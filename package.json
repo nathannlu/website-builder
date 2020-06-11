@@ -9,12 +9,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "nodemon app.js",
-    "client-install": "yarn install --prefix client",
-    "client": "yarn start --prefix client",
-    "dev": "concurrently \"npx nodemon server\" \"cd client && yarn start\"",
-    "build": "cd client && yarn run build",
-    "install-client": "cd client && yarn install",
-    "heroku-postbuild": "yarn run install-client && yarn run build"
+    "client-install": "npm install --prefix client",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npx nodemon server\" \"cd client && npm start\"",
+    "build": "cd client && npm run build",
+    "install-client": "cd client && npm install",
+    "heroku-postbuild": "npm run install-client && npm run build"
   },
   "author": "nathan",
   "license": "ISC",
