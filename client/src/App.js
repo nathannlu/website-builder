@@ -1,13 +1,24 @@
 import React from 'react';
-import axios from 'axios';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+import { Provider } from 'react-redux';
+import store from './store';
+
+import Register from './screens/Register';
+import Login from './screens/Login';
 
 const App = () => {
-	axios.get('/api/users/').then(res => console.log(res));
-  
 	return (
-    <div className="App">
-			Hi this is home
-		</div>
+		<Provider store={store}>
+			<Router>
+				<div className="App">
+					{/* Navbar goes here */}
+					<Route exact path="/" component={Register} />
+					<Route exact path="/register" component={Register} />
+					<Route exact path="/login" component={Login} />
+				</div>
+			</Router>
+		</Provider>
   );
 }
 
