@@ -5,11 +5,11 @@
     "node": "10.x"
   },
   "description": "",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon app.js",
+    "server": "nodemon server.js",
     "client-install": "npm install --prefix client",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npx nodemon server\" \"cd client && npm start\"",
@@ -20,9 +20,16 @@
   "author": "nathan",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
     "concurrently": "^5.2.0",
     "express": "^4.17.1",
+    "is-empty": "^1.2.0",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.5.8",
-    "mongoose": "^5.9.18"
+    "mongoose": "^5.9.18",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "validator": "^13.1.0"
   }
 }

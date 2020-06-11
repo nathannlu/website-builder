@@ -1,11 +1,20 @@
 const express = require('express');
-const app = express();
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const passport = require('passport');
 
 const userRoutes = require('./routes/userRoutes');
 
-const database = 'mongodb+srv://nathan:CanFISHfly%3F@cluster0-tsbpc.mongodb.net/design?retryWrites=true&w=majority'
+const app = express();
 
+app.use(
+	bodyParser.urlencoded({
+		extended: false
+	})
+);
+app.use(bodyParser.json());
+
+const database = 'mongodb+srv://nathan:CanFISHfly%3F@cluster0-tsbpc.mongodb.net/design?retryWrites=true&w=majority'
 mongoose.connect(database, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -16,6 +25,13 @@ mongoose.connect(database, {
   }
 )
 
+// Passport middleware
+app.use(passport.initialize());
+
+// Passport config
+require('./config/passport')(passport);
+
+// Routes
 app.use('/api/users', userRoutes);
 
 if (process.env.NODE_ENV === 'production') {
@@ -25,7 +41,8 @@ if (process.env.NODE_ENV === 'production') {
 	});
 }
 
-app.listen(process.env.PORT || 5000, () => {
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
 	console.log('Server started');
 });
 
