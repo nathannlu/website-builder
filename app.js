@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 
+const userRoutes = require('./routes/userRoutes');
+
 const database = 'mongodb+srv://nathan:CanFISHfly%3F@cluster0-tsbpc.mongodb.net/design?retryWrites=true&w=majority'
 
 mongoose.connect(database, {
@@ -13,9 +15,15 @@ mongoose.connect(database, {
     console.log('Database loaded and connected.')
   }
 )
-app.get('/', (req, res) => {
-	res.send('hi');
-});
+
+app.use('/api/users', userRoutes);
+
+if (process.env.NODE_ENV === 'production') {
+	app.use(express.static("client/build"));
+	app.get('*', (req, res) => {
+		res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+	});
+}
 
 app.listen(5000, () => {
 	console.log('Server started');

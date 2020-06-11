@@ -4,11 +4,19 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon app.js",
+    "client-install": "yarn install --prefix client",
+    "client": "yarn start --prefix client",
+    "dev": "concurrently \"npx nodemon server\" \"cd client && yarn start\"",
+    "build": "cd client && yarn run build",
+    "install-client": "cd client && yarn install",
+    "heroku-postbuild": "yarn run install-client && yarn run build"
   },
   "author": "nathan",
   "license": "ISC",
   "dependencies": {
+    "concurrently": "^5.2.0",
     "express": "^4.17.1",
     "mongodb": "^3.5.8",
     "mongoose": "^5.9.18"
