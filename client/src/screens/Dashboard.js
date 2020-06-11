@@ -4,9 +4,15 @@ import { connect } from 'react-redux';
 import { logoutUser } from '../actions/authActions';
 
 const Dashboard = props => {
+	const onLogoutClick = e => {
+		e.preventDefault();
+		props.logoutUser();
+	}
+	
 	return (
 		<div>
 			User Dashboard	
+			<button onClick={onLogoutClick}>Logout</button>
 		</div>
 	)
 };

@@ -7,6 +7,13 @@ import { setCurrentUser, logoutUser } from './actions/authActions';
 import { Provider } from 'react-redux';
 import store from './store';
 
+import Navbar from './components/Navbar';
+import Landing from './screens/Landing';
+import Services from './screens/Services';
+import Work from './screens/Work';
+import Pricing from './screens/Pricing';
+import About from './screens/About';
+
 import Register from './screens/Register';
 import Login from './screens/Login';
 import Dashboard from './screens/Dashboard';
@@ -36,8 +43,14 @@ const App = () => {
 		<Provider store={store}>
 			<Router>
 				<div className="App">
-					{/* Navbar goes here */}
-					<Route exact path="/" component={Register} />
+					<Navbar />	
+					<Route exact path="/" component={Landing} />
+					<Route exact path="/services" component={Services} />
+					<Route exact path="/work" component={Work} />
+					<Route exact path="/pricing" component={Pricing} />
+					<Route exact path="/about" component={About} />
+
+
 					<Route exact path="/register" component={Register} />
 					<Route exact path="/login" component={Login} />
 					<Switch>
