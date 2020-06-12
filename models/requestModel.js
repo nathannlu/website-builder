@@ -10,6 +10,14 @@ const RequestSchema = new Schema({
 		type: String,
 		required: true
 	},
+	description: {
+		type: String,
+		required: true
+	},
+	dimensions: {
+		type: String,
+		required: true
+	},
 	delivered: {
 		type: Boolean,
 		default: false,

@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { logoutUser } from '../actions/authActions';
+import { logoutUser } from '../../actions/authActions';
 
 const Dashboard = props => {
 	const [requests, setRequests] = useState([]);	
@@ -45,7 +46,7 @@ const Dashboard = props => {
 					</div>
 				))}
 
-				<button className="btn btn-black my-4" onClick={addRequest}>New request</button>
+				<Link className="btn btn-black my-4" to="/dashboard/create-request">New request</Link>
 			</div>
 		</div>
 	)

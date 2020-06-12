@@ -46,9 +46,12 @@ router.post('/', checkToken, (req, res) => {
 		if (err) {
 			res.sendStatus(403);
 		} else {
+			console.log(req.body);	
 			const requestData = {
 				author: authorizedData.id,
-				title: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+				title: req.body.title,
+				description: req.body.description,
+				dimensions: req.body.dimensions
 			}
 			
 			Request.create(requestData).then((err, newRequest) => {
