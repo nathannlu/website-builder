@@ -6,13 +6,14 @@ import { logoutUser } from '../actions/authActions';
 
 const Dashboard = props => {
 	const [requests, setRequests] = useState([]);	
+	const [deliveredTab, setDeliveredTab] = useState(false);
 
 	const onLogoutClick = e => {
 		e.preventDefault();
 		props.logoutUser();
 	}
 
-	const newRequest = () => {
+	const addRequest = () => {
 		axios.post('/api/requests').then(res => console.log(res));
 	}
 
@@ -22,16 +23,30 @@ const Dashboard = props => {
 	
 	return (
 		<div>
-			<h1>User Dashboard</h1>
-			<p>Your design requests</p>
-			{requests.map((request, i) => (
-				<div key={i}>
-					{request.title}
-				</div>
-			))}
+			<div className="container mx-auto">
+				<button className="btn btn-black my-4" onClick={onLogoutClick}>Logout</button>
+		
+				<h2>Your Design Requests</h2>
+				<button className="btn mr-4" onClick={() => setDeliveredTab(false)}>Queued</button>
+				<button className="btn" onClick={() => setDeliveredTab(true)}>Delivered</button>
+	
+				{/*!deliveredTab ? (
+					<div>
+						Queued files go here 
+					</div>
+				) : (
+					<div>
+						Delivered requests go her
+					</div>
+				)*/}
+				{requests.map((request, i) => (
+					<div key={i}>
+						{request.title} - delivered: {request.delivered.toString()}
+					</div>
+				))}
 
-			<button onClick={newRequest}>New request</button>
-			<button onClick={onLogoutClick}>Logout</button>
+				<button className="btn btn-black my-4" onClick={addRequest}>New request</button>
+			</div>
 		</div>
 	)
 };

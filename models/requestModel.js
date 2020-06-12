@@ -10,6 +10,14 @@ const RequestSchema = new Schema({
 		type: String,
 		required: true
 	},
+	delivered: {
+		type: Boolean,
+		default: false,
+	},
+	date: {
+		type: Date,
+		default: Date.now
+	}
 });
 
 module.exports = User = mongoose.model("Requests", RequestSchema);

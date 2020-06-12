@@ -53,7 +53,7 @@ const App = () => {
 					<Route exact path="/register" component={Register} />
 					<Route exact path="/login" component={Login} />
 					<Switch>
-						<Route exact path="/dashboard" component={Dashboard} />
+						<PrivateRoute exact path="/dashboard" component={Dashboard} />
 					</Switch>
 				</div>
 			</Router>
