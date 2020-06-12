@@ -43,18 +43,17 @@ const App = () => {
 		<Provider store={store}>
 			<Router>
 				<div className="App">
-					<Navbar />	
+					{/*<Navbar />*/}	
 					<Route exact path="/" component={Landing} />
 					<Route exact path="/services" component={Services} />
 					<Route exact path="/work" component={Work} />
 					<Route exact path="/pricing" component={Pricing} />
 					<Route exact path="/about" component={About} />
 
-
 					<Route exact path="/register" component={Register} />
 					<Route exact path="/login" component={Login} />
 					<Switch>
-						<PrivateRoute exact path="/dashboard" component={Dashboard} />
+						<Route exact path="/dashboard" component={Dashboard} />
 					</Switch>
 				</div>
 			</Router>

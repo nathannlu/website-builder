@@ -5,6 +5,7 @@ const passport = require('passport');
 const path = require('path');
 
 const userRoutes = require('./routes/userRoutes');
+const requestRoutes = require('./routes/requestRoutes');
 
 const app = express();
 
@@ -34,6 +35,7 @@ require('./config/passport')(passport);
 
 // Routes
 app.use('/api/users', userRoutes);
+app.use('/api/requests', requestRoutes);
 
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static("client/build"));
