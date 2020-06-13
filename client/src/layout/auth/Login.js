@@ -41,47 +41,54 @@ const Login = props => {
 	}, [])
 
 	return (
-		<div>
-			<h1>Login</h1>
-			<form noValidate onSubmit={onSubmit}>
-				<div>
-					<input 
-						onChange={onChange}
-						value={user.email}
-						id="email"
-						name="email"
-						type="email"
-			      className={classnames("", {
-							invalid: errors.name
-            })}
-					/>
-					<label htmlFor="email">Email</label>
-					<span>
-						{errors.email}
-						{errors.emailnotfound}
-					</span>
-				</div>
+		<div className="h-screen flex flex-wrap">
+			<div className="w-1/3 bg-gray-500"></div>	
+			<div className="w-2/3 bg-gray-100">
+				<div className="w-1/3 mx-auto flex flex-wrap h-full items-center">
+					<div className="w-full">	
+						<h2 className="mb-8">Login</h2>
+						<form noValidate onSubmit={onSubmit}>
+							<div>
+								<label className="block" htmlFor="email">Email</label>
+								<input 
+									onChange={onChange}
+									value={user.email}
+									id="email"
+									name="email"
+									type="email"
+									className={classnames("", {
+										invalid: errors.name
+									})}
+								/>
+								<span>
+									{errors.email}
+									{errors.emailnotfound}
+								</span>
+							</div>
 
-				<div>
-					<input 
-						onChange={onChange}
-						value={user.password}
-						id="password"
-						name="password"
-						type="password"
-						className={classnames("", {
-							invalid: errors.password || errors.passwordincorrect
-						})}
-					/>
-					<label htmlFor="password">Password</label>
-					<span>
-						{errors.password}
-						{errors.passwordincorrect}
-					</span>
+							<div>
+								<label className="block" htmlFor="password">Password</label>
+								<input 
+									onChange={onChange}
+									value={user.password}
+									id="password"
+									name="password"
+									type="password"
+									className={classnames("", {
+										invalid: errors.password || errors.passwordincorrect
+									})}
+								/>
+								<span>
+									{errors.password}
+									{errors.passwordincorrect}
+								</span>
+							</div>
+							
+							<button className="btn btn-black">Login</button>
+						</form>
+					</div>
 				</div>
-				
-				<button>Login</button>
-			</form>
+			</div>	
 		</div>
 	)
 };

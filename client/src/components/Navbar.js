@@ -12,12 +12,12 @@ const Navbar = () => {
 				</div>
 
 				<div className="float-right inline-block">
-					<Link to="/services">Services</Link>
+					{/*<Link to="/services">Services</Link>*/}
 					<Link className="ml-8" to="/work">Work</Link>
 					<Link className="ml-8" to="/pricing">Pricing</Link>
-					<Link className="ml-8" to="/about">About</Link>
+					{/*<Link className="ml-8" to="/about">About</Link>*/}
 
-					<Link className="ml-8" to="/login">Login</Link>
+					<Link className="btn btn-black ml-8" to="/login">Login</Link>
 
 				</div>	
 			
