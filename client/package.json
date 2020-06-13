@@ -17,7 +17,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "postcss-cli": "^7.1.1"
   },
   "scripts": {
     "start": "npm run watch:css && react-scripts start",
@@ -45,7 +46,6 @@
   },
   "devDependencies": {
     "autoprefixer": "^9.8.0",
-    "postcss-cli": "^7.1.1",
     "tailwindcss": "^1.4.6"
   }
 }
