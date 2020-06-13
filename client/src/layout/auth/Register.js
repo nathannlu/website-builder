@@ -5,9 +5,10 @@ import { connect } from 'react-redux';
 import { registerUser } from '../../actions/authActions';
 import classnames from 'classnames';
 
-const Register = (props) => {
+const Register = ({props}) => {
 	const [user, setUser] = useState({name: '', email: '', password: '', password2: ''});
 	const [errors, setErrors] = useState({});	
+	
 
   const onChange = e => {
     const { name, value } = e.target;
@@ -27,17 +28,10 @@ const Register = (props) => {
 		}
 	}, [props.errors])
 
-	useEffect(() => {
-		if(props.auth.isAuthenticated) {
-			props.history.push('/dashboard');
-		}
-	}, [])
-
 	return (
 		<div>
 			<h1>Register</h1>
 			<form noValidate onSubmit={onSubmit}>
-
 				<div>
 					<input
 						onChange={onChange}
@@ -53,7 +47,6 @@ const Register = (props) => {
 					<label htmlFor="name">Name</label>
 					<span>{errors.name}</span>
 				</div>
-
 				<div>
 					<input
 						onChange={onChange}
@@ -69,7 +62,6 @@ const Register = (props) => {
 					<label htmlFor="email">Email</label>
 					<span>{errors.email}</span>
 				</div>
-
 				<div>
 					<input
 						onChange={onChange}
@@ -85,7 +77,6 @@ const Register = (props) => {
 					<label htmlFor="password">Password</label>
 					<span>{errors.password}</span>
 				</div>
-
 				<div>
 					<input
 						onChange={onChange}
@@ -101,15 +92,54 @@ const Register = (props) => {
 					<label htmlFor="password2">Confirm password</label>
 					<span>{errors.password2}</span>
 				</div>
-
 				<button>Sign up</button>
-
 			</form>
 		</div>
 	)
 };
 
-Register.propTypes = {
+const PaymentPlan = ({props, setOnboardingStage}) => {
+	return (
+		<div>
+			plans
+
+			<button onClick={() => setOnboardingStage(2)}>Next</button>
+		</div>
+	)
+};
+
+const Checkout = ({props}) => {
+	return (
+		<div>
+			Checkout page
+		</div>
+	)
+};
+
+const Onboarding = props => {
+	const [onboardingStage, setOnboardingStage] = useState(0);
+
+	useEffect(() => {
+		if(props.auth.isAuthenticated) {
+			// Needs to check if user has paid	
+			setOnboardingStage(1);
+			console.log(`Logged in as ${props.auth.user.name}`);
+		}
+	}, [props.auth])
+	
+	return (
+		<div>
+			{{
+				0: <Register props={props} />,
+				1: <PaymentPlan props={props} setOnboardingStage={setOnboardingStage} />,
+				2: <Checkout props={props} />
+			}[onboardingStage]}
+		</div>
+	)
+};
+
+
+Onboarding.propTypes = {
 	registerUser: PropTypes.func.isRequired,
 	auth: PropTypes.object.isRequired,
 	errors: PropTypes.object.isRequired,
@@ -123,4 +153,4 @@ const mapStateToProps = state => ({
 export default connect(
 	mapStateToProps,
 	{ registerUser }
-)(withRouter(Register));
+)(withRouter(Onboarding));

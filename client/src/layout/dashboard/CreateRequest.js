@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
-const CreateRequest = () => {
+const CreateRequest = props => {
 	const initialFormState = {
 		title: '',
 		description: '',
@@ -19,9 +19,10 @@ const CreateRequest = () => {
 		e.preventDefault();
 		
 		console.log(newRequest);
-		axios.post('/api/requests', newRequest).then(res => console.log(res));
+		axios.post('/api/requests', newRequest).then(res => { 
+			if(res.status == 200) props.history.push('/dashboard');
+		});
 	}
-
 	return (
 		<div>
 			<h2>Create Request</h2>

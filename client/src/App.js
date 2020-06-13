@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 
 import Navbar from './components/Navbar';
+import DashNavbar from './components/dashboard/Navbar';
 import Landing from './layout/Landing';
 import Services from './layout/Services';
 import Work from './layout/Work';
@@ -18,6 +19,7 @@ import Register from './layout/auth/Register';
 import Login from './layout/auth/Login';
 import Dashboard from './layout/dashboard/Dashboard';
 import CreateRequest from './layout/dashboard/CreateRequest';
+import Account from './layout/dashboard/Account';
 import PrivateRoute from './components/routes/PrivateRoute';
 
 // Check for token to keep user logged in
@@ -44,18 +46,20 @@ const App = () => {
 		<Provider store={store}>
 			<Router>
 				<div className="App">
-					{/*<Navbar />*/}	
+					<Navbar />	
 					<Route exact path="/" component={Landing} />
 					<Route exact path="/services" component={Services} />
 					<Route exact path="/work" component={Work} />
 					<Route exact path="/pricing" component={Pricing} />
 					<Route exact path="/about" component={About} />
 
-					<Route exact path="/register" component={Register} />
+					<Route exact path="/onboard" component={Register} />
 					<Route exact path="/login" component={Login} />
+					<DashNavbar />	
 					<Switch>
 						<PrivateRoute exact path="/dashboard" component={Dashboard} />
 						<PrivateRoute exact path="/dashboard/create-request" component={CreateRequest} />
+						<PrivateRoute exact path="/dashboard/account" component={Account} />
 					</Switch>
 				</div>
 			</Router>

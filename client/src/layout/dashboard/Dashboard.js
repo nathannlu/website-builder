@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
+import Request from '../../components/dashboard/Request';
 import { logoutUser } from '../../actions/authActions';
 
 const Dashboard = props => {
@@ -25,28 +27,33 @@ const Dashboard = props => {
 	return (
 		<div>
 			<div className="container mx-auto">
-				<button className="btn btn-black my-4" onClick={onLogoutClick}>Logout</button>
 		
-				<h2>Your Design Requests</h2>
-				<button className="btn mr-4" onClick={() => setDeliveredTab(false)}>Queued</button>
-				<button className="btn" onClick={() => setDeliveredTab(true)}>Delivered</button>
-	
-				{/*!deliveredTab ? (
-					<div>
-						Queued files go here 
-					</div>
-				) : (
-					<div>
-						Delivered requests go her
-					</div>
-				)*/}
-				{requests.map((request, i) => (
-					<div key={i}>
-						{request.title} - delivered: {request.delivered.toString()}
-					</div>
-				))}
+				<div className="bg-gray-200 py-8 w-full">
+					<h3>My Requests</h3>	
+				</div>
 
-				<Link className="btn btn-black my-4" to="/dashboard/create-request">New request</Link>
+				<div className="pt-24">
+					<button className="btn mr-4" onClick={() => setDeliveredTab(false)}>Queued</button>
+					<button className="btn" onClick={() => setDeliveredTab(true)}>Delivered</button>
+		
+					{!deliveredTab ? (
+						<div>
+							{requests.filter(request => !request.delivered).map((request, i) => (
+								<div key={i}>	
+									<Request request={request} />	
+								</div>
+							))}
+						</div>
+					) : (
+						<div>
+							{requests.filter(request => request.delivered).map((request, i) => (
+								<div key={i}>	
+									<Request request={request} />	
+								</div>
+							))}
+						</div>
+					)}
+				</div>
 			</div>
 		</div>
 	)
