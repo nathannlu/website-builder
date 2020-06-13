@@ -27,7 +27,7 @@ const Pricing = () => {
 						<div className="w-1/2 px-16"> 
 							<div className="bg-gray-300 text-center py-16">
 								<h5>Basic</h5>
-								<p>$4,99/mo</p>
+								<p>$499/mo</p>
 								<Link to="/onboard?plan=Standard">Start Trial</Link>
 							</div>
 						</div>
@@ -35,7 +35,7 @@ const Pricing = () => {
 						<div className="w-1/2 px-16">
 							<div className="bg-gray-300 text-center py-16">
 								<h5>Premium</h5>
-								<p>$7,99/mo</p>
+								<p>$799/mo</p>
 								<Link to="/onboard?plan=Premium">Start Trial</Link>
 							</div>
 						</div>

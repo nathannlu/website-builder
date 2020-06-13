@@ -1,9 +1,6 @@
 import React, { useState, useEffect} from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { registerUser } from '../../actions/authActions';
 import classnames from 'classnames';
+
 
 const Register = ({props}) => {
 	const [user, setUser] = useState({name: '', email: '', password: '', password2: ''});
@@ -29,128 +26,81 @@ const Register = ({props}) => {
 	}, [props.errors])
 
 	return (
-		<div>
-			<h1>Register</h1>
-			<form noValidate onSubmit={onSubmit}>
-				<div>
-					<input
-						onChange={onChange}
-						value={user.name}
-						error={errors.name}
-						id="name"
-						name="name"
-						type="text"
-						classnames={classnames("", {
-							invalid: errors.name
-						})}
-					/>
-					<label htmlFor="name">Name</label>
-					<span>{errors.name}</span>
+		<div className="h-screen flex flex-wrap">
+			<div className="w-1/3 bg-gray-500"></div>	
+			<div className="w-2/3 bg-gray-100">
+				<div className="w-1/3 mx-auto flex flex-wrap h-full items-center">
+					<div className="w-full">	
+						<h2 className="mb-8">Create an Account</h2>
+						<form noValidate onSubmit={onSubmit}>
+							<div>
+								<label className="block" htmlFor="name">Name</label>
+								<input
+									onChange={onChange}
+									value={user.name}
+									error={errors.name}
+									id="name"
+									name="name"
+									type="text"
+									className={classnames("w-full", {
+										invalid: errors.name
+									})}
+								/>
+								<span>{errors.name}</span>
+							</div>
+							<div>
+								<label className="block" htmlFor="email">Email</label>
+								<input
+									onChange={onChange}
+									value={user.email}
+									error={errors.email}
+									id="email"
+									name="email"
+									type="email"
+									className={classnames("w-full", {
+										invalid: errors.email
+									})}
+								/>
+								<span>{errors.email}</span>
+							</div>
+							<div>
+								<label className="block" htmlFor="password">Password</label>
+								<input
+									onChange={onChange}
+									value={user.password}
+									error={errors.password}
+									id="password"
+									name="password"
+									type="password"
+									className={classnames("w-full", {
+										invalid: errors.password
+									})}
+								/>
+								<span>{errors.password}</span>
+							</div>
+							<div>
+								<label className="block" htmlFor="password2">Confirm password</label>
+								<input
+									onChange={onChange}
+									value={user.password2}
+									error={errors.password2}
+									id="password2"
+									name="password2"
+									type="password"
+									className={classnames("w-full", {
+										invalid: errors.password2
+									})}
+								/>
+								<span>{errors.password2}</span>
+							</div>
+							<button className="btn btn-black">Sign up</button>
+						</form>
+					</div>
 				</div>
-				<div>
-					<input
-						onChange={onChange}
-						value={user.email}
-						error={errors.email}
-						id="email"
-						name="email"
-						type="email"
-						classnames={classnames("", {
-							invalid: errors.email
-						})}
-					/>
-					<label htmlFor="email">Email</label>
-					<span>{errors.email}</span>
-				</div>
-				<div>
-					<input
-						onChange={onChange}
-						value={user.password}
-						error={errors.password}
-						id="password"
-						name="password"
-						type="password"
-						classnames={classnames("", {
-							invalid: errors.password
-						})}
-					/>
-					<label htmlFor="password">Password</label>
-					<span>{errors.password}</span>
-				</div>
-				<div>
-					<input
-						onChange={onChange}
-						value={user.password2}
-						error={errors.password2}
-						id="password2"
-						name="password2"
-						type="password"
-						classnames={classnames("", {
-							invalid: errors.password2
-						})}
-					/>
-					<label htmlFor="password2">Confirm password</label>
-					<span>{errors.password2}</span>
-				</div>
-				<button>Sign up</button>
-			</form>
+			</div>
 		</div>
-	)
-};
+	)		
+}
 
-const PaymentPlan = ({props, setOnboardingStage}) => {
-	return (
-		<div>
-			plans
+export default Register;
 
-			<button onClick={() => setOnboardingStage(2)}>Next</button>
-		</div>
-	)
-};
-
-const Checkout = ({props}) => {
-	return (
-		<div>
-			Checkout page
-		</div>
-	)
-};
-
-const Onboarding = props => {
-	const [onboardingStage, setOnboardingStage] = useState(0);
-
-	useEffect(() => {
-		if(props.auth.isAuthenticated) {
-			// Needs to check if user has paid	
-			setOnboardingStage(1);
-			console.log(`Logged in as ${props.auth.user.name}`);
-		}
-	}, [props.auth])
-	
-	return (
-		<div>
-			{{
-				0: <Register props={props} />,
-				1: <PaymentPlan props={props} setOnboardingStage={setOnboardingStage} />,
-				2: <Checkout props={props} />
-			}[onboardingStage]}
-		</div>
-	)
-};
-
-
-Onboarding.propTypes = {
-	registerUser: PropTypes.func.isRequired,
-	auth: PropTypes.object.isRequired,
-	errors: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = state => ({
-	auth: state.auth,
-	errors: state.errors
-});
-
-export default connect(
-	mapStateToProps,
-	{ registerUser }
-)(withRouter(Onboarding));

@@ -15,12 +15,19 @@ import Work from './layout/Work';
 import Pricing from './layout/Pricing';
 import About from './layout/About';
 
-import Register from './layout/auth/Register';
+import Onboard from './layout/auth/Onboard';
 import Login from './layout/auth/Login';
 import Dashboard from './layout/dashboard/Dashboard';
 import CreateRequest from './layout/dashboard/CreateRequest';
 import Account from './layout/dashboard/Account';
 import PrivateRoute from './components/routes/PrivateRoute';
+
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
+
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+const stripePromise = loadStripe("pk_test_51GtOMjKmTCfCxz2BBWOhjP3REOf3Gx5TUDzYkZ9x6qfURvmWKA0nXt6bnBIFeu9t462hJ9HjcevUkGsGKfP4GNnl00fz8xbmGM");
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -46,20 +53,29 @@ const App = () => {
 		<Provider store={store}>
 			<Router>
 				<div className="App">
-					<Navbar />	
-					<Route exact path="/" component={Landing} />
-					<Route exact path="/services" component={Services} />
-					<Route exact path="/work" component={Work} />
-					<Route exact path="/pricing" component={Pricing} />
-					<Route exact path="/about" component={About} />
-
-					<Route exact path="/onboard" component={Register} />
-					<Route exact path="/login" component={Login} />
-					<DashNavbar />	
-					<Switch>
-						<PrivateRoute exact path="/dashboard" component={Dashboard} />
-						<PrivateRoute exact path="/dashboard/create-request" component={CreateRequest} />
-						<PrivateRoute exact path="/dashboard/account" component={Account} />
+					<Switch>	
+						<Route path="/dashboard">	
+							<DashNavbar />	
+							<Switch>
+								<PrivateRoute exact path="/dashboard" component={Dashboard} />
+								<PrivateRoute exact path="/dashboard/create-request" component={CreateRequest} />
+								<PrivateRoute exact path="/dashboard/account" component={Account} />
+							</Switch>
+						</Route>
+		
+						<Route path="/">
+							<Navbar />	
+							<Route exact path="/" component={Landing} />
+							<Route exact path="/services" component={Services} />
+							<Route exact path="/work" component={Work} />
+							<Route exact path="/pricing" component={Pricing} />
+							<Route exact path="/about" component={About} />
+							
+							<Elements stripe={stripePromise}>
+								<Route exact path="/onboard" component={Onboard} />
+							</Elements>	
+							<Route exact path="/login" component={Login} />
+						</Route>	
 					</Switch>
 				</div>
 			</Router>
