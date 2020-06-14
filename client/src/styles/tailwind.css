@@ -29,11 +29,15 @@ body {
 h1 {
   font-size: 4.883rem;
   line-height: 5.86rem;
+	font-family: 'Times New Roman', Time, serif;
+	font-weight: bold;
 }
 
 h2 {
   font-size: 3.906rem;
   line-height: 4.69rem;
+	font-family: 'Times New Roman', Time, serif;
+	font-weight: 600;
 }
 
 h3 {
@@ -49,11 +53,12 @@ h4 {
 h5 {
   font-size: 2.0rem;
   line-height: 2.4rem;
+	font-weight: bold;
 }
 
 .btn {
   display: inline-block;
-  padding: .5rem 1rem;
+  padding: 1.5rem 2.5rem;
 }
 
 .btn-black {

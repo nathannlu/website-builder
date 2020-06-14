@@ -3,21 +3,21 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
 	return (
-		<div className="w-full bg-green-500 text-white py-8">
-			<div className="container mx-auto">
+		<div className="w-full pt-12 pb-8">
+			<div className="container mx-auto flex flex-wrap items-center">
 				<div className="inline-block">		
 					<Link to="/">
-						<h5>Graaphic</h5>	
+						<h4 className="font-bold">Graaphic</h4>	
 					</Link>
 				</div>
 
-				<div className="float-right inline-block">
+				<div className="ml-auto inline-block">
 					{/*<Link to="/services">Services</Link>*/}
-					<Link className="ml-8" to="/work">Work</Link>
-					<Link className="ml-8" to="/pricing">Pricing</Link>
+					<Link className="ml-16" to="/work">Work</Link>
+					<Link className="ml-16" to="/pricing">Pricing</Link>
 					{/*<Link className="ml-8" to="/about">About</Link>*/}
 
-					<Link className="btn btn-black ml-8" to="/login">Login</Link>
+					<Link className="inline-block ml-16" to="/login">Login</Link>
 
 				</div>	
 			
