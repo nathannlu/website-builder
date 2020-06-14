@@ -111,8 +111,8 @@ const Landing = () => {
 					<div className="w-1/2 bg-green-500" style={{height: '500px'}}>
 						<h3>Graphic Design</h3>
 					</div>
-					<div className="w-1/2 bg-gray-800">
-						2
+					<div className="w-1/2 bg-gray-800 text-white">
+						<h3>Eat my ass</h3>
 					</div>
 				</section>
 
