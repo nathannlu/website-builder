@@ -8,7 +8,7 @@ const Request = ({request})  => {
 				<h4>{request.title}</h4>
 				<div className="my-3 opacity-50">Request #{request._id} | by You | via Website | {!request.delivered ? 'Queued' : 'Delivered'}</div>
 				{!request.delivered ? (
-					<div className="text-green-500">Edit proposal</div>
+					''	
 				) : (	
 					<div className="text-green-500">Download files</div>
 				)}
