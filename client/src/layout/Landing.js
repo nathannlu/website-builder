@@ -133,7 +133,7 @@ const Landing = () => {
 			</main>
 
 			<footer style={{height: '250px'}} className="container mx-auto">
-				Footer
+				lockie is kinda gay	
 			</footer>
 		</div>
 	)
