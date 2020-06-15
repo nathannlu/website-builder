@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Landing = () => {
 	return (
@@ -42,7 +43,7 @@ const Landing = () => {
 							Whether you have considered hiring an in house designer, tried to manage a freelancer, or even worked with one of those “other design sites,” we know it sucks. Design Pickle is all about making your life easier. AKA not suck. All for one flat rate.
 						</p>
 						<ul className="pt-8">
-							<li className="py-4 font-bold">A dedicated, professional, designer</li>
+							<li className="py-4 font-bold"><Link to="#block-0">A dedicated, professional, designer</Link></li>
 							<li className="py-4 opacity-50 font-bold">Unlimited Requests and Revisions</li>
 							<li className="py-4 opacity-50 font-bold">Ridiculously Fast Turnarounds</li>
 							<li className="py-4 opacity-50 font-bold">Easy and Streamlined Communication</li>
@@ -50,7 +51,7 @@ const Landing = () => {
 						</ul>
 					</div>
 					<div className="w-1/2 pl-24 pt-40">
-						<div className="mb-40">
+						<div id="block-0" className="mb-40">
 							<img className="mb-8" src="https://opendoodles.s3-us-west-1.amazonaws.com/clumsy.png" />
 							<h5 className="mb-4">A dedicated, professional, designer</h5>
 							<p>
