@@ -80,7 +80,7 @@ const Landing = () => {
 						</div>
 						<div className="mb-40">
 							<img className="mb-8" src="https://opendoodles.s3-us-west-1.amazonaws.com/loving.png" />
-							<h5 className="mb-4">Easy and Streamlined Communication</h5>
+							<h5 className="mb-4">World Class Customer Support</h5>
 							<p>
 								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla auctor venenatis varius. Maecenas molestie scelerisque odio, ut elementum odio venenatis tempus. Nullam sit amet augue vel erat porttitor blandit nec ut nisi.
 							</p>
@@ -104,16 +104,55 @@ const Landing = () => {
 					</div>
 				</section>
 
-				<section className="py-24 flex flex-wrap container mx-auto text-center">
+				<section className="py-40 flex flex-wrap container mx-auto text-center">
 					<div className="w-full pb-16">
 						<h2 className="w-1/2 mx-auto">Whatever You Need, We’ve Got the Right Plan for You.</h2>
 					</div>	
-					<div className="w-1/2 bg-green-500" style={{height: '500px'}}>
-						<h3>Graphic Design</h3>
+					<div className="w-1/2 px-8">
+						<div className="bg-green-500 h-full p-12">
+							<h3 className="text-white font-bold">Graphic Design</h3>
+
+							<ul className="text-left my-12">
+								<li className="bg-white p-8 mb-6">
+									Static graphics like flyers, infographics, social media graphics and more
+								</li>	
+								<li className="bg-white p-8 mb-6">
+									Static graphics like flyers, infographics, social media graphics and more
+								</li>	
+								<li className="bg-white p-8 mb-6">
+									Static graphics like flyers, infographics, social media graphics and more
+								</li>	
+								<li className="bg-white p-8 mb-6">
+									Static graphics like flyers, infographics, social media graphics and more
+								</li>	
+							</ul>
+
+							<button className="btn btn-black">Get Demo</button>
+						</div>
 					</div>
-					<div className="w-1/2 bg-gray-800 text-white">
-						<h3>Eat my ass</h3>
+					<div className="w-1/2 px-8">
+						<div className="bg-gray-800 h-full p-12">
+							<h3 className="text-white font-bold">Graphic Design Pro</h3>
+
+							<ul className="text-left my-12">
+								<li className="bg-white p-8 mb-6">
+									Static graphics like flyers, infographics, social media graphics and more
+								</li>	
+								<li className="bg-white p-8 mb-6">
+									Static graphics like flyers, infographics, social media graphics and more
+								</li>	
+								<li className="bg-white p-8 mb-6">
+									Static graphics like flyers, infographics, social media graphics and more
+								</li>	
+								<li className="bg-white p-8 mb-6">
+									Static graphics like flyers, infographics, social media graphics and more
+								</li>	
+							</ul>
+
+							<button className="btn btn-black">Get Demo</button>
+						</div>
 					</div>
+
 				</section>
 
 				<section className="bg-green-500">
