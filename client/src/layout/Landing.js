@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { HashLink as Link } from 'react-router-hash-link';
 
 const Landing = () => {
 	return (
@@ -44,42 +44,42 @@ const Landing = () => {
 						</p>
 						<ul className="pt-8">
 							<li className="py-4 font-bold"><Link to="#block-0">A dedicated, professional, designer</Link></li>
-							<li className="py-4 opacity-50 font-bold">Unlimited Requests and Revisions</li>
-							<li className="py-4 opacity-50 font-bold">Ridiculously Fast Turnarounds</li>
-							<li className="py-4 opacity-50 font-bold">Easy and Streamlined Communication</li>
-							<li className="py-4 opacity-50 font-bold">World Class Customer Support</li>
+							<li className="py-4 opacity-50 font-bold"><Link to="#block-1">Unlimited Requests and Revisions</Link></li>
+							<li className="py-4 opacity-50 font-bold"><Link to="#block-2">Ridiculously Fast Turnarounds</Link></li>
+							<li className="py-4 opacity-50 font-bold"><Link to="#block-3">Easy and Streamlined Communication</Link></li>
+							<li className="py-4 opacity-50 font-bold"><Link to="#block-4">World Class Customer Support</Link></li>
 						</ul>
 					</div>
 					<div className="w-1/2 pl-24 pt-40">
 						<div id="block-0" className="mb-40">
-							<img className="mb-8" src="https://opendoodles.s3-us-west-1.amazonaws.com/clumsy.png" />
+							<img className="mb-8 p-16" src="https://opendoodles.s3-us-west-1.amazonaws.com/clumsy.png" />
 							<h5 className="mb-4">A dedicated, professional, designer</h5>
 							<p>
 								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla auctor venenatis varius. Maecenas molestie scelerisque odio, ut elementum odio venenatis tempus. Nullam sit amet augue vel erat porttitor blandit nec ut nisi.
 							</p>
 						</div>
-						<div className="mb-40">
+						<div id="block-1" className="mb-40">
 							<img className="mb-8" src="https://opendoodles.s3-us-west-1.amazonaws.com/meditating.png" />
 							<h5 className="mb-4">Unlimited Requests and Revisions</h5>
 							<p>
 								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla auctor venenatis varius. Maecenas molestie scelerisque odio, ut elementum odio venenatis tempus. Nullam sit amet augue vel erat porttitor blandit nec ut nisi.
 							</p>
 						</div>
-						<div className="mb-40">
+						<div id="block-2" className="mb-40">
 							<img className="mb-8" src="https://opendoodles.s3-us-west-1.amazonaws.com/sprinting.png" />
 							<h5 className="mb-4">Ridiculously Fast Turnarounds</h5>
 							<p>
 								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla auctor venenatis varius. Maecenas molestie scelerisque odio, ut elementum odio venenatis tempus. Nullam sit amet augue vel erat porttitor blandit nec ut nisi.
 							</p>
 						</div>
-						<div className="mb-40">
+						<div id="block-3" className="mb-40">
 							<img className="mb-8" src="https://opendoodles.s3-us-west-1.amazonaws.com/selfie.png" />
 							<h5 className="mb-4">Easy and Streamlined Communication</h5>
 							<p>
 								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla auctor venenatis varius. Maecenas molestie scelerisque odio, ut elementum odio venenatis tempus. Nullam sit amet augue vel erat porttitor blandit nec ut nisi.
 							</p>
 						</div>
-						<div className="mb-40">
+						<div id="block-4" className="mb-40">
 							<img className="mb-8" src="https://opendoodles.s3-us-west-1.amazonaws.com/loving.png" />
 							<h5 className="mb-4">World Class Customer Support</h5>
 							<p>
@@ -90,7 +90,7 @@ const Landing = () => {
 					</div>
 				</section>
 
-				<section style={{backgroundColor: '#d8eacc'}}>
+				<section style={{backgroundColor: '#f6f6f4'}}>
 					<div className="container mx-auto flex flex-wrap">
 						<div className="w-1/2">
 							<img src="https://opendoodles.s3-us-west-1.amazonaws.com/levitate.png" />
@@ -110,8 +110,8 @@ const Landing = () => {
 						<h2 className="w-1/2 mx-auto">Whatever You Need, We’ve Got the Right Plan for You.</h2>
 					</div>	
 					<div className="w-1/2 px-8">
-						<div className="bg-green-500 h-full p-12">
-							<h3 className="text-white font-bold">Graphic Design</h3>
+						<div style={{backgroundColor: "#fbeeca"}} className="h-full p-12">
+							<h3 className="text-black font-bold">Graphic Design</h3>
 
 							<ul className="text-left my-12">
 								<li className="bg-white p-8 mb-6">
@@ -156,7 +156,20 @@ const Landing = () => {
 
 				</section>
 
-				<section className="bg-green-500">
+				<section>
+					<hr />
+					<div className="container mx-auto py-24 text-center">
+						<h2 className="pb-16">Check Out Some of Our Work</h2>	
+						<div className="flex flex-wrap pb-16">
+							<div style={{height: '200px'}} className="w-1/3 bg-gray-300">1</div>
+							<div className="w-1/3 bg-gray-500">1</div>
+							<div className="w-1/3 bg-gray-800">1</div>
+						</div>
+						<button className="btn btn-black">View More Work</button>
+					</div>
+				</section>
+
+				<section style={{backgroundColor: '#d8eacc'}}>
 					<div className="container mx-auto flex flex-wrap">
 						
 						<div className="w-1/2 pr-24 py-40">
@@ -165,15 +178,41 @@ const Landing = () => {
 						</div>
 
 						<div className="w-1/2">
-							<img src="https://via.placeholder.com/400" />
+							<img src="https://opendoodles.s3-us-west-1.amazonaws.com/zombieing.png" />	
 						</div>
 
 					</div>
 				</section>
 			</main>
 
-			<footer style={{height: '250px'}} className="container mx-auto">
-				lockie is kinda gay	
+			<footer style={{height: '250px'}} className="container mx-auto flex flex-wrap py-16">
+				<div className="w-2/5">
+					<img src="/logo.png" className="" />	
+				</div>
+				<div className="w-3/5 flex flex-wrap">
+					<div className="w-1/4">
+						<div className="font-bold uppercase">
+							Products
+						</div>
+					</div>
+					<div className="w-1/4">
+						<div className="font-bold uppercase">
+							Products
+						</div>
+					</div>
+					<div className="w-1/4">
+						<div className="font-bold uppercase">
+							Products
+						</div>
+					</div>
+					<div className="w-1/4">
+						<div className="font-bold uppercase">
+							Products
+						</div>
+					</div>
+
+
+				</div>
 			</footer>
 		</div>
 	)
