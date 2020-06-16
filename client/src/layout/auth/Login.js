@@ -43,13 +43,17 @@ const Login = props => {
 	return (
 		<div className="h-screen flex flex-wrap">
 			<div className="w-1/3 bg-gray-500"></div>	
-			<div className="w-2/3 bg-gray-100">
+			<div className="w-2/3 pb-24" style={{backgroundColor: '#f6f6f4'}}>
 				<div className="w-1/3 mx-auto flex flex-wrap h-full items-center">
 					<div className="w-full">	
-						<h2 className="mb-8">Login</h2>
+						<h2 className="mb-4">Log In</h2>
+						<p className="mb-12">
+							Need a Graaphic account? <Link className="link" to="/pricing">Sign up here</Link>
+						</p>
+
 						<form noValidate onSubmit={onSubmit}>
-							<div>
-								<label className="block" htmlFor="email">Email</label>
+							<div className="mb-8">
+								<label className="block mb-4 font-bold" htmlFor="email">Email</label>
 								<input 
 									onChange={onChange}
 									value={user.email}
@@ -66,8 +70,8 @@ const Login = props => {
 								</span>
 							</div>
 
-							<div>
-								<label className="block" htmlFor="password">Password</label>
+							<div className="mb-16">
+								<label className="block mb-4 font-bold" htmlFor="password">Password</label>
 								<input 
 									onChange={onChange}
 									value={user.password}
@@ -84,7 +88,7 @@ const Login = props => {
 								</span>
 							</div>
 							
-							<button className="btn btn-black">Login</button>
+							<button className="btn btn-primary w-full">Login</button>
 						</form>
 					</div>
 				</div>

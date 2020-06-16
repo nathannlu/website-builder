@@ -1,4 +1,5 @@
 import React, { useState, useEffect} from 'react';
+import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 
 
@@ -28,13 +29,17 @@ const Register = ({props}) => {
 	return (
 		<div className="h-screen flex flex-wrap">
 			<div className="w-1/3 bg-gray-500"></div>	
-			<div className="w-2/3 bg-gray-100">
+			<div className="w-2/3 pb-24" style={{backgroundColor: '#f6f6f4'}}>
 				<div className="w-1/3 mx-auto flex flex-wrap h-full items-center">
 					<div className="w-full">	
-						<h2 className="mb-8">Create an Account</h2>
+						<h2 className="mb-4">Create an Account</h2>
+						<p className="mb-12">
+							Already have an account? <Link className="link" to="/login">Log in here</Link>
+						</p>
+
 						<form noValidate onSubmit={onSubmit}>
-							<div>
-								<label className="block" htmlFor="name">Name</label>
+							<div className="mb-8">
+								<label className="block mb-4 font-bold" htmlFor="name">Name</label>
 								<input
 									onChange={onChange}
 									value={user.name}
@@ -48,8 +53,8 @@ const Register = ({props}) => {
 								/>
 								<span>{errors.name}</span>
 							</div>
-							<div>
-								<label className="block" htmlFor="email">Email</label>
+							<div className="mb-8">
+								<label className="block mb-4 font-bold" htmlFor="email">Email</label>
 								<input
 									onChange={onChange}
 									value={user.email}
@@ -63,8 +68,8 @@ const Register = ({props}) => {
 								/>
 								<span>{errors.email}</span>
 							</div>
-							<div>
-								<label className="block" htmlFor="password">Password</label>
+							<div className="mb-8">
+								<label className="block mb-4 font-bold" htmlFor="password">Password</label>
 								<input
 									onChange={onChange}
 									value={user.password}
@@ -78,8 +83,8 @@ const Register = ({props}) => {
 								/>
 								<span>{errors.password}</span>
 							</div>
-							<div>
-								<label className="block" htmlFor="password2">Confirm password</label>
+							<div className="mb-16">
+								<label className="block mb-4 font-bold" htmlFor="password2">Confirm password</label>
 								<input
 									onChange={onChange}
 									value={user.password2}
@@ -93,7 +98,7 @@ const Register = ({props}) => {
 								/>
 								<span>{errors.password2}</span>
 							</div>
-							<button className="btn btn-black">Sign up</button>
+							<button className="btn btn-primary w-full">Sign up</button>
 						</form>
 					</div>
 				</div>

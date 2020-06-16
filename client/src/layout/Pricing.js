@@ -1,11 +1,35 @@
 import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+import PricingModule from '../components/PricingModule';
 import Footer from '../components/Footer';
 
 const Pricing = () => {
 	const [billingSchedule, setBillingSchedule] = useState(0);
+	const graphicDesignPerks = [
+		'Dedicated Designer',
+		'Unlimited requests',
+		'Unlimited revisions',
+		'1-2 day turnaround',
+		'30-day satisfaction guarantee'
+	];
+	const graphicDesignPrices = ['399', '379', '319'];
+
+	const proPerks = [
+		'Dedicated Designer',
+		'Unlimited requests',
+		'Unlimited revisions',
+		'1-2 day turnaround',
+		'30-day satisfaction guarantee',
+		'aids'
+	];
+	const proPrices = ['995', '945', '833'];
+
 	return (
 		<div>
+			<Helmet>
+				<title>Pricing</title>
+			</Helmet>
 			<header className="w-full" style={{backgroundColor: '#fbeeca', height: '500px'}}>
 				<div className="container mx-auto h-full flex flex-wrap items-center">
 					<div className="text-center mx-auto w-2/3 pr-24">
@@ -25,56 +49,17 @@ const Pricing = () => {
 					</div>	
 					<div className="flex flex-wrap">
 						<div className="w-1/2 px-16"> 
-							<div style={{backgroundColor: '#fbeeca'}} className="p-16">
-								<h3 className="font-bold my-4">Graphic Design</h3>
-								<p>Best for solo entrepreneurs & small businesses.</p>
-								<ul className="py-8 list-disc">
-									<li>Dedicated designer</li>
-									<li>Dedicated designer</li>
-									<li>Dedicated designer</li>
-									<li>Dedicated designer</li>
-									<li>Dedicated designer</li>
-									<li>Dedicated designer</li>
-									<li>Dedicated designer</li>
-									<li>Dedicated designer</li>
-									<li>Dedicated designer</li>
-
-								</ul>
-								<div className="flex flex-wrap">
-									{{
-										0: <div><div>$499/mo</div><div>Paid Monthly</div></div>,
-										1: <div><div>$479/mo</div><div>Paid Quarterly</div></div>,
-										2: <div><div>$469/mo</div><div>Paid Annually</div></div>
-									}[billingSchedule]}
-									<Link className="btn btn-black ml-auto" to="/onboard?plan=Standard">Start Trial</Link>
-								</div>	
-							</div>
+							<PricingModule
+								plan={'standard'}	
+								billingSchedule={billingSchedule}
+							/>
 						</div>
 						<div className="w-1/2 px-16"> 
-							<div className="text-white bg-gray-800 p-16">
-								<h3 className="font-bold my-4">Graphic Design Pro</h3>
-								<p>Best for solo entrepreneurs & small businesses.</p>
-								<ul className="py-8 list-disc">
-									<li>Dedicated designer</li>
-									<li>Dedicated designer</li>
-									<li>Dedicated designer</li>
-									<li>Dedicated designer</li>
-									<li>Dedicated designer</li>
-									<li>Dedicated designer</li>
-									<li>Dedicated designer</li>
-									<li>Dedicated designer</li>
-									<li>Dedicated designer</li>
-
-								</ul>
-								<div className="flex flex-wrap">
-									{{
-										0: <div><div>$995/mo</div><div>Paid Monthly</div></div>,
-										1: <div><div>$945/mo</div><div>Paid Quarterly</div></div>,
-										2: <div><div>$833/mo</div><div>Paid Annually</div></div>
-									}[billingSchedule]}
-									<Link className="btn btn-black ml-auto" to="/onboard?plan=Standard">Start Trial</Link>
-								</div>	
-							</div>
+							<PricingModule
+								plan={'premium'}	
+								billingSchedule={billingSchedule}
+								backgroundColor={"#fbeeca"}
+							/>
 						</div>
 					</div>
 				</section>

@@ -1,10 +1,15 @@
 import React from 'react';
 import { HashLink as Link } from 'react-router-hash-link';
+import { Helmet } from 'react-helmet';
+import PricingModule from '../components/PricingModuleSmall';
 import Footer from '../components/Footer.js';
 
 const Landing = () => {
 	return (
 		<div>
+			<Helmet>
+				<title>My Title</title>
+			</Helmet>
 			<header style={{backgroundColor: '#fbeeca'}} className="w-full bg-gray-300">
 				<div className="container mx-auto h-full flex flex-wrap items-center" style={{height: '700px'}}>
 					<div className="w-1/2 pr-24">
@@ -12,7 +17,7 @@ const Landing = () => {
 						<p className="mb-12">
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla auctor venenatis varius. Maecenas molestie scelerisque odio, ut elementum odio venenatis tempus. Nullam sit amet augue vel erat porttitor blandit nec ut nisi.
 						</p>
-						<button className="btn btn-black">Request a demo</button>
+						<button className="btn btn-primary">Request a demo</button>
 					</div>
 					<div className="w-1/2">
 						<img src="https://opendoodles.s3-us-west-1.amazonaws.com/reading-side.png" />
@@ -106,55 +111,24 @@ const Landing = () => {
 					</div>
 				</section>
 
-				<section className="py-40 flex flex-wrap container mx-auto text-center">
+				<section className="py-40 flex flex-wrap container mx-auto">
 					<div className="w-full pb-16">
-						<h2 className="w-1/2 mx-auto">Whatever You Need, We’ve Got the Right Plan for You.</h2>
+						<h2 className="w-1/2 mx-auto text-center">Whatever You Need, We’ve Got the Right Plan for You.</h2>
 					</div>	
+								
 					<div className="w-1/2 px-8">
-						<div style={{backgroundColor: "#fbeeca"}} className="h-full p-12">
-							<h3 className="text-black font-bold">Graphic Design</h3>
-
-							<ul className="text-left my-12">
-								<li className="bg-white p-8 mb-6">
-									Static graphics like flyers, infographics, social media graphics and more
-								</li>	
-								<li className="bg-white p-8 mb-6">
-									Static graphics like flyers, infographics, social media graphics and more
-								</li>	
-								<li className="bg-white p-8 mb-6">
-									Static graphics like flyers, infographics, social media graphics and more
-								</li>	
-								<li className="bg-white p-8 mb-6">
-									Static graphics like flyers, infographics, social media graphics and more
-								</li>	
-							</ul>
-
-							<button className="btn btn-black">Get Demo</button>
-						</div>
+						<PricingModule
+							plan={'standard'}	
+							footerButton={true}
+						/>		
 					</div>
 					<div className="w-1/2 px-8">
-						<div className="bg-gray-800 h-full p-12">
-							<h3 className="text-white font-bold">Graphic Design Pro</h3>
-
-							<ul className="text-left my-12">
-								<li className="bg-white p-8 mb-6">
-									Static graphics like flyers, infographics, social media graphics and more
-								</li>	
-								<li className="bg-white p-8 mb-6">
-									Static graphics like flyers, infographics, social media graphics and more
-								</li>	
-								<li className="bg-white p-8 mb-6">
-									Static graphics like flyers, infographics, social media graphics and more
-								</li>	
-								<li className="bg-white p-8 mb-6">
-									Static graphics like flyers, infographics, social media graphics and more
-								</li>	
-							</ul>
-
-							<button className="btn btn-black">Get Demo</button>
-						</div>
+						<PricingModule
+							plan={'premium'}	
+							backgroundColor={"#fbeeca"}
+							footerButton={true}
+						/>
 					</div>
-
 				</section>
 
 				<section>
