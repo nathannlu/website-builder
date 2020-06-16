@@ -1,5 +1,6 @@
 import React from 'react';
 import { HashLink as Link } from 'react-router-hash-link';
+import Footer from '../components/Footer.js';
 
 const Landing = () => {
 	return (
@@ -168,52 +169,8 @@ const Landing = () => {
 						<button className="btn btn-black">View More Work</button>
 					</div>
 				</section>
-
-				<section style={{backgroundColor: '#d8eacc'}}>
-					<div className="container mx-auto flex flex-wrap">
-						
-						<div className="w-1/2 pr-24 py-40">
-							<h2 className="mb-8">You made it to the bottom of the page! Go fuck yourself.</h2>
-							<button className="btn btn-black">View Pricing</button>
-						</div>
-
-						<div className="w-1/2">
-							<img src="https://opendoodles.s3-us-west-1.amazonaws.com/zombieing.png" />	
-						</div>
-
-					</div>
-				</section>
 			</main>
-
-			<footer style={{height: '250px'}} className="container mx-auto flex flex-wrap py-16">
-				<div className="w-2/5">
-					<img src="/logo.png" className="" />	
-				</div>
-				<div className="w-3/5 flex flex-wrap">
-					<div className="w-1/4">
-						<div className="font-bold uppercase">
-							Products
-						</div>
-					</div>
-					<div className="w-1/4">
-						<div className="font-bold uppercase">
-							Products
-						</div>
-					</div>
-					<div className="w-1/4">
-						<div className="font-bold uppercase">
-							Products
-						</div>
-					</div>
-					<div className="w-1/4">
-						<div className="font-bold uppercase">
-							Products
-						</div>
-					</div>
-
-
-				</div>
-			</footer>
+			<Footer />
 		</div>
 	)
 };
