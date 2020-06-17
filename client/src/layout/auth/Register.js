@@ -28,7 +28,7 @@ const Register = ({props}) => {
 
 	return (
 		<div className="h-screen flex flex-wrap">
-			<div className="w-1/3 bg-gray-500"></div>	
+			<div className="w-1/3" style={{backgroundImage: 'url(/splash.png)', backgroundSize: 'cover', filter: 'grayscale(100%)'}}></div>	
 			<div className="w-2/3 pb-24" style={{backgroundColor: '#f6f6f4'}}>
 				<div className="w-1/3 mx-auto flex flex-wrap h-full items-center">
 					<div className="w-full">	

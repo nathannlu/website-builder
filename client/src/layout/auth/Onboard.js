@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import axios from 'axios';
 import { Link, withRouter } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { registerUser } from '../../actions/authActions';
@@ -25,6 +26,9 @@ const Onboarding = props => {
 	
 	return (
 		<div>
+			<Helmet>
+				<title>Onboarding | Graaphic</title>	
+			</Helmet>
 			{{
 				0: <Register props={props} />,
 				1: <PaymentPlan props={props} setOnboardingStage={setOnboardingStage} />,

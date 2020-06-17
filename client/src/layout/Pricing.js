@@ -3,28 +3,10 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import PricingModule from '../components/PricingModule';
 import Footer from '../components/Footer';
+import Accordion from '../components/Accordion';
 
 const Pricing = () => {
 	const [billingSchedule, setBillingSchedule] = useState(0);
-	const graphicDesignPerks = [
-		'Dedicated Designer',
-		'Unlimited requests',
-		'Unlimited revisions',
-		'1-2 day turnaround',
-		'30-day satisfaction guarantee'
-	];
-	const graphicDesignPrices = ['399', '379', '319'];
-
-	const proPerks = [
-		'Dedicated Designer',
-		'Unlimited requests',
-		'Unlimited revisions',
-		'1-2 day turnaround',
-		'30-day satisfaction guarantee',
-		'aids'
-	];
-	const proPrices = ['995', '945', '833'];
-
 	return (
 		<div>
 			<Helmet>
@@ -43,9 +25,9 @@ const Pricing = () => {
 			<main>
 				<section className="container mx-auto py-40">
 					<div className="text-center pb-16">
-						<button className="btn btn-black" onClick={() => setBillingSchedule(0)}>Monthly</button>
-						<button className="btn btn-black" onClick={() => setBillingSchedule(1)}>Quarterly</button>
-						<button className="btn btn-black" onClick={() => setBillingSchedule(2)}>Annually</button>
+						<button className={billingSchedule === 0 ? 'btn btn-black' : 'btn' } onClick={() => setBillingSchedule(0)}>Monthly</button>
+						<button className={billingSchedule === 1 ? 'btn btn-black' : 'btn' } onClick={() => setBillingSchedule(1)}>Quarterly</button>
+						<button className={billingSchedule === 2 ? 'btn btn-black' : 'btn' } onClick={() => setBillingSchedule(2)}>Annually</button>
 					</div>	
 					<div className="flex flex-wrap">
 						<div className="w-1/2 px-16"> 
@@ -67,39 +49,31 @@ const Pricing = () => {
 				<section className="container mx-auto pb-40">
 					<h2 className="pb-16 text-center">All Plans Include</h2>
 					<div className="flex flex-wrap">
-						<div className="w-1/4 px-8 py-16">
-							<h4 className="font-bold">Unlimited Requests</h4>
+						<div className="w-1/3 p-16">
+							<h4 className="font-bold mb-4">Unlimited Requests</h4>
 							<p>Request as many designs as your heart desires. Even if you’ve already submitted 100.</p>
 						</div>
-						<div className="w-1/4 px-8 py-16">
-							<h4 className="font-bold">Unlimited Requests</h4>
-							<p>Request as many designs as your heart desires. Even if you’ve already submitted 100.</p>
+						<div className="w-1/3 p-16">
+							<h4 className="font-bold mb-4">Unlimited Revisions</h4>
+							<p>We’ll keep editing until you think it’s absolutely perfect. We won’t stop you.</p>	
 						</div>
-						<div className="w-1/4 px-8 py-16">
-							<h4 className="font-bold">Unlimited Requests</h4>
-							<p>Request as many designs as your heart desires. Even if you’ve already submitted 100.</p>
-						</div>
-						<div className="w-1/4 px-8 py-16">
-							<h4 className="font-bold">Unlimited Requests</h4>
-							<p>Request as many designs as your heart desires. Even if you’ve already submitted 100.</p>
+						<div className="w-1/3 p-16">
+							<h4 className="font-bold mb-4">A Dedicated Designer</h4>
+							<p>Work with your designer directly, on a first-name basis. No friction, no middlemen.</p>
 						</div>
 					</div>
 					<div className="flex flex-wrap">
-						<div className="w-1/4 px-8 py-16">
-							<h4 className="font-bold">Unlimited Requests</h4>
-							<p>Request as many designs as your heart desires. Even if you’ve already submitted 100.</p>
+						<div className="w-1/3 p-16">
+							<h4 className="font-bold mb-4">Fast or Faster Turnaround Times</h4>
+							<p>Most requests only take one or two business days — or even same-day for Pro accounts.</p>
 						</div>
-						<div className="w-1/4 px-8 py-16">
-							<h4 className="font-bold">Unlimited Requests</h4>
-							<p>Request as many designs as your heart desires. Even if you’ve already submitted 100.</p>
+						<div className="w-1/3 p-16">
+							<h4 className="font-bold mb-4">24/7 Live Chat Support</h4>
+							<p>Run into an issue? Just chat with our world-class support team in real time, available 24/5.</p>
 						</div>
-						<div className="w-1/4 px-8 py-16">
-							<h4 className="font-bold">Unlimited Requests</h4>
-							<p>Request as many designs as your heart desires. Even if you’ve already submitted 100.</p>
-						</div>
-						<div className="w-1/4 px-8 py-16">
-							<h4 className="font-bold">Unlimited Requests</h4>
-							<p>Request as many designs as your heart desires. Even if you’ve already submitted 100.</p>
+						<div className="w-1/3 p-16">
+							<h4 className="font-bold mb-4">Satisfaction Guarantee</h4>
+							<p>Try us out risk-free. If you don’t love us, get a full refund with our extended 30-day risk-free trial.</p>
 						</div>
 					</div>
 				</section>
@@ -111,8 +85,8 @@ const Pricing = () => {
 							<h2 className="pb-16">Got questions? Relax bruh we got you.</h2>	
 							<img src="https://opendoodles.s3-us-west-1.amazonaws.com/laying.png" />	
 						</div>
-						<div className="w-1/2 bg-gray-500">
-							1
+						<div className="w-1/2">
+							<Accordion />	
 						</div>
 					</div>
 				</section>

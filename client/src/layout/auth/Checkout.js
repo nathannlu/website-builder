@@ -59,15 +59,16 @@ const Checkout = ({props}) => {
         // execution. Set up a webhook or plugin to listen for the
         // payment_intent.succeeded event that handles any business critical
         // post-payment actions.
-				console.log('Payment succeeded')
-      }
+    		alert('Payment succeeded! Redirecting you to login...');
+				props.history.push('/login');
+			}
     }
 
 	};	
 
 	return (
 		<div className="h-screen flex flex-wrap">
-			<div className="w-1/3 bg-gray-500"></div>	
+			<div className="w-1/3" style={{backgroundImage: 'url(/splash.png)', backgroundSize: 'cover', filter: 'grayscale(100%)'}}></div>	
 			<div style={{backgroundColor: '#f6f6f4'}} className="w-2/3 pb-24">
 				<div className="w-1/3 mx-auto flex flex-wrap h-full items-center">
 					<div className="w-full">

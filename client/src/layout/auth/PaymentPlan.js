@@ -1,60 +1,43 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import PricingModule from '../../components/PricingModuleSmall';
+
 const PaymentPlan = ({props, setOnboardingStage}) => {
-	const [proPlan, setProPlan] = useState(false);	
+	const [plan, setPlan] = useState(0);	
 	const [billingSchedule, setBillingSchedule] = useState(0);
-	const graphicDesignPerks = [
-		'Dedicated Designer',
-		'Unlimited requests',
-		'Unlimited revisions',
-		'1-2 day turnaround',
-		'30-day satisfaction guarantee'
-	];
-	const graphicDesignPrices = ['399', '379', '319'];
-
-	const proPerks = [
-		'Dedicated Designer',
-		'Unlimited requests',
-		'Unlimited revisions',
-		'1-2 day turnaround',
-		'30-day satisfaction guarantee',
-		'aids'
-	];
-	const proPrices = ['995', '945', '833'];
-
+	useEffect(() => {
+		const selectedPlan = JSON.parse('{"' + props.location.search.split('?')[1].replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}') 
+		selectedPlan.plan.toLowerCase() === 'standard' ? setPlan(0) : setPlan(1);
+	}, [])
 	return (
 		<div className="h-screen flex flex-wrap">
-			<div className="w-1/3 bg-gray-500"></div>	
+			<div className="w-1/3" style={{backgroundImage: 'url(/splash.png)', backgroundSize: 'cover', filter: 'grayscale(100%)'}}></div>	
 			<div style={{backgroundColor: '#f6f6f4'}} className="w-2/3">
 				<div className="w-2/3 mx-auto flex flex-wrap h-full items-center">
 					<div className="w-full">
 						<h2 className="mb-16">Confirm Your Subscription</h2>
 						
 						<div className="pb-8">
-							<button className="btn btn-black" onClick={() => setBillingSchedule(0)}>Monthly</button>
-							<button className="btn btn-black" onClick={() => setBillingSchedule(1)}>Quarterly</button>
-							<button className="btn btn-black" onClick={() => setBillingSchedule(2)}>Annually</button>
+							<button className={billingSchedule === 0 ? 'btn btn-black' : 'btn' } onClick={() => setBillingSchedule(0)}>Monthly</button>
+							<button className={billingSchedule === 1 ? 'btn btn-black' : 'btn' } onClick={() => setBillingSchedule(1)}>Quarterly</button>
+							<button className={billingSchedule === 2 ? 'btn btn-black' : 'btn' } onClick={() => setBillingSchedule(2)}>Annually</button>
 						</div>
 						<div className="flex flex-wrap">
-							<div className="w-1/2"> 
+							<div className="w-1/2" onClick={() => setPlan(0)}> 
 								<PricingModule
-									title={'Graphic Design'} 
-									perks={graphicDesignPerks}		
+									plan={'standard'}	
+									backgroundColor={plan === 0 ? '#fbeeca' : ''}
 								/>
 							</div>
-							<div className="w-1/2"> 
+							<div className="w-1/2" onClick={() => setPlan(1)}> 
 								<PricingModule
-									title={'Graphic Design Pro'} 
-									perks={proPerks}		
+									plan={'premium'}
+									backgroundColor={plan === 1 ? '#fbeeca' : ''}
 								/>
 							</div>
 						</div>
 
 						<div className="py-8">
 							Total: ${{
-								0: !proPlan ? graphicDesignPrices[0] : proPrices[0],
-								1: !proPlan ? graphicDesignPrices[1] : proPrices[1],
-								2: !proPlan ? graphicDesignPrices[2] : proPrices[2]
 							}[billingSchedule]}/mo
 						</div>
 						<button className="btn btn-primary" onClick={() => setOnboardingStage(2)}>Proceed to payment</button>
