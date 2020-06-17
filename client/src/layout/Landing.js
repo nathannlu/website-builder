@@ -5,10 +5,12 @@ import PricingModule from '../components/PricingModuleSmall';
 import Footer from '../components/Footer.js';
 
 const Landing = () => {
+	const workExamples = [0,1,2]
+
 	return (
 		<div>
 			<Helmet>
-				<title>My Title</title>
+				<title>Graaphic - Manage designs and branding without the an in-house designer.</title>
 			</Helmet>
 			<header style={{backgroundColor: '#fbeeca'}} className="w-full bg-gray-300">
 				<div className="container mx-auto h-full flex flex-wrap items-center" style={{height: '700px'}}>
@@ -136,11 +138,16 @@ const Landing = () => {
 					<div className="container mx-auto py-24 text-center">
 						<h2 className="pb-16">Check Out Some of Our Work</h2>	
 						<div className="flex flex-wrap pb-16">
-							<div style={{height: '200px'}} className="w-1/3 bg-gray-300">1</div>
-							<div className="w-1/3 bg-gray-500">1</div>
-							<div className="w-1/3 bg-gray-800">1</div>
-						</div>
-						<button className="btn btn-black">View More Work</button>
+							{workExamples.map(i => (
+								<div className="w-1/3 p-4">
+									<div className="border" style={{height: "35rem", objectFit: 'contain', overflow: 'hidden'}}>
+										<img src={"/work/hostgenius_" + i + '.jpg'} />
+									</div>
+								</div>
+							
+							))}
+							</div>
+						<Link to="/work" className="btn btn-primary">View More Work</Link>
 					</div>
 				</section>
 			</main>
