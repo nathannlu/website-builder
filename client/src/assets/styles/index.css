@@ -14376,14 +14376,14 @@ body {
 h1 {
   font-size: 4.883rem;
   line-height: 5.86rem;
-  font-family: 'Merriweather', 'Times New Roman', Time, serif;
+  font-family: sans-serif;
   font-weight: bold;
 }
 
 h2 {
   font-size: 3.906rem;
   line-height: 4.69rem;
-  font-family: 'Merriweather', 'Times New Roman', Time, serif;
+  font-family: sans-serif;
   font-weight: 600;
 }
 
