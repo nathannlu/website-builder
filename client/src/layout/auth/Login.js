@@ -52,7 +52,7 @@ const Login = props => {
 					<div className="w-full">	
 						<h2 className="mb-4">Log In</h2>
 						<p className="mb-12">
-							Need a Graaphic account? <Link className="link" to="/pricing">Sign up here</Link>
+							Need a Graaphic account? <Link className="link" to="https://www.graaphic.co/pricing/">Sign up here</Link>
 						</p>
 
 						<form noValidate onSubmit={onSubmit}>
