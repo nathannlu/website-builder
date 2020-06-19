@@ -28,8 +28,12 @@ const RequestAssetsPanel = ({setFormStage, props, newRequest, setNewRequest}) =>
 	
 	const onSubmit = e => {
 		e.preventDefault();
-		searchImages();
-		setModalShow(true);	
+		if(unsplashQuery.length > 0) {
+			searchImages();
+			setModalShow(true);	
+		} else {
+			alert('Input cannot be empty');
+		}
 	}
 
 	const onChange = e => {
@@ -54,9 +58,12 @@ const RequestAssetsPanel = ({setFormStage, props, newRequest, setNewRequest}) =>
 		}
 	}
 
+	const deleteImage = image => {
+		setSelectedCheckboxes(selectedCheckboxes.filter(arrItem => arrItem !== image))
+	}
+
 	const submitImageSelection = e => {
 		e.preventDefault();
-		console.log(selectedCheckboxes);
 	}
 
 	const continueButtonHandler = e => {
@@ -64,6 +71,7 @@ const RequestAssetsPanel = ({setFormStage, props, newRequest, setNewRequest}) =>
 
 		setNewRequest(prevState => {
 			prevState.assets.unsplashAssets = selectedCheckboxes;	
+			prevState.assets.findForMe = findAssetsForMe;
 			return({...prevState});
 		})
 		setFormStage(4);
@@ -71,7 +79,6 @@ const RequestAssetsPanel = ({setFormStage, props, newRequest, setNewRequest}) =>
 
 	useEffect(() => {
 		setSelectedCheckboxes(newRequest.assets.unsplashAssets);
-		console.log(JSON.stringify({id: '1', preview: '2'}))
 	}, [])
 
 	return (
@@ -91,11 +98,14 @@ const RequestAssetsPanel = ({setFormStage, props, newRequest, setNewRequest}) =>
 							<input placeholder="Search for assets" value={unsplashQuery} onChange={e => setUnsplashQuery(e.target.value)} />	
 							<button className="btn btn-black">search</button>
 						</div>
-						{selectedCheckboxes.map((image,i) => (
-							<div key={i}>
-								<img src={JSON.parse(image).thumb} />
-							</div>
-						))}
+						<div className="flex flex-wrap">
+							{selectedCheckboxes.map((image,i) => (
+								<div className="w-1/5 flex flex-wrap" key={i}>
+									<img className="w-full" style={{height: '100px', objectFit: 'cover'}} src={JSON.parse(image).thumb} />
+									<button type="button" onClick={() => deleteImage(image)} className="w-full">Delete</button>
+								</div>
+							))}
+						</div>
 						
 						{selectedCheckboxes.length > 0 ? ('') : (
 							<a type="button" onClick={() => setFindAssetsForMe(true)} className="link">Find stock assets for me</a>
@@ -116,27 +126,39 @@ const RequestAssetsPanel = ({setFormStage, props, newRequest, setNewRequest}) =>
 			>
 				<a style={closeStyle} onClick={() => setModalShow(false)}>X</a>	
 				<div>
+					<h3 className="mb-8">Select images</h3>
+					{/*
 					<form className="w-full flex" onSubmit={e => searchImages(e)}>
-						{/*<input value={unsplashQuery} onChange={e => setUnsplashQuery(e.target.value)} /> 
-						<button className="btn btn-black">Search</button>*/}
+						<input value={unsplashQuery} onChange={e => setUnsplashQuery(e.target.value)} /> 
+						<button className="btn btn-black">Search</button>
 					</form>
-					<form className="flex flex-wrap" onSubmit={submitImageSelection}>
-						{
-							unsplashImages.map((image,i) => (
-								<div className="w-1/3" style={{height: '200px'}} key={i}>
-								{/* rerender component when user researches */}
-									<Checkbox 
-										label={`{"id": "${image.id}", "thumb":"${image.urls.thumb}"}`} 
-										checked={selectedCheckboxes.includes(`{"id": "${image.id}", "thumb":"${image.urls.thumb}"}`)} 
-										handleCheckboxChange={toggleCheckbox}
-										key={i}
-										image={image.urls.thumb} />
-									/>
-								{/*<img style={{width: '100%',height: '100%', objectFit: 'cover'}} src={image.urls.thumb} />	*/}
-								</div>
-							))
-						}
-						<button className="btn btn-black">Select images</button>
+					*/}
+					<form onSubmit={submitImageSelection}>
+					{unsplashImages.length > 0 ? (
+						<div className="flex flex-wrap">
+							{
+								unsplashImages.map((image,i) => (
+									<div className="w-1/3"  key={i}>
+									{/* rerender component when user researches */}
+										<Checkbox 
+											label={`{"id": "${image.id}", "thumb":"${image.urls.thumb}"}`} 
+											checked={selectedCheckboxes.includes(`{"id": "${image.id}", "thumb":"${image.urls.thumb}"}`)} 
+											handleCheckboxChange={toggleCheckbox}
+											key={i}
+											image={image.urls.thumb}
+										/>
+									</div>
+								))
+							}
+						</div>	
+						) : (
+							<div className="w-full py-40 text-center" style={{backgroundColor: '#f6f6f4'}}>
+								<p>No images found</p>
+							</div>
+						)}
+						<div className="w-full mt-8">
+							<button onClick={() => setModalShow(false)} className="btn btn-black">Select {selectedCheckboxes.length} image(s)</button>
+						</div>
 					</form>
 				</div>
 			</Modal>

@@ -23,15 +23,16 @@ class Checkbox extends Component {
     const { isChecked } = this.state;
 
     return (
-      <div className="checkbox">
-        <label>
+      <div className={isChecked ? 'relative checkbox border-blue-500 border-4' : 'relative'} style={{height: '200px'}}>
+        <label className="inline-block w-full h-full">
           <input
+						className="h-full w-full"
 						type="checkbox"
 						value={label}
 						checked={isChecked}
 						onChange={this.toggleCheckboxChange}
 					/>
-          <img src={image} />
+          <img style={{width: '100%',height: '100%', objectFit: 'cover'}} className="absolute top-0" src={image} />
         </label>
       </div>
     );

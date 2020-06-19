@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
 	return (
-		<div className="w-full bg-green-500 text-white py-8">
+		<div className="w-full pt-16 pb-8 text-white" style={{backgroundColor: '#00465a'}}>
 			<div className="container mx-auto">
 				<div className="inline-block">		
 					<Link to="/">

@@ -14376,18 +14376,19 @@ body {
 h1 {
   font-size: 4.883rem;
   line-height: 5.86rem;
-  font-family: sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: bold;
 }
 
 h2 {
   font-size: 3.906rem;
   line-height: 4.69rem;
-  font-family: sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: 600;
 }
 
 h3 {
+  font-family: 'Poppins', sans-serif;
   font-size: 3.125rem;
   line-height: 3.75rem;
 }
@@ -14410,6 +14411,7 @@ h5 {
   font-weight: bold;
   transition: all .2s ease;
   text-transform: uppercase;
+  border-radius: 3px;
 }
 
 .btn:focus {
@@ -14478,6 +14480,22 @@ input {
 }
 
 input:focus {
+  outline: none;
+  border: 1px solid #00465a;
+  box-shadow: inset 0 0 0 1px #00465a;
+}
+
+textarea {
+  border: 1px solid rgba(36,28,21,0.3);
+  background-color: white;
+  transition: all .2s ease;
+  border-radius: 2px;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  min-height: 4.6rem;
+}
+
+textarea:focus {
   outline: none;
   border: 1px solid #00465a;
   box-shadow: inset 0 0 0 1px #00465a;
