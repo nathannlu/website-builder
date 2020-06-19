@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
+import ReactFilestack from 'filestack-react';
 import Switch from 'react-switch';
+import axios from 'axios';
 
 const RequestDescriptionPanel = ({props, setFormStage, newRequest, setNewRequest}) => {
 	const [checkedCustomText, setCheckedCustomText] = useState(false);
@@ -25,8 +27,34 @@ const RequestDescriptionPanel = ({props, setFormStage, newRequest, setNewRequest
 		});
 	}
 
+	const deleteFile = handle => {
+		axios.delete(`https://www.filestackapi.com/api/file/${handle}?key=AZEPTIQ8sRBehAsatbasfz`)
+			.then(res => console.log(res));
+
+		setNewRequest(prevState => {
+			prevState.description.customAssets = prevState.description.customAssets.filter(asset => asset.handle !== handle)
+			return({...prevState});
+		})
+	}
+
+	const onFileUpload = res => {
+		console.log(res);
+		if (res.filesFailed.length > 0) {
+			alert('File upload failed. Please try again or contact support');
+		} else if (res.filesUploaded.length > 0) {
+			setNewRequest((prevState) => {
+				const _temp = [...prevState.description.customAssets, ...res.filesUploaded]
+				
+				// Filter array and remove duplicates, then change newRequest state
+				prevState.description.customAssets = Array.from(new Set(_temp.map(a => a.handle))).map(handle => {return _temp.find(a => a.handle === handle)})
+				return({...prevState})
+			});
+		}
+	}
+
 	useEffect(() => {
-		if (newRequest.description.customText.length > 0) setCheckedCustomText(true)
+		if (newRequest.description.customText.length > 0) setCheckedCustomText(true);
+		if (newRequest.description.customAssets.length > 0) setCheckedCustomAssets(true); 
 	}, [])
 
 	return (
@@ -79,7 +107,25 @@ const RequestDescriptionPanel = ({props, setFormStage, newRequest, setNewRequest
 				</label>
 				{ checkedCustomAssets ? (
 					<div className="text-left">
-						<button className="btn btn-black">Add files</button>
+					
+						<ReactFilestack
+							apikey={'AZEPTIQ8sRBehAsatbasfz'}
+							componentDisplayMode={{
+								type: 'button',
+								customText: 'Add files',
+								customClass: 'btn btn-black'
+							}}
+							onSuccess={onFileUpload}
+						/>
+						
+						<div>
+						{newRequest.description.customAssets.map((file, i) => (
+							<div style={{display: 'inline-block'}}>
+								{file.filename} <a onClick={() => deleteFile(file.handle)} className="text-red-500 cursor-pointer">x</a>
+							</div>
+						))}
+
+						</div>
 					</div>
 				) : ('')}
 			</section>

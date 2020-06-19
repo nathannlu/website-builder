@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
 import { setCurrentUser, logoutUser } from './actions/authActions';
@@ -7,13 +7,7 @@ import { setCurrentUser, logoutUser } from './actions/authActions';
 import { Provider } from 'react-redux';
 import store from './store';
 
-import Navbar from './components/Navbar';
-import DashNavbar from './components/dashboard/Navbar';
-import Landing from './layout/Landing';
-import Services from './layout/Services';
-import Work from './layout/Work';
-import Pricing from './layout/Pricing';
-import About from './layout/About';
+import Navbar from './components/dashboard/Navbar';
 
 import Onboard from './layout/auth/Onboard';
 import Login from './layout/auth/Login';
@@ -55,7 +49,7 @@ const App = () => {
 				<div className="App">
 					<Switch>	
 						<Route path="/dashboard">	
-							<DashNavbar />	
+							<Navbar />	
 							<Switch>
 								<PrivateRoute exact path="/dashboard" component={Dashboard} />
 								<PrivateRoute exact path="/dashboard/create-request" component={CreateRequest} />
@@ -64,13 +58,9 @@ const App = () => {
 						</Route>
 		
 						<Route path="/">
-							<Navbar />	
-							<Route exact path="/" component={Landing} />
-							<Route exact path="/services" component={Services} />
-							<Route exact path="/work" component={Work} />
-							<Route exact path="/pricing" component={Pricing} />
-							<Route exact path="/about" component={About} />
-							
+							<Route exact path="/">
+								<Redirect to="/login" />
+							</Route>
 							<Elements stripe={stripePromise}>
 								<Route exact path="/onboard" component={Onboard} />
 							</Elements>	

@@ -57,7 +57,7 @@ const RequestFormManager = props => {
 		description: {
 			content: '',
 			customText: '',
-			customAssets: ''
+			customAssets: [] 
 		},
 		assets:{
 			unsplashAssets: [],
