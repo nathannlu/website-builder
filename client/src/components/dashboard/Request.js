@@ -2,7 +2,7 @@ import React from 'react';
 
 const Request = ({request})  => {
 	return (
-		<div className="bg-gray-300 p-6 mb-6 flex">
+		<div className="shadow-xl rounded bg-white p-6 mb-6 flex">
 			<img className="mr-4" src="https://via.placeholder.com/150" />	
 			<div className="">
 				<h4>{request.title}</h4>

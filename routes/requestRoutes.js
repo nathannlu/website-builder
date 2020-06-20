@@ -49,9 +49,7 @@ router.post('/', checkToken, (req, res) => {
 			console.log(req.body);	
 			const requestData = {
 				author: authorizedData.id,
-				title: req.body.title,
-				description: req.body.description,
-				dimensions: req.body.dimensions
+				...req.body	
 			}
 			
 			Request.create(requestData).then((err, newRequest) => {

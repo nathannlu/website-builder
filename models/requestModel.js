@@ -10,14 +10,20 @@ const RequestSchema = new Schema({
 		type: String,
 		required: true
 	},
-	description: {
-		type: String,
-		required: true
-	},
 	dimensions: {
-		type: String,
+		type: Object,
 		required: true
 	},
+	description: {
+		content: String,
+		customAssets: Array,
+		customText: String,
+	},
+	assets: {
+		unsplashAssets: Array,
+		findForMeDescription: String,
+	},
+	filetypes: Array,
 	delivered: {
 		type: Boolean,
 		default: false,

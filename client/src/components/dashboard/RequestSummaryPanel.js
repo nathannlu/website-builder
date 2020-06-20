@@ -1,9 +1,10 @@
 import React from 'react';
 
-const RequestSummaryPanel = ({props, setFormStage}) => {
+const RequestSummaryPanel = ({props, setFormStage, createNewRequest}) => {
 	const onSubmit = e => {
 		e.preventDefault();
 
+		createNewRequest();
 		console.log('submitted to designer');	
 	}
 

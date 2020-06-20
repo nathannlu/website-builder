@@ -28,15 +28,14 @@ const RequestDescriptionPanel = ({props, setFormStage, newRequest, setNewRequest
 	}
 
 	const deleteFile = handle => {
-		axios.delete(`https://www.filestackapi.com/api/file/${handle}?key=AZEPTIQ8sRBehAsatbasfz`)
-			.then(res => console.log(res));
+		axios.delete(`https://www.filestackapi.com/api/file/${handle}?key=AZEPTIQ8sRBehAsatbasfz&policy=eyJleHBpcnkiOjE5MTczMTE0MDAsImNhbGwiOlsicmVtb3ZlIl19&signature=55e89b22fee904304a4f47cdd73a4553f1ee9e91b06a682e29739acb5a85ab89`)
 
 		setNewRequest(prevState => {
 			prevState.description.customAssets = prevState.description.customAssets.filter(asset => asset.handle !== handle)
 			return({...prevState});
 		})
 	}
-
+	
 	const onFileUpload = res => {
 		console.log(res);
 		if (res.filesFailed.length > 0) {
@@ -110,10 +109,17 @@ const RequestDescriptionPanel = ({props, setFormStage, newRequest, setNewRequest
 					
 						<ReactFilestack
 							apikey={'AZEPTIQ8sRBehAsatbasfz'}
+							action="pick"
 							componentDisplayMode={{
 								type: 'button',
 								customText: 'Add files',
 								customClass: 'btn btn-black'
+							}}
+							clientOptions={{
+								security: {
+									policy: 'eyJjYWxsIjpbInBpY2siXSwiZXhwaXJ5IjoxOTE3MzExNDAwfQ==',
+									signature: '9720077e2b6d7d5715613cf4e113a0597f56f6b4162bc2d4ec22d3e0fcb12581' 
+								}
 							}}
 							onSuccess={onFileUpload}
 						/>
