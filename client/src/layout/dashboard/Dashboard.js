@@ -26,6 +26,10 @@ const Dashboard = props => {
 	const addRequest = () => {
 		axios.post('/api/requests').then(res => console.log(res));
 	}
+
+	const updateConversation = (note) => {
+		axios.put('/api/requests', note).then(res => console.log(res));
+	}
 	
 	const onClickRequest = request => {
 		setDeliveredRequest(request)
@@ -111,7 +115,7 @@ const Dashboard = props => {
 					{
 						{
 							0: <DeliveredRequestOverview deliveredRequest={deliveredRequest} setRequestOverviewStage={setRequestOverviewStage} setModalShow={setModalShow} />,
-							1: <DeliveredRequestRevision deliveredRequest={deliveredRequest} setRequestOverviewStage={setRequestOverviewStage} setModalShow={setModalShow} />
+							1: <DeliveredRequestRevision props={props} deliveredRequest={deliveredRequest} setRequestOverviewStage={setRequestOverviewStage} updateConversation={updateConversation} setModalShow={setModalShow} />
 						}[requestOverviewStage]
 					}
 				</Modal>

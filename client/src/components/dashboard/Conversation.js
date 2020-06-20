@@ -15,10 +15,10 @@ const Conversation = props => {
 		<Accordion allowZeroExpanded={true}>
 			{
 				props.conversation.map((message, i) => (
-					<AccordionItem>
+					<AccordionItem key={i}>
 						<AccordionItemHeading>
 							<AccordionItemButton>
-								{message.author}
+								{message.author.name}
 							</AccordionItemButton>
 						</AccordionItemHeading>
 						<AccordionItemPanel>

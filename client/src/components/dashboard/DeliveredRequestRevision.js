@@ -1,7 +1,26 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Modal, {closeStyle} from 'simple-react-modal';
 
-const DeliveredRequestRevision = ({deliveredRequest, setRequestOverviewStage, setModalShow}) => {
+const DeliveredRequestRevision = ({props, deliveredRequest, setRequestOverviewStage, updateConversation, setModalShow}) => {
+	const initialFormState = {
+		requestId:deliveredRequest._id,
+		author: {
+			name: props.auth.user.name,
+			id: props.auth.user.id 
+		},
+		content: '',
+	}
+	const [newNote, setNewNote] = useState(initialFormState);
+
+	const onChange = e => {
+		const {name, value} = e.target
+		setNewNote({...newNote, [name]: value});
+	}
+
+	const onSubmit = e => {
+		updateConversation(newNote);
+	}
+
 	return (
 		<div>
 			<a style={closeStyle} onClick={() => setModalShow(false)}>X</a>	
@@ -9,11 +28,11 @@ const DeliveredRequestRevision = ({deliveredRequest, setRequestOverviewStage, se
 				<h4 className="mb-8">{deliveredRequest.title}</h4>
 
 				<hr />
-				<div className="my-8">
+				<form onSubmit={onSubmit} className="my-8">
 					<p className="font-bold pb-4">Submit for revision</p>
-					<textarea placeholder="What would you like to see changed?"></textarea>
+					<textarea name="content" value={newNote.content} onChange={onChange} placeholder="What would you like to see changed?"></textarea>
 					<button className="btn btn-black">Submit for revision</button>
-				</div>
+				</form>
 				<hr />
 
 				<div className="w-full mt-8">

@@ -14,6 +14,9 @@ import { connect } from 'react-redux';
 const RequestFormManager = props => {
 	const requestSchema = {
 		title: '',
+		author: {
+			name: props.auth.user.name 
+		},
 		dimensions: {
 			type: '',
 			size: '',
@@ -38,9 +41,11 @@ const RequestFormManager = props => {
 		});
 	}
 
+	/*
 	useEffect(() => {
 		console.log(newRequest);
 	}, [formStage])
+	*/
 
 	return (
 		<div style={{backgroundColor: '#fbeeca'}} className="min-h-screen">

@@ -31,7 +31,7 @@ router.get('/', checkToken, (req, res) => {
 			res.sendStatus(403);
 		} else {
 			// If token is successfully verified, we can send the data
-			const userRequests = await Request.find({author: authorizedData.id})
+			const userRequests = await Request.find({'author.id': authorizedData.id})
 			res.status(200).json(userRequests)
 		}
 	})
@@ -46,16 +46,36 @@ router.post('/', checkToken, (req, res) => {
 		if (err) {
 			res.sendStatus(403);
 		} else {
+			req.body.author.id = authorizedData.id
 			console.log(req.body);	
-			const requestData = {
-				author: authorizedData.id,
-				...req.body	
-			}
-			
-			Request.create(requestData).then((err, newRequest) => {
+			Request.create(req.body).then((err, newRequest) => {
 				if(err) console.log(err);
 
 				console.log(newRequest);
+				res.status(200).json('success');
+			})
+		}
+	})
+});
+
+
+// @route PUT api/requests
+// @desc Updates design request 
+// @access Private 
+router.put('/', checkToken, (req, res) => {
+	jwt.verify(req.token, keys.secretOrKey, async (err, authorizedData) => {
+		if (err) {
+			res.sendStatus(403);
+		} else {
+			const newNote = {
+				author: req.body.author,
+				content: req.body.content
+			}
+
+			Request.findByIdAndUpdate(req.body.requestId, {delivered: false, $push: {conversation: newNote}}).then((newlyUpdated, err) => {
+				if (err) console.log(err);
+				console.log(newlyUpdated);
+
 				res.status(200).json('success');
 			})
 		}

@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const RequestSchema = new Schema({
 	author: {
-		type: String,
-		required: true
+		id: String,
+		name: String,
 	},
 	title: {
 		type: String,
@@ -28,10 +28,11 @@ const RequestSchema = new Schema({
 		type: Boolean,
 		default: false,
 	},
-	date: {
-		type: Date,
-		default: Date.now
-	}
+	conversation: {
+		type: Array
+	},
+}, {
+	timestamps: true
 });
 
 module.exports = User = mongoose.model("Requests", RequestSchema);

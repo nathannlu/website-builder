@@ -39,7 +39,7 @@ const DeliveredRequestOverview = ({deliveredRequest, setRequestOverviewStage, se
 				</div>
 
 				<div className="w-full mb-8">
-					<Conversation conversation={sample_conversation} />
+					<Conversation conversation={deliveredRequest.conversation} />
 				</div>
 
 				<hr />
