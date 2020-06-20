@@ -18,7 +18,12 @@ const DeliveredRequestRevision = ({props, deliveredRequest, setRequestOverviewSt
 	}
 
 	const onSubmit = e => {
-		updateConversation(newNote);
+		if (newNote.content > 0) {
+			updateConversation(newNote);
+		} else {
+			e.preventDefault();
+			alert('Please provide information on how you would like to change the design.');
+		}
 	}
 
 	return (

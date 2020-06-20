@@ -23,8 +23,19 @@ const Dashboard = props => {
 		props.logoutUser();
 	}
 
+	/*
 	const addRequest = () => {
 		axios.post('/api/requests').then(res => console.log(res));
+	}*/
+
+	const deleteRequest = id => {
+		axios.delete(`/api/requests/${id}`).then(res => {
+			if (res.status === 200) {
+				setRequests(requests.filter(request => request._id !== id))
+			} else {
+				alert('Something went wrong. Please try again or contact support');
+			}
+		})
 	}
 
 	const updateConversation = (note) => {
@@ -76,13 +87,13 @@ const Dashboard = props => {
 								<div>
 									{requests.filter(request => !request.delivered).map((request, i) => (
 										<div key={i}>	
-											<Request request={request} />	
+											<Request deleteRequest={deleteRequest} request={request} />	
 										</div>
 									))}
 								</div>
 							) : (
 								<div className="w-full text-center pt-16">
-									<p className="pb-8">No designs found</p>
+									<p className="pb-8">No designs queued</p>
 									<Link to="/dashboard/create-request" className="btn btn-black">Make a design request here</Link>
 								</div>
 							)}

@@ -82,5 +82,23 @@ router.put('/', checkToken, (req, res) => {
 	})
 });
 
+// @route PUT api/requests
+// @desc Updates design request 
+// @access Private 
+router.delete('/:id', checkToken, (req, res) => {
+	jwt.verify(req.token, keys.secretOrKey, async (err, authorizedData) => {
+		if (err) {
+			res.sendStatus(403);
+		} else {
+			Request.findByIdAndDelete(req.params.id).then((deletedRequest, err) => {
+				if (err) console.log(err);
+				console.log(deletedRequest);
+
+				res.status(200).json('success');
+			})
+		}
+	})
+});
+
 
 module.exports = router;
