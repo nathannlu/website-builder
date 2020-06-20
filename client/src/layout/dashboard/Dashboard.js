@@ -92,15 +92,14 @@ const Dashboard = props => {
 							{requests.filter(request => request.delivered).length > 0 ? (
 								<div>
 									{requests.filter(request => request.delivered).map((request, i) => (
-										<div onClick={() => onClickRequest(request)} key={i}>	
-											<Request request={request} />	
+										<div key={i}>	
+											<Request onClickRequest={onClickRequest} request={request} />	
 										</div>
 									))}
 								</div>
 							) : (
 								<div className="w-full text-center pt-16">
-									<p className="pb-8">No designs found</p>
-									<Link to="/dashboard/create-request" className="btn btn-black">Make a design request here</Link>
+									<p className="pb-8">Your work will arrive soon!</p>
 								</div>
 							)}
 						</div>

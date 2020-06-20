@@ -12,11 +12,11 @@ const Account = props => {
 	}
 
 	return (
-		<div>
-
-			<h2>Account page</h2>
-			<button className="btn btn-black my-4" onClick={onLogoutClick}>Logout</button>
-
+		<div style={{backgroundColor: '#fbeeca'}} className="min-h-screen pb-16">
+			<div className="container mx-auto">
+				<h3 className="pt-16 pb-6 w-full">Account page</h3>
+				<button className="btn btn-black my-4" onClick={onLogoutClick}>Logout</button>
+			</div>
 		</div>
 	)
 };

@@ -16,24 +16,24 @@ const DeliveredRequestOverview = ({deliveredRequest, setRequestOverviewStage, se
 				<hr />
 
 				<div className="py-8">
-					<p><span className="font-bold">Submitted:</span> {deliveredRequest.date}</p>
-					<p><span className="font-bold">By:</span> {deliveredRequest.author}</p>
-					<p><span className="font-bold">Last Updated:</span> 06/12/2020 12:41am MDT</p>
+					<p><span className="font-bold">Submitted:</span> {deliveredRequest.createdAt}</p>
+					<p><span className="font-bold">By:</span> {deliveredRequest.author.name}</p>
+					<p><span className="font-bold">Last Updated:</span> {deliveredRequest.updatedAt}</p>
 				</div>
 
 				<button className="btn btn-black w-full mb-8">Download all current files</button>
 
 				<div className="w-full flex flex-wrap mb-8">
 					<div className="w-1/5 px-4">
-						<img class="ticket_thumbnail" src="https://cdn.filestackcontent.com/rtH4XinR3KDK3nE7fN0g" />	
+						<img className="ticket_thumbnail" src="https://cdn.filestackcontent.com/rtH4XinR3KDK3nE7fN0g" />	
 						<label className="font-bold">JPG</label>
 					</div>
 					<div className="w-1/5 px-4">
-						<img class="ticket_thumbnail" src="https://cdn.filestackcontent.com/rtH4XinR3KDK3nE7fN0g" />	
+						<img className="ticket_thumbnail" src="https://cdn.filestackcontent.com/rtH4XinR3KDK3nE7fN0g" />	
 						<label className="font-bold">JPG</label>
 					</div>
 					<div className="w-1/5 px-4">
-						<img class="ticket_thumbnail" src="https://cdn.filestackcontent.com/rtH4XinR3KDK3nE7fN0g" />	
+						<img className="ticket_thumbnail" src="https://cdn.filestackcontent.com/rtH4XinR3KDK3nE7fN0g" />	
 						<label className="font-bold">JPG</label>
 					</div>
 				</div>
