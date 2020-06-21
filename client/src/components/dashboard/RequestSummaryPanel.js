@@ -1,6 +1,11 @@
 import React from 'react';
+import RequestInstructions from '../RequestInstructions';
+import RequestCustomText from '../RequestCustomText';
+import RequestCustomAssets from '../RequestCustomAssets';
+import RequestAssets from '../RequestAssets';
+import RequestFiletypes from '../RequestFiletypes';
 
-const RequestSummaryPanel = ({props, setFormStage, createNewRequest}) => {
+const RequestSummaryPanel = ({props, setFormStage, newRequest, setNewRequest, createNewRequest}) => {
 	const onSubmit = e => {
 		e.preventDefault();
 
@@ -27,12 +32,33 @@ const RequestSummaryPanel = ({props, setFormStage, createNewRequest}) => {
 			<hr />
 			<section className="text-left py-8">
 				<h4 className="pb-6 ">Description</h4>
-				<p className="pb-8">
+				<p className="pb-6">
 					Use sentences or paragraphs below to share your request. When you press enter, we'll create a new line for you. After you're done, we'll take each line and create a request checklist for your designer.
 				</p>
-				<input />	
-				<button className="btn mt-8 btn-primary">Continue</button>
+				<RequestInstructions newRequest={newRequest} setNewRequest={setNewRequest} />
+				
+				<div className="py-8">
+					<p className="font-bold pb-4">Does your design need to include text?</p>
+					<RequestCustomText newRequest={newRequest} setNewRequest={setNewRequest} />
+				</div>
+				<div className="">
+					<p className="font-bold pb-4 inline-block">Do you have any assets to upload?</p>
+					<RequestCustomAssets newRequest={newRequest} setNewRequest={setNewRequest} />
+				</div>
 			</section>
+			<hr />
+			<section className="text-left py-8">
+				<h4 className="pb-6">Assets</h4>
+				<RequestAssets newRequest={newRequest} setNewRequest={setNewRequest} />	
+			</section>
+
+			<hr />
+			<section className="text-left py-8">
+				<h4 className="pb-6">File Types</h4>
+				<RequestFiletypes newRequest={newRequest} setNewRequest={setNewRequest} />
+			</section>
+
+
 		</form>
 	)
 };
