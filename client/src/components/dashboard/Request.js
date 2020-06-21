@@ -12,7 +12,7 @@ const Request = ({request, onClickRequest, deleteRequest})  => {
 				{!request.delivered ? (
 					<div onClick={() => deleteRequest(request._id)} className="text-red-500">Delete request</div>
 				) : (	
-					<div className="text-green-500">Download files</div>
+					<div className="text-green-500"></div>
 				)}
 			</div>	
 		</div>
