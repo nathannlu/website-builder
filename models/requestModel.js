@@ -15,7 +15,7 @@ const RequestSchema = new Schema({
 		required: true
 	},
 	description: {
-		content: String,
+		content: Array,
 		customAssets: Array,
 		customText: String,
 	},

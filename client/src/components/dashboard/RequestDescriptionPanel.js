@@ -7,30 +7,33 @@ const RequestDescriptionPanel = ({props, setFormStage, newRequest, setNewRequest
 	const [description, setDescription] = useState(['']); 
 	const [checkedCustomText, setCheckedCustomText] = useState(false);
 	const [checkedCustomAssets, setCheckedCustomAssets] = useState(false);
+
 	const onSubmit = e => {
 		e.preventDefault();
-
-		setFormStage(3);	
 	}
+
 	const onChangeCustomText = e => {
 		setCheckedCustomText(e);
 	}
+
 	const onChangeCustomAssets = e => {
 		setCheckedCustomAssets(e);
 	}
 
 	const onChange = e => {
 		const {name, value} = e.target;
-		setNewRequest((prevState) => {
-			prevState.description[name] = value;	
-			return({...prevState})
-		});
-		/*
 		setDescription(prevState => {
 			prevState[name] = value;
 			return([...prevState]);
 		})
-		*/
+	}
+
+	const continueButtonHandler = () => {
+		setFormStage(3);
+		setNewRequest(prevState =>{
+			prevState.description.content = description;
+			return({...prevState});
+		})
 	}
 
 	const deleteFile = handle => {
@@ -65,10 +68,11 @@ const RequestDescriptionPanel = ({props, setFormStage, newRequest, setNewRequest
 	useEffect(() => {
 		if (newRequest.description.customText.length > 0) setCheckedCustomText(true);
 		if (newRequest.description.customAssets.length > 0) setCheckedCustomAssets(true); 
+		if (newRequest.description.content.length > 0) setDescription(newRequest.description.content);
 	}, [])
 
 	return (
-		<form onSubmit={onSubmit}>
+		<div>
 			<section className="mb-16">
 				<div className="text-left">
 					<button type="button" onClick={() => setFormStage(1)}>&larr; Back</button>
@@ -83,16 +87,16 @@ const RequestDescriptionPanel = ({props, setFormStage, newRequest, setNewRequest
 						Use sentences or paragraphs below to share your request. When you press enter, we'll create a new line for you. After you're done, we'll take each line and create a request checklist for your designer.
 					</p>
 				</div>
-		<input onChange={onChange} value={newRequest.description.content} name="content" />
-				{/*
-					description.map((e, i) => (
-						<div key={i}>
-							<input onChange={onChange} name={i} value={description[i]} type="text" />
-						</div>
-					))
-				<button type="button" onClick={() => addInputField()}>Add input field</button>
-
-				*/}
+				<form onSubmit={onSubmit}>
+					{
+						description.map((e, i) => (
+							<div key={i}>
+								<input className="input-underlined mt-6" placeholder="Enter request instructions" onChange={onChange} name={i} value={description[i]} type="text" />
+							</div>
+						))
+					}
+				</form>
+				<button className="input-underlined text-left mt-6 text-gray-500" type="button" onClick={() => addInputField()}>Click to add another line</button>
 			</section>
 			
 			<section className="mb-12">
@@ -156,9 +160,8 @@ const RequestDescriptionPanel = ({props, setFormStage, newRequest, setNewRequest
 				) : ('')}
 			</section>
 
-			<button className="btn mt-8 btn-primary">Continue</button>
-
-		</form>
+			<button onClick={() => continueButtonHandler()} className="btn mt-8 btn-primary">Continue</button>
+		</div>
 	)
 };			
 export default RequestDescriptionPanel;

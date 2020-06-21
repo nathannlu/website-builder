@@ -22,7 +22,7 @@ const RequestFormManager = props => {
 			size: '',
 		},
 		description: {
-			content: '',
+			content:[], 
 			customText: '',
 			customAssets: [] 
 		},
