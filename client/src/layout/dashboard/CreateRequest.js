@@ -33,7 +33,7 @@ const RequestFormManager = props => {
 		filetypes: []
 	}
 	const [newRequest, setNewRequest] = useState(requestSchema);
-	const [formStage, setFormStage] = useState(5);
+	const [formStage, setFormStage] = useState(0);
 
 	const createNewRequest = () => {
 		axios.post('/api/requests', newRequest).then(res => { 

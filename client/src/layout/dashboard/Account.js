@@ -15,6 +15,15 @@ const Account = props => {
 		<div style={{backgroundColor: '#fbeeca'}} className="min-h-screen pb-16">
 			<div className="container mx-auto">
 				<h3 className="pt-16 pb-6 w-full">Account page</h3>
+				<h4>Personal Information</h4>
+
+				<div className="pt-8">
+					<p><span className="font-bold">Name: </span>{props.auth.user.name}</p>
+				</div>
+				<div className="pb-8">
+					<p><span className="font-bold">Email: </span>{props.auth.user.email}</p>
+				</div>
+
 				<button className="btn btn-black my-4" onClick={onLogoutClick}>Logout</button>
 			</div>
 		</div>
