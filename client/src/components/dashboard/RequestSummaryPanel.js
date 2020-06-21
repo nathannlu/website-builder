@@ -58,7 +58,7 @@ const RequestSummaryPanel = ({props, setFormStage, newRequest, setNewRequest, cr
 				<RequestFiletypes newRequest={newRequest} setNewRequest={setNewRequest} />
 			</section>
 
-
+			<button className="btn btn-primary mt-6">Send to my designer</button>
 		</form>
 	)
 };

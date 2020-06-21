@@ -11,11 +11,10 @@ const RequestCustomText = props => {
 	const onChange = e => {
 		const {name, value} = e.target;
 
-		props.setDescription(prevState => {
-			prevState[name] = value;
-
-			return([...prevState]);
-		});
+		props.setNewRequest(prevState => {
+			prevState.description[name] = value;
+			return({...prevState});
+		})
 	}
 
 	useEffect(() => {
