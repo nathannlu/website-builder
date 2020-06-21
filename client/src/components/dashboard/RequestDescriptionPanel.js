@@ -4,6 +4,7 @@ import Switch from 'react-switch';
 import axios from 'axios';
 
 const RequestDescriptionPanel = ({props, setFormStage, newRequest, setNewRequest}) => {
+	const [description, setDescription] = useState(['']); 
 	const [checkedCustomText, setCheckedCustomText] = useState(false);
 	const [checkedCustomAssets, setCheckedCustomAssets] = useState(false);
 	const onSubmit = e => {
@@ -20,11 +21,16 @@ const RequestDescriptionPanel = ({props, setFormStage, newRequest, setNewRequest
 
 	const onChange = e => {
 		const {name, value} = e.target;
-
 		setNewRequest((prevState) => {
 			prevState.description[name] = value;	
 			return({...prevState})
 		});
+		/*
+		setDescription(prevState => {
+			prevState[name] = value;
+			return([...prevState]);
+		})
+		*/
 	}
 
 	const deleteFile = handle => {
@@ -51,6 +57,11 @@ const RequestDescriptionPanel = ({props, setFormStage, newRequest, setNewRequest
 		}
 	}
 
+	const addInputField = () => {
+		setDescription(description.concat(''));
+		console.log(description);
+	}
+
 	useEffect(() => {
 		if (newRequest.description.customText.length > 0) setCheckedCustomText(true);
 		if (newRequest.description.customAssets.length > 0) setCheckedCustomAssets(true); 
@@ -72,7 +83,16 @@ const RequestDescriptionPanel = ({props, setFormStage, newRequest, setNewRequest
 						Use sentences or paragraphs below to share your request. When you press enter, we'll create a new line for you. After you're done, we'll take each line and create a request checklist for your designer.
 					</p>
 				</div>
-				<input onChange={onChange} value={newRequest.description.content} name="content" />	
+		<input onChange={onChange} value={newRequest.description.content} name="content" />
+				{/*
+					description.map((e, i) => (
+						<div key={i}>
+							<input onChange={onChange} name={i} value={description[i]} type="text" />
+						</div>
+					))
+				<button type="button" onClick={() => addInputField()}>Add input field</button>
+
+				*/}
 			</section>
 			
 			<section className="mb-12">

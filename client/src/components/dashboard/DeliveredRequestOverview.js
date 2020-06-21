@@ -3,10 +3,6 @@ import Conversation from '../../components/dashboard/Conversation';
 import Modal, {closeStyle} from 'simple-react-modal';
 
 const DeliveredRequestOverview = ({deliveredRequest, setRequestOverviewStage, setModalShow}) => {
-	const sample_conversation = [
-		{author: 'Charles Mullany', content: 'I want a logo done'},
-		{author: 'Nathan Lu', content: 'ok'}
-	]
 	return (
 		<div>
 			<a style={closeStyle} onClick={() => setModalShow(false)}>X</a>	

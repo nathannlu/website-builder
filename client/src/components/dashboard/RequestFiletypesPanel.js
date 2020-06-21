@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Switch from 'react-switch';
 
-const RequestFiletypesPanel = ({props, setFormStage, newRequest, setNewRequest}) => {
+const RequestFiletypesPanel = ({props, setFormStage, newRequest, setNewRequest, createNewRequest}) => {
 	const [checkedJpg, setCheckedJpg] = useState(false);
 	const [checkedPng, setCheckedPng] = useState(false);
 	const [checkedPdf, setCheckedPdf] = useState(false);
@@ -15,8 +15,10 @@ const RequestFiletypesPanel = ({props, setFormStage, newRequest, setNewRequest})
 
 			return ({...prevState})
 		})
-		setFormStage(5);	
-	}
+		/*setFormStage(5);*/
+		createNewRequest();
+		alert('Submitted to designer');	
+}
 
 	useEffect(() => {
 		newRequest.filetypes.jpg ? setCheckedJpg(true) : setCheckedJpg(false);

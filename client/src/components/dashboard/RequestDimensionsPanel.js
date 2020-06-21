@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import Select from 'react-select';
 
 const Option = props => {
 	const setSelection = e => {
@@ -25,6 +26,11 @@ const Option = props => {
 
 const RequestDimensionsPanel = ({props, setFormStage, newRequest, setNewRequest}) => {
 	const [selection, setSelection] = useState({});
+	const options = [
+		{value: 'ad', label: 'Ad'},
+		{value: 'branding', label: 'Branding'},
+	]
+
 	const onSubmit = e => {
 		e.preventDefault();
 
@@ -57,6 +63,11 @@ const RequestDimensionsPanel = ({props, setFormStage, newRequest, setNewRequest}
 			</div>
 			
 			<h3 className="font-bold mb-8">What size should your design be?</h3>
+			<div className="w-full text-left">
+{/*
+				<p className="font-bold">Request type</p>
+		<Select options={options} />*/}
+			</div>
 
 			<div className="flex flex-wrap">
 				<Option selection={selection} setSelection={setSelection} type={'Post'} dimensions={'1200x1200'} />

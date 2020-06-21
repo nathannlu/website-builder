@@ -52,15 +52,15 @@ const RequestFormManager = props => {
 	return (
 		<div style={{backgroundColor: '#fbeeca'}} className="min-h-screen">
 			<div className="container mx-auto text-center py-24">
-				<p className="font-bold pb-8">Step {formStage}/5</p>	
+				<p className="font-bold pb-8">Step {formStage}/4</p>	
 				<div className="w-2/3 mx-auto bg-white shadow-xl p-16 rounded-lg">
 					{{
 						0: <RequestTitlePanel props={props} newRequest={newRequest} setNewRequest={setNewRequest} setFormStage={setFormStage} />,
 						1: <RequestDimensionsPanel newRequest={newRequest} setNewRequest={setNewRequest} setFormStage={setFormStage} />,
 						2: <RequestDescriptionPanel newRequest={newRequest} setNewRequest={setNewRequest} setFormStage={setFormStage} />,
 						3: <RequestAssetsPanel newRequest={newRequest} setNewRequest={setNewRequest} setFormStage={setFormStage} />,
-						4: <RequestFiletypesPanel newRequest={newRequest} setNewRequest={setNewRequest} setFormStage={setFormStage} />,
-						5: <RequestSummaryPanel createNewRequest={createNewRequest} newRequest={newRequest} setNewRequest={setNewRequest} setFormStage={setFormStage} />
+						4: <RequestFiletypesPanel createNewRequest={createNewRequest} newRequest={newRequest} setNewRequest={setNewRequest} setFormStage={setFormStage} />,
+							/*5: <RequestSummaryPanel createNewRequest={createNewRequest} newRequest={newRequest} setNewRequest={setNewRequest} setFormStage={setFormStage} />*/
 					}[formStage]}
 				</div>
 			</div>
