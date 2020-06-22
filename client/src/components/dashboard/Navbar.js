@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
 	return (
-		<div className="w-full pt-16 pb-8 text-white" style={{backgroundColor: '#00465a'}}>
+		<div className="w-full pt-16 pb-8 text-white" style={{backgroundColor: '#fc5185'}}>
 			<div className="container mx-auto">
 				<div className="inline-block">		
 					<Link to="/">
-						<h5>Graaphic</h5>	
+						<img src="/logo-white.png" style={{height: '30px'}} />	
 					</Link>
 				</div>
 

@@ -53,7 +53,7 @@ const RequestFormManager = props => {
 		<div style={{backgroundColor: '#fbeeca'}} className="min-h-screen">
 			<div className="container mx-auto text-center py-24">
 				<p className="font-bold pb-8">Step {formStage}/5</p>	
-				<div className="w-2/3 mx-auto bg-white shadow-xl p-16 rounded-lg">
+				<div className="w-2/3 mx-auto bg-white shadow-2xl p-16 rounded-lg">
 					{{
 						0: <RequestTitlePanel props={props} newRequest={newRequest} setNewRequest={setNewRequest} setFormStage={setFormStage} />,
 						1: <RequestDimensionsPanel newRequest={newRequest} setNewRequest={setNewRequest} setFormStage={setFormStage} />,
