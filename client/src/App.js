@@ -12,7 +12,7 @@ import Navbar from './components/Navbar';
 import DashNavbar from './components/dashboard/Navbar';
 
 import Onboard from './components/Onboarding';
-import Login from './layout/auth/Login';
+import Login from './components/Login';
 import Dashboard from './layout/dashboard/Dashboard';
 import CreateRequest from './layout/dashboard/CreateRequest';
 import Account from './layout/dashboard/Account';
@@ -44,9 +44,18 @@ if (localStorage.jwtToken) {
   }
 }
 
+const theme = createMuiTheme({
+	palette: {
+		primary: {
+			main: '#776FFF'
+		}
+	}
+});
+
 const App = () => {
 	return (
 		<Provider store={store}>
+			<ThemeProvider theme={theme}>
 			<Router>
 				<div className="App">
 					<Switch>	
@@ -72,6 +81,7 @@ const App = () => {
 					</Switch>
 				</div>
 			</Router>
+			</ThemeProvider>
 		</Provider>
   );
 }
