@@ -12,23 +12,32 @@ export const registerUser = (userData, history) => dispatch => {
     .post("/api/users/register", userData)
     .then(res => {
 			if(res.status == 200) {
-				axios
-					.post("/api/users/login", {
-						email: userData.email,
-						password: userData.password
-					})
-					.then(res => {
-						// Save to localStorage
-						// Set token to localStorage
-						const { token } = res.data;
-						localStorage.setItem("jwtToken", token);
-						// Set token to Auth header
-						setAuthToken(token);
-						// Decode token to get user data
-						const decoded = jwt_decode(token);
-						// Set current user
-						dispatch(setCurrentUser(decoded));
-					})
+				axios.post('/api/payments/create-customer', {email: userData.email})
+				.then(response => {
+					if(response.status == 200) {
+						console.log('Created Stripe client successfully');
+
+						axios
+						.post("/api/users/login", {
+							email: userData.email,
+							password: userData.password
+						})
+						.then(res => {
+							// Save to localStorage
+							// Set token to localStorage
+							const { token } = res.data;
+							localStorage.setItem("jwtToken", token);
+							// Set token to Auth header
+							setAuthToken(token);
+							// Decode token to get user data
+							const decoded = jwt_decode(token);
+							// Set current user
+							dispatch(setCurrentUser(decoded));
+						})
+					} else {
+						alert('Something went wrong creating Stripe account. Please contact support before continuing');
+					}
+				});
 			}
 		}) // re-direct to login on successful register
     .catch(err =>

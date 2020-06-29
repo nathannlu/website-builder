@@ -15,7 +15,6 @@ const RequestDescriptionPanel = ({props, setFormStage, newRequest, setNewRequest
 
 	const continueButtonHandler = () => {
 		setFormStage(3);
-		console.log(newRequest);
 	}
 
 	return (
@@ -27,7 +26,6 @@ const RequestDescriptionPanel = ({props, setFormStage, newRequest, setNewRequest
 				<div className="w-full mb-8">
 					<img className="mx-auto" src="https://jar.designpickle.com/assets/requests/size-241f17a4e9dbed6bf360f85939bd7f863356e8515fd558f294081b35336022ba.png" />
 				</div>
-
 				<div className="mb-8">
 					<h3 className="font-bold mb-6">What are you looking for?</h3>	
 					<p>

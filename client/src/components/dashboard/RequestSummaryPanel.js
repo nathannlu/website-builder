@@ -10,7 +10,15 @@ const RequestSummaryPanel = ({props, setFormStage, newRequest, setNewRequest, cr
 		e.preventDefault();
 
 		createNewRequest();
-		console.log('submitted to designer');	
+	}
+
+	const dimensionsInputHandler = e => {
+		const {value} = e.target;
+
+		setNewRequest(prevState => {
+			prevState.dimensions.size = value
+			return({...prevState});
+		})
 	}
 
 	return (
@@ -27,7 +35,7 @@ const RequestSummaryPanel = ({props, setFormStage, newRequest, setNewRequest, cr
 		
 			<section className="text-left py-8">
 				<h4 className="pb-6 ">Dimensions</h4>
-				<input />	
+				<input value={newRequest.dimensions.size} onChange={dimensionsInputHandler} /> 
 			</section>
 			<hr />
 			<section className="text-left py-8">

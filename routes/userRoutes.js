@@ -76,7 +76,8 @@ router.post('/login', (req, res) => {
 				const payload = {
 					id: user.id,
 					name: user.name,
-					email: email
+					email: email,
+					stripeCustomerId: user.stripeCustomerId
 				};
 
 				// Sign token

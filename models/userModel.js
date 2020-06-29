@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
 	name: {
 		type: String,
-		required: true
+		required: false 
 	},
 	email: {
 		type: String,
@@ -13,6 +13,9 @@ const UserSchema = new Schema({
 	password: {
 		type: String,
 		required: true
+	},
+	stripeCustomerId: {
+		type: String,
 	},
 	date: {
 		type: Date,

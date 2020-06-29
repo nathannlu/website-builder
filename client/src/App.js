@@ -3,13 +3,15 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-d
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
 import { setCurrentUser, logoutUser } from './actions/authActions';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 import { Provider } from 'react-redux';
 import store from './store';
 
-import Navbar from './components/dashboard/Navbar';
+import Navbar from './components/Navbar';
+import DashNavbar from './components/dashboard/Navbar';
 
-import Onboard from './layout/auth/Onboard';
+import Onboard from './components/Onboarding';
 import Login from './layout/auth/Login';
 import Dashboard from './layout/dashboard/Dashboard';
 import CreateRequest from './layout/dashboard/CreateRequest';
@@ -49,7 +51,7 @@ const App = () => {
 				<div className="App">
 					<Switch>	
 						<Route path="/dashboard">	
-							<Navbar />	
+							<DashNavbar />	
 							<Switch>
 								<PrivateRoute exact path="/dashboard" component={Dashboard} />
 								<PrivateRoute exact path="/dashboard/create-request" component={CreateRequest} />
@@ -58,6 +60,7 @@ const App = () => {
 						</Route>
 		
 						<Route path="/">
+							<Navbar />
 							<Route exact path="/">
 								<Redirect to="/login" />
 							</Route>

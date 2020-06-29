@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Modal, {closeStyle} from 'simple-react-modal';
-
 import DeliveredRequestOverview from '../../components/dashboard/DeliveredRequestOverview';
 import DeliveredRequestRevision from '../../components/dashboard/DeliveredRequestRevision';
 
