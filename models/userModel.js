@@ -17,6 +17,9 @@ const UserSchema = new Schema({
 	stripeCustomerId: {
 		type: String,
 	},
+	subscription: {
+		type: Object,
+	},
 	date: {
 		type: Date,
 		default: Date.now

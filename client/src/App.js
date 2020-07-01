@@ -47,7 +47,7 @@ if (localStorage.jwtToken) {
 const theme = createMuiTheme({
 	palette: {
 		primary: {
-			main: '#776FFF'
+			main: '#3F51B5'
 		}
 	}
 });
@@ -60,12 +60,14 @@ const App = () => {
 				<div className="App">
 					<Switch>	
 						<Route path="/dashboard">	
+							<div className="dashboard">
 							<DashNavbar />	
 							<Switch>
 								<PrivateRoute exact path="/dashboard" component={Dashboard} />
 								<PrivateRoute exact path="/dashboard/create-request" component={CreateRequest} />
 								<PrivateRoute exact path="/dashboard/account" component={Account} />
 							</Switch>
+							</div>
 						</Route>
 		
 						<Route path="/">

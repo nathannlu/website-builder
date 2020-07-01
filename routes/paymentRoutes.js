@@ -58,7 +58,11 @@ router.post('/create-subscription', async(req, res) => {
 		expand: ['latest_invoice.payment_intent'],
 	})
 
-	res.status(200).send(subscription);
+	User.findOneAndUpdate({stripeCustomerId: req.body.customerId}, {subscription: subscription}, (err, updatedUser) => {
+		if (err) console.log(err);
+
+		res.status(200).send(subscription);
+	})
 });
 
 module.exports = router;
