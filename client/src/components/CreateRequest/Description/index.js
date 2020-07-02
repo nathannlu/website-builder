@@ -3,6 +3,7 @@ import { Typography, Grid, TextField, Button, Box, Switch, Fade } from '@materia
 import DescriptionIcon from '@material-ui/icons/Description';
 
 import Instructions from './Instructions';
+import CustomAssets from './CustomAssets';
 
 const Description = props => {
 	const [hasCustomText, setHasCustomText] = useState(false);
@@ -72,6 +73,9 @@ const Description = props => {
 					</Box>
 
 					<Box>
+						<CustomAssets newRequest={props.newRequest} setNewRequest={props.setNewRequest} />
+
+						{/*
 						<Typography variant="h5">
 							Do you have any assets to upload?
 						</Typography>
@@ -89,6 +93,8 @@ const Description = props => {
 								</Button>
 							)}
 						</Box>
+
+					*/}
 					</Box>
 				</Box>
 			</Box>

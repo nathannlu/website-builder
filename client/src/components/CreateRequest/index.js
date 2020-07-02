@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {Divider, Box, Fade, Grid, Button, CardContent, Container, Card, Link } from '@material-ui/core';
 import VerticalStepper from './VerticalStepper';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 import Title from './Title';
 import Sizing from './Sizing';
@@ -8,12 +10,12 @@ import Description from './Description';
 import Assets from './Assets';
 import FileTypes from './FileTypes';
 
-const Summary = ({newRequest, setNewRequest}) => {
+const Summary = ({user, newRequest, setNewRequest}) => {
 	return (
 		<div>
-				<Title newRequest={newRequest} setNewRequest={setNewRequest} summary />,
+				<Title user={user} newRequest={newRequest} setNewRequest={setNewRequest} summary />
 			<Divider style={{margin: '50px 0'}} />
-				<Sizing newRequest={newRequest} setNewRequest={setNewRequest} summary />,
+				<Sizing newRequest={newRequest} setNewRequest={setNewRequest} summary />
 			<Divider style={{margin: '50px 0'}} />
 				<Description newRequest={newRequest} setNewRequest={setNewRequest} summary />
 			<Divider style={{margin: '50px 0'}} />
@@ -24,7 +26,7 @@ const Summary = ({newRequest, setNewRequest}) => {
 	)
 };
 
-export default function() {
+const RequestFormManager = props => {
 	const initialRequestState = {
 		title: '',
 		dimensions: {
@@ -56,6 +58,9 @@ export default function() {
 		sizing: 8
 	};
 
+	const sendToDesigner = () => {
+		console.log('sent to designer');
+	};
 	const next = () => {
 		console.log(newRequest);
 		setActiveStep(prevState => {
@@ -82,15 +87,16 @@ export default function() {
 						<Box p={8}>
 							{activeStep !== 0 && <Link onClick={back}>Back</Link>} 
 							{{
-								0: <Title newRequest={newRequest} setNewRequest={setNewRequest} />,
+								0: <Title user={props.auth.user} newRequest={newRequest} setNewRequest={setNewRequest} />,
 								1: <Sizing newRequest={newRequest} setNewRequest={setNewRequest} />,
 								2: <Description newRequest={newRequest} setNewRequest={setNewRequest} />,
 								3: <Assets newRequest={newRequest} setNewRequest={setNewRequest} />,
 								4: <FileTypes newRequest={newRequest} setNewRequest={setNewRequest} />,
-								5: <Summary newRequest={newRequest} setNewRequest={setNewRequest} />
+								5: <Summary user={props.auth.user} newRequest={newRequest} setNewRequest={setNewRequest} />
 							}[activeStep]}
+
 							<Box align="center" mt={3}>
-								<Button variant="contained" color="primary" onClick={next}>Continue</Button>
+								<Button variant="contained" color="primary" onClick={activeStep === 5 ? sendToDesigner : next}>{activeStep === 5 ? 'Send to designer' : 'Continue'}</Button>
 							</Box>
 						</Box>
 					</Card>
@@ -100,4 +106,14 @@ export default function() {
 	);
 };
 
+RequestFormManager.propTypes = {
+	auth: PropTypes.object.isRequired
+};
 
+const mapStateToProps = state => ({
+	auth: state.auth
+});
+
+export default connect(
+	mapStateToProps,
+)(RequestFormManager);

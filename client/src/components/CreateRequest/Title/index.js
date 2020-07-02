@@ -5,15 +5,13 @@ const Title = props => {
 	const onInputChange = e => {
 		props.setNewRequest({...props.newRequest, ['title']: e.target.value});	
 	}
-	const onSubmit = () => {
-		props.next();		
-	}
+
 	return (
 		<Fade in={true}>
-			<form onSubmit={onSubmit} style={{textAlign:'center'}}>
+			<form onSubmit={e => e.preventDefault()} style={{textAlign:'center'}}>
 				<Box pb={4}>
 					<Typography gutterBottom variant="h4">
-						Hello user
+						Hello {props.user.name}
 					</Typography>
 					<Typography variant="body1">
 						Let's get you started on your request.

@@ -25,8 +25,13 @@ const Instructions = props => {
 		setInstructions(instructions.concat(''));
 	}
 
+	const onSubmit = e => {
+		e.preventDefault();
+		addInputField();
+	}
+
 	return (
-		<form>
+		<form onSubmit={e => e.preventDefault()}>
 			{instructions.map((instruction, i) => (
 				<TextField
 					placeholder="Enter request instructions"
