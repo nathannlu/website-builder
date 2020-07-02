@@ -13,8 +13,8 @@ import DashNavbar from './components/dashboard/Navbar';
 
 import Onboard from './components/Onboarding';
 import Login from './components/Login';
-import Dashboard from './layout/dashboard/Dashboard';
-import CreateRequest from './layout/dashboard/CreateRequest';
+import Dashboard from './components/Requests';
+import CreateRequest from './components/CreateRequest';
 import Account from './layout/dashboard/Account';
 import PrivateRoute from './components/routes/PrivateRoute';
 
@@ -47,7 +47,7 @@ if (localStorage.jwtToken) {
 const theme = createMuiTheme({
 	palette: {
 		primary: {
-			main: '#3F51B5'
+			main: '#585BF2'
 		}
 	}
 });
