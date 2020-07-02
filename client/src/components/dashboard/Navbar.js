@@ -10,17 +10,11 @@ const Navbar = () => {
 					<img src='/logo-white.png' style={{height: '30px'}} />
 				</IconButton>
 				<Box ml="auto">
-					<NavLink>
-						<Link to="/dashboard/create-request">Make a Request</Link>
-					</NavLink>
+					<Link style={{color: 'white', textDecoration: 'none'}} to="/dashboard/create-request">Make a Request</Link>
 
-					<NavLink>
-						<Link to="/dashboard">My Requests</Link>
-					</NavLink>
+					<Link style={{color: 'white', textDecoration: 'none', marginLeft: '30px'}} to="/dashboard">My Requests</Link>
 
-					<NavLink>
-						<Link to="/dashboard/account">Account</Link>
-					</NavLink>
+					<Link style={{color: 'white', textDecoration: 'none', marginLeft: '30px'}} to="/dashboard/account">Account</Link>
 				</Box>
 			</Toolbar>
 		</AppBar>

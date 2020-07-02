@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Typography, Grid, Button, Box, Switch, Fade, TextField } from '@material-ui/core';
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
+import UnplashSearch from './UnsplashSearch';
 
 const Assets = props => {
 	const [hasCustomText, setHasCustomText] = useState(false);
@@ -16,10 +17,7 @@ const Assets = props => {
 				</Box>
 				)}
 
-				<Box>
-					<Typography gutterBottom variant="h4">
-					</Typography>
-				</Box>
+				
 
 				<Grid justify="center" display="flex">
 					{props.summary && (
@@ -30,13 +28,7 @@ const Assets = props => {
 					</Typography>
 				</Grid>
 				<Box align="left">
-					<TextField
-						variant="outlined"
-						margin="normal"
-						fullWidth
-						label="Search for assets"
-						name="assets"
-					/>
+					<UnplashSearch />
 				</Box>
 			</Box>
 		</Fade>

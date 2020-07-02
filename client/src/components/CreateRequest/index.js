@@ -3,6 +3,7 @@ import {Divider, Box, Fade, Grid, Button, CardContent, Container, Card, Link } f
 import VerticalStepper from './VerticalStepper';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 import Title from './Title';
 import Sizing from './Sizing';
@@ -27,8 +28,12 @@ const Summary = ({user, newRequest, setNewRequest}) => {
 };
 
 const RequestFormManager = props => {
+	
 	const initialRequestState = {
 		title: '',
+		author: {
+			name: props.auth.user.name
+		},
 		dimensions: {
 			type: '',
 			size: '',
@@ -59,8 +64,11 @@ const RequestFormManager = props => {
 	};
 
 	const sendToDesigner = () => {
-		console.log('sent to designer');
+		axios.post('/api/requests', newRequest).then(res => { 
+			if(res.status == 200) props.history.push('/dashboard');
+		});
 	};
+
 	const next = () => {
 		console.log(newRequest);
 		setActiveStep(prevState => {
