@@ -9,13 +9,12 @@ import { Provider } from 'react-redux';
 import store from './store';
 
 import Navbar from './components/Navbar';
-import DashNavbar from './components/dashboard/Navbar';
+import DashNavbar from './components/Dashboard/Navbar';
 
 import Onboard from './components/Onboarding';
 import Login from './components/Login';
-import Dashboard from './components/Requests';
-import CreateRequest from './components/CreateRequest';
-import Account from './layout/dashboard/Account';
+import Dashboard from './components/Dashboard';
+import Builder from './components/Builder';
 import PrivateRoute from './components/routes/PrivateRoute';
 
 import {Elements} from '@stripe/react-stripe-js';
@@ -64,8 +63,7 @@ const App = () => {
 							<DashNavbar />	
 							<Switch>
 								<PrivateRoute exact path="/dashboard" component={Dashboard} />
-								<PrivateRoute exact path="/dashboard/create-request" component={CreateRequest} />
-								<PrivateRoute exact path="/dashboard/account" component={Account} />
+								<PrivateRoute exact path="/dashboard/:title/:pageName" component={Builder} />
 							</Switch>
 							</div>
 						</Route>

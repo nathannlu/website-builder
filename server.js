@@ -5,8 +5,8 @@ const passport = require('passport');
 const path = require('path');
 
 const userRoutes = require('./routes/userRoutes');
-const requestRoutes = require('./routes/requestRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
+const websiteRoutes = require('./routes/websiteRoutes');
 
 const app = express();
 
@@ -17,7 +17,7 @@ app.use(
 );
 app.use(bodyParser.json());
 
-const database = 'mongodb+srv://nathan:CanFISHfly%3F@cluster0-tsbpc.mongodb.net/design?retryWrites=true&w=majority'
+const database = 'mongodb+srv://nathan:CanFISHfly%3F@cluster0-tsbpc.mongodb.net/website-builder?retryWrites=true&w=majority'
 mongoose.connect(database, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -36,8 +36,8 @@ require('./config/passport')(passport);
 
 // Routes
 app.use('/api/users', userRoutes);
-app.use('/api/requests', requestRoutes);
 app.use('/api/payments', paymentRoutes);
+app.use('/api/websites', websiteRoutes);
 
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static("client/build"));
