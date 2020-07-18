@@ -8,42 +8,38 @@ import { Button } from '../user/Button';
 import { Text } from '../user/Text';
 import { Layout } from '../user/Layout';
 import { WidthFull } from '../user/Layout';
+import { Biography } from '../user/Biography';
+import { Footer } from '../user/Footer';
+import { Features } from '../user/Features';
 
 export const Toolbox = () => {
 	const { connectors, query } = useEditor();
+	const { actions: {add}, query: {createNode, node} } = useEditor();
 
   return (
     <Box px={2} py={2}>
       <Grid container direction="column"  alignItems="center" justify="center" spacing={1}>
-        <Box pb={2}>
-          <Typography>Drag to add</Typography>
-        </Box>
-        <Grid container direction="column" item>
-          <MaterialButton ref={ref => connectors.create(ref, <Button size="small">Click me</Button>)} variant="contained">Button</MaterialButton>
-        </Grid>
-        <Grid container direction="column" item>
-          <MaterialButton ref={ref => connectors.create(ref, <Text text="Hello world" />)} variant="contained">Text</MaterialButton>
-        </Grid>
-				<Grid container direction="column" item>
-          <MaterialButton ref={ref => connectors.create(ref, <Image src={''} />)} variant="contained">Image</MaterialButton>
-        </Grid>
-        <Grid container direction="column" item>
-          <MaterialButton ref={ref => connectors.create(ref, <Element is={Container} padding={20} canvas />)} variant="contained">Container</MaterialButton>
-        </Grid>
-        <Grid container direction="column" item>
-          <MaterialButton variant="contained">Card</MaterialButton>
-        </Grid>
-
 				<Box pb={2}>
-          <Typography>Drag to add</Typography>
+          <Typography>Components</Typography>
         </Box>
 				<Grid container direction="column" item>
-          <MaterialButton ref={ref => connectors.create(ref, <Element is={Layout} canvas />)} variant="contained">w-1/2</MaterialButton>
+          <MaterialButton ref={ref => connectors.create(ref, <Element is={Footer} canvas />)} variant="contained">Footer</MaterialButton>
         </Grid>
 				<Grid container direction="column" item>
-          <MaterialButton ref={ref => connectors.create(ref, <Element is={WidthFull} canvas />)} variant="contained">Width FUll</MaterialButton>
+          <MaterialButton ref={ref => connectors.create(ref, <Element is={Features} canvas />)} variant="contained">Features</MaterialButton>
         </Grid>
-		
+				<Grid>
+					<MaterialButton onClick={() => {
+						add(
+							createNode(React.createElement(Container, {})),'ROOT' 
+						);
+					}}>
+						penis
+					</MaterialButton>
+				</Grid>
+				<Grid container direction="column" item>
+          <MaterialButton ref={ref => connectors.create(ref, <Element is={Biography} canvas />)} variant="contained">Biography</MaterialButton>
+        </Grid>
       </Grid>
     </Box>
   )

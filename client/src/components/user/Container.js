@@ -1,12 +1,14 @@
 import React from "react";
 import {Paper, FormControl, FormLabel, Slider} from "@material-ui/core";
 import ColorPicker from 'material-ui-color-picker';
-import { useNode } from '@craftjs/core';
+import { useNode, useEditor } from '@craftjs/core';
 
-export const Container = ({background, padding = 0, children}) => {
-	const { connectors: {connect,drag} } = useNode();
+export const Container = ({width, background, display, flexWrap, padding, children, paddingBottom, paddingLeft, paddingRight}) => {
+	const { actions: {add}, query: {createNode, node}} = useEditor();
+	const { id, connectors: {connect,drag} } = useNode();
+
   return (
-    <div ref={ref => connect(drag(ref)) } style={{margin: "0", background, padding: `${padding}px`}}>
+    <div style={{display, width, flexWrap, margin: "0", background, paddingBottom: `${paddingBottom}px`, padding: `${padding}px`}}>
       {children}
     </div>
   )
@@ -35,7 +37,6 @@ export const ContainerSettings = () => {
 
 export const ContainerDefaultProps = {
 	background: '#fff',
-	padding: 0
 };
 
 Container.craft = {

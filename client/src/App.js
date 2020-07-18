@@ -1,6 +1,4 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
-import jwt_decode from 'jwt-decode';
+import React from 'react'; import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'; import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
 import { setCurrentUser, logoutUser } from './actions/authActions';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -14,8 +12,10 @@ import DashNavbar from './components/Dashboard/Navbar';
 import Onboard from './components/Onboarding';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
+import Pages from './components/Pages';
 import Builder from './components/Builder';
 import PrivateRoute from './components/routes/PrivateRoute';
+import Published from './components/Published';
 
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
@@ -63,6 +63,7 @@ const App = () => {
 							<DashNavbar />	
 							<Switch>
 								<PrivateRoute exact path="/dashboard" component={Dashboard} />
+								<PrivateRoute exact path="/dashboard/:title" component={Pages} />
 								<PrivateRoute exact path="/dashboard/:title/:pageName" component={Builder} />
 							</Switch>
 							</div>
@@ -77,6 +78,7 @@ const App = () => {
 								<Route exact path="/onboard" component={Onboard} />
 							</Elements>	
 							<Route exact path="/login" component={Login} />
+							<Route exact path="/published/:title/:pageName" component={Published} />
 						</Route>	
 					</Switch>
 				</div>

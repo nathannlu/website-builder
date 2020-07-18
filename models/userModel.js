@@ -20,6 +20,9 @@ const UserSchema = new Schema({
 	subscription: {
 		type: Object,
 	},
+	paid: {
+		type: Boolean,	
+	},
 	websiteData: {
 		type: String,
 		default: '',

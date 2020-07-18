@@ -3,7 +3,7 @@ import {Paper, FormControl, FormLabel, Input, Slider} from "@material-ui/core";
 import ColorPicker from 'material-ui-color-picker';
 import { useNode } from '@craftjs/core';
 
-export const Image = ({background = '#333', width = '100%', children, src}) => {
+export const Image = ({background, width = '100%', children, src}) => {
 	const { connectors: {connect,drag} } = useNode();
   return (
 		<img style={{width, background, minHeight: '48px'}} className="min-h-full" src={src} ref={ref => connect(drag(ref))} />

@@ -11,6 +11,10 @@ const Navbar = props => {
     enabled: state.options.enabled
   }));
 
+	useEffect(() => {
+		console.log(query);
+	}, [])
+
   const [dialogOpen, setDialogOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState();
   const [stateToLoad, setStateToLoad] = useState(null);

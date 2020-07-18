@@ -3,7 +3,7 @@ import { FormControl, FormLabel, Slider } from '@material-ui/core';
 import { useNode } from '@craftjs/core';
 import ContentEditable from 'react-contenteditable';
 
-export const Text = ({text, color, fontSize, fontFamily, fontWeight, textAlign}) => {
+export const Text = ({text, marginBottom, color, fontSize, fontFamily, fontWeight, textAlign}) => {
 	const { isActive, isHover, dom, connectors: {connect, drag}, selected, dragged, actions: {setProp} } = useNode((state) => ({
 		selected: state.events.selected,
 		dragged: state.events.dragged,
@@ -32,7 +32,7 @@ export const Text = ({text, color, fontSize, fontFamily, fontWeight, textAlign})
 					setProp(props => props.text = e.target.value.replace(/<\/?[^>]+(>|$)/g, ""))
 				}
 				tagName="p"
-				style={{fontSize: `${fontSize}px`, fontFamily, fontWeight, textAlign, color}}
+				style={{fontSize: `${fontSize}px`, marginBottom: `${marginBottom}px`, fontFamily, fontWeight, textAlign, color}}
 			/>
 		</div>
   )
