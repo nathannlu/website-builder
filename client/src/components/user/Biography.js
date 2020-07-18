@@ -10,13 +10,6 @@ import {useNode, Element} from '@craftjs/core';
 
 export const Biography = () => {
 	const { connectors: {connect,drag} } = useNode();
-	const { isHovered } = useNode(node => ({
-		isHovered: node.events.hovered,
-	}))
-
-	useEffect(() => {
-		console.log(isHovered)
-	}, [isHovered])
 
 	return (
 		<Fade in={true}>

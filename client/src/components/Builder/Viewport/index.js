@@ -12,7 +12,6 @@ const Viewport = props => {
 
 			<Navbar saveToDatabase={props.saveToDatabase} />	
 
-
 			<div className="flex h-full overflow-hidden flex-row w-full">
 				<div className="flex-1 h-full">
 					<div className="w-full h-full">
@@ -22,9 +21,13 @@ const Viewport = props => {
 							ref={ref => connectors.select(connectors.hover(ref, null), null)}
 						>
 							<div className="relative flex-col flex items-center pb-8 pt-8">
-								<div style={{width: '1200px'}}>
+								<div className="rounded-md shadow-lg overflow-hidden" style={{width: '1200px'}}>
 									{props.children}
 								</div>
+							</div>
+							
+							<div style={{opacity: .25}} className="pt-4 pb-24 text-center"> 
+								<p>Designed for Realtors</p>
 							</div>
 						</div>
 					</div>

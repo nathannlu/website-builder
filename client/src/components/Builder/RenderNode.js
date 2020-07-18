@@ -10,13 +10,6 @@ import ReactDOM from 'react-dom';
 import { ROOT_NODE } from '@craftjs/utils';
 import { Container } from '../user/Container';
 
-const IndicatorDiv = styled.div`
-  height: 35px;
-  margin-top: -29px;
-  font-size: 12px;
-  line-height: 12px;
-`;
-
 export const RenderNode = ({ render }, openComponentSelection) => {
 	const { actions: {add, move}, query: {createNode, node} } = useEditor();
   const { actions, query, connectors } = useEditor();
@@ -71,12 +64,15 @@ export const RenderNode = ({ render }, openComponentSelection) => {
 
 	// Get properties of hovered div
   const getPos = useCallback((dom: HTMLElement) => {
-    const { top, left, bottom } = dom
+    const { top, left, bottom, right } = dom
       ? dom.getBoundingClientRect()
-      : { top: 0, left: 0, bottom: 0 };
+      : { top: 0, left: 0, bottom: 0, right: 0 };
     return {
-      top: `${top > 0 ? top : top}px`,
+      top: `${top}px`,
       left: `${left}px`,
+			bottom: `${bottom}px`,
+			height: `${bottom - top}px`,
+			width: `${right - left}px`
     };
   }, []);
 
@@ -104,62 +100,67 @@ export const RenderNode = ({ render }, openComponentSelection) => {
       {isHover || isActive
         ? ReactDOM.createPortal(
 						<Fade in={true}>
-							<IndicatorDiv
+							<div
 								ref={currentRef}
 								className="px-2 py-2 text-white fixed flex items-center"
 								style={{
 									left: getPos(dom).left,
 									top: getPos(dom).top,
-									transform: 'translateY(100%)',
-									zIndex: 5,
+									zIndex: 0,
+									height: getPos(dom).height,
+									width: getPos(dom).width,
 								}}
 							>
-								<Button variant="contained" color="primary" onClick={() => {
-									openComponentSelection(id)
-								}}>
-									Add a component
-								</Button>
-
-								{currentNodeIndex > 0 && ( 
-									<Button
-										variant="outlined"
-										style={{backgroundColor: 'white'}}
-										size="small"
-										onClick={() => {
-											moveUp();	
-										}}
-									>
-										<ArrowUp />
+								<div className="absolute bottom-0" style={{zIndex: 5, left: '50%', transform: 'translate(-50%, 50%)'}}>
+									<Button variant="contained" color="primary" onClick={() => {
+										openComponentSelection(id)
+									}}>
+										Add a component
 									</Button>
-								)}
+								</div>	
 
-								{currentNodeIndex < node('ROOT').get().data.nodes.length - 1 && ( 
-									<Button
-										variant="outlined"
-										style={{backgroundColor: 'white'}}
-										size="small"
-										onClick={() => {
-											moveDown();	
-										}}
-									>
-										<ArrowDown />	
-									</Button>
-								)}
+								<div className="absolute top-0 right-0 p-6" style={{zIndex: 5}}>
+									{currentNodeIndex > 0 && ( 
+										<Button
+											variant="outlined"
+											style={{backgroundColor: 'white'}}
+											size="small"
+											onClick={() => {
+												moveUp();	
+											}}
+										>
+											<ArrowUp />
+										</Button>
+									)}
 
-								{deletable ? (
-									<Button
-										variant="outlined"
-										style={{backgroundColor: 'white'}}
-										size="small"
-										onMouseDown={(e: React.MouseEvent) => {
-											e.stopPropagation();
-											actions.delete(id);
-										}}
-									>
-										<Delete />
-									</Button>
-								) : null}
-							</IndicatorDiv>
+									{currentNodeIndex < node('ROOT').get().data.nodes.length - 1 && ( 
+										<Button
+											variant="outlined"
+											style={{backgroundColor: 'white'}}
+											size="small"
+											onClick={() => {
+												moveDown();	
+											}}
+										>
+											<ArrowDown />	
+										</Button>
+									)}
+
+									{deletable ? (
+										<Button
+											variant="outlined"
+											style={{backgroundColor: 'white'}}
+											size="small"
+											onMouseDown={(e: React.MouseEvent) => {
+												e.stopPropagation();
+												actions.delete(id);
+											}}
+										>
+											<Delete />
+										</Button>
+									) : null}
+								</div>
+							</div>
 						</Fade>,
             document.body
           )

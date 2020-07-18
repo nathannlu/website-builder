@@ -3,10 +3,23 @@ import { Modal, Grid, Button, Container } from '@material-ui/core';
 import { useEditor, useNode } from '@craftjs/core';
 import { Biography } from '../user/Biography';
 import { Features } from '../user/Features';
+import { Header } from '../user/Header';
+import { Footer } from '../user/Footer';
 
 const ComponentSelection = props => {
 	const { actions: {add, move}, query: {createNode, node} } = useEditor();
 
+	const addComponent = (component) => {
+		const nodeIndex = node('ROOT').get().data.nodes.findIndex(arrItem => arrItem == props.selectedNode) + 1
+		const newComponent = createNode(React.createElement(component, {}));
+
+		add(newComponent, 'ROOT');
+		move(newComponent.id, 'ROOT', nodeIndex);
+
+		console.log('Added', newComponent.id, 'to index', nodeIndex);
+
+		props.setOpen(false);	
+	}
 
 	return (
 		<Modal 
@@ -14,48 +27,28 @@ const ComponentSelection = props => {
 			onBackdropClick={() => props.setOpen(false)}
 			open={props.open}
 		>
-			<div className="container z-10 bg-white">
+			<div className="container p-4 z-10 bg-white rounded">
 				<Grid>
-					<Button variant="contained" onClick={() => {
-						const nodeIndex = node('ROOT').get().data.nodes.findIndex(arrItem => arrItem == props.selectedNode) + 1
-						const newComponent = createNode(React.createElement(Biography, {}));
-
-						add(newComponent, 'ROOT');
-						move(newComponent.id, 'ROOT', nodeIndex);
-
-						console.log('Added', newComponent.id, 'to index', nodeIndex);
-
-						props.setOpen(false);
-					}}>
+					<Button variant="contained" onClick={() => addComponent(Biography)}>
 						Biography	
 					</Button>
 				</Grid>
 
 				<Grid>
-					<Button variant="contained" onClick={() => {
-						const nodeIndex = node('ROOT').get().data.nodes.findIndex(arrItem => arrItem == props.selectedNode) + 1
-						const newComponent = createNode(React.createElement(Features, {}));
-
-						add(newComponent, 'ROOT');
-						move(newComponent.id, 'ROOT', nodeIndex);
-
-						console.log('Added', newComponent.id, 'to index', nodeIndex);
-
-						props.setOpen(false);
-					}}>
+					<Button variant="contained" onClick={() => addComponent(Features)}>
 						Features
 					</Button>
 				</Grid>
 
 				<Grid>
-					<Button variant="contained" onClick={() => {
-						const nodeIndex = node('ROOT').get().data.nodes.findIndex(arrItem => arrItem == props.selectedNode)
-						
-						//	move(props.selectedNode,'ROOT', nodeIndex);
-						
-						props.setOpen(false);
-					}}>
-						penis
+					<Button variant="contained" onClick={() => addComponent(Header)}>
+						Header
+					</Button>
+				</Grid>
+
+				<Grid>
+					<Button variant="contained" onClick={() => addComponent(Footer)}>
+						Footer	
 					</Button>
 				</Grid>
 			</div>
