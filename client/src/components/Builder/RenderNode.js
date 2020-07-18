@@ -5,21 +5,16 @@ import { default as Move } from '@material-ui/icons/OpenWith';
 import { default as ArrowUp } from '@material-ui/icons/ArrowUpward';
 import { default as ArrowDown } from '@material-ui/icons/ArrowDownward';
 import { default as Delete } from '@material-ui/icons/Delete';
-import { Button } from '@material-ui/core';
+import { Fade, Button } from '@material-ui/core';
 import ReactDOM from 'react-dom';
 import { ROOT_NODE } from '@craftjs/utils';
 import { Container } from '../user/Container';
 
 const IndicatorDiv = styled.div`
-  height: 30px;
+  height: 35px;
   margin-top: -29px;
   font-size: 12px;
   line-height: 12px;
-  svg {
-    fill: #fff;
-    width: 15px;
-    height: 15px;
-  }
 `;
 
 export const RenderNode = ({ render }, openComponentSelection) => {
@@ -63,6 +58,7 @@ export const RenderNode = ({ render }, openComponentSelection) => {
 		}	
 	}
 
+	// Hover/active selection indicator
   useEffect(() => {
     if (dom) {
       if (isActive || isHover) {
@@ -73,6 +69,7 @@ export const RenderNode = ({ render }, openComponentSelection) => {
     }
   }, [dom, isActive, isHover]);
 
+	// Get properties of hovered div
   const getPos = useCallback((dom: HTMLElement) => {
     const { top, left, bottom } = dom
       ? dom.getBoundingClientRect()
@@ -83,6 +80,7 @@ export const RenderNode = ({ render }, openComponentSelection) => {
     };
   }, []);
 
+	// Scroll handler 
   const scroll = useCallback(() => {
     const { current: currentDOM } = currentRef;
 
@@ -92,15 +90,12 @@ export const RenderNode = ({ render }, openComponentSelection) => {
     currentDOM.style.left = left;
   }, [dom]);
 
+	// Add scroll event listenr to HTML
   useEffect(() => {
-    document
-//      .getElementById('craftjs-renderer')
-      .addEventListener('scroll', scroll);
+    document.addEventListener('scroll', scroll);
 
     return () => {
-      document
-//        .getElementById('craftjs-renderer')
-        .removeEventListener('scroll', scroll);
+      document.removeEventListener('scroll', scroll);
     };
   }, [scroll]);
 
@@ -108,59 +103,64 @@ export const RenderNode = ({ render }, openComponentSelection) => {
     <>
       {isHover || isActive
         ? ReactDOM.createPortal(
-            <IndicatorDiv
-              ref={currentRef}
-              className="px-2 py-2 text-white fixed flex items-center"
-              style={{
-                left: getPos(dom).left,
-                top: getPos(dom).top,
-								transform: 'translateY(100%)',
-                zIndex: 5,
-              }}
-            >
-							<Button variant="contained" color="primary" onClick={() => {
-								openComponentSelection(id)
-							}}>
-								Add a component
-							</Button>
-					{currentNodeIndex > 0 && ( 
-							<Button
-								variant="contained"
-								color="primary"
-								onClick={() => {
-									moveUp();	
+						<Fade in={true}>
+							<IndicatorDiv
+								ref={currentRef}
+								className="px-2 py-2 text-white fixed flex items-center"
+								style={{
+									left: getPos(dom).left,
+									top: getPos(dom).top,
+									transform: 'translateY(100%)',
+									zIndex: 5,
 								}}
 							>
-								<ArrowUp />
-							</Button>
-					)}
+								<Button variant="contained" color="primary" onClick={() => {
+									openComponentSelection(id)
+								}}>
+									Add a component
+								</Button>
 
-					{currentNodeIndex < node('ROOT').get().data.nodes.length - 1 && ( 
-							<Button
-								variant="contained"
-								color="primary"
-								onClick={() => {
-									moveDown();	
-								}}
-							>
-								<ArrowDown />	
-							</Button>
-					)}
+								{currentNodeIndex > 0 && ( 
+									<Button
+										variant="outlined"
+										style={{backgroundColor: 'white'}}
+										size="small"
+										onClick={() => {
+											moveUp();	
+										}}
+									>
+										<ArrowUp />
+									</Button>
+								)}
 
-              {deletable ? (
-                <Button
-									variant="contained"
-									color="primary"
-                  className="cursor-pointer"
-                  onMouseDown={(e: React.MouseEvent) => {
-                    e.stopPropagation();
-                    actions.delete(id);
-                  }}
-                >
-									<Delete />
-                </Button>
-              ) : null}
-            </IndicatorDiv>,
+								{currentNodeIndex < node('ROOT').get().data.nodes.length - 1 && ( 
+									<Button
+										variant="outlined"
+										style={{backgroundColor: 'white'}}
+										size="small"
+										onClick={() => {
+											moveDown();	
+										}}
+									>
+										<ArrowDown />	
+									</Button>
+								)}
+
+								{deletable ? (
+									<Button
+										variant="outlined"
+										style={{backgroundColor: 'white'}}
+										size="small"
+										onMouseDown={(e: React.MouseEvent) => {
+											e.stopPropagation();
+											actions.delete(id);
+										}}
+									>
+										<Delete />
+									</Button>
+								) : null}
+							</IndicatorDiv>
+						</Fade>,
             document.body
           )
         : null}

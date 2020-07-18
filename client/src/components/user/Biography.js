@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Fade, Paper, FormControl, FormLabel, Slider} from "@material-ui/core";
 import ColorPicker from 'material-ui-color-picker';
 import { Container } from './Container';
@@ -10,6 +10,13 @@ import {useNode, Element} from '@craftjs/core';
 
 export const Biography = () => {
 	const { connectors: {connect,drag} } = useNode();
+	const { isHovered } = useNode(node => ({
+		isHovered: node.events.hovered,
+	}))
+
+	useEffect(() => {
+		console.log(isHovered)
+	}, [isHovered])
 
 	return (
 		<Fade in={true}>
