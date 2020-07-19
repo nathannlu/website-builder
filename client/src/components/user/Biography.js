@@ -14,7 +14,7 @@ export const Biography = () => {
 	return (
 		<Fade in={true}>
 			<div style={{padding: '40px'}} className="relative bg-white" ref={ref => connect(ref) }>
-				<div className="flex flex-wrap">
+				<div className="container mx-auto flex flex-wrap">
 					<div className="w-1/2">
 						<Image src="https://mdata.sothebysrealty.ca/images/agents/agent_726_1450975562.jpeg" />
 					</div>

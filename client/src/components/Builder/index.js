@@ -9,10 +9,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 // Component imports
-import { SettingsPanel } from './SettingsPanel';
 import Navbar from './Navbar';
-import ComponentSelection from './ComponentSelection';
-import { Toolbox } from './Toolbox';
 import { RenderNode } from './RenderNode';
 import Viewport from './Viewport';
 
@@ -32,6 +29,7 @@ const App = props => {
 	const [enabled, setEnabled] = useState(false);					// Editor enabler
 	const [open, setOpen] = useState(false);								// Modal opener
 	const [selectedNode, setSelectedNode] = useState('');		// Saves component node id to determine which node the modal was opened from
+	const [openDrawer, setOpenDrawer] = useState(false);		// Component editing drawer handler	
 
 	// Used to query DB for page data
 	const {title, pageName} = props.match.params;
@@ -44,8 +42,13 @@ const App = props => {
 
 	// Handle component modal opening
 	const openComponentSelection = selectedNodeId => {
-		setOpen(true);
 		setSelectedNode(selectedNodeId);
+		setOpen(true);
+	}
+
+	const openComponentEditor = selectedNodeId => {
+		setSelectedNode(selectedNodeId);
+		setOpenDrawer(true);
 	}
 	
 	// Load website data on load
@@ -64,7 +67,7 @@ const App = props => {
 	return (
 		<div>
 			<Editor 
-				onRender={render => RenderNode(render, openComponentSelection)} 
+				onRender={render => RenderNode(render, openComponentSelection, openComponentEditor)} 
 				resolver={{Image, Biography, Header, Footer, Features, Button, Text, Container}}
 			>
 				<Viewport 
@@ -72,6 +75,8 @@ const App = props => {
 					setOpen={setOpen}
 					selectedNode={selectedNode}
 					saveToDatabase={saveToDatabase}
+					openDrawer={openDrawer}
+					setOpenDrawer={setOpenDrawer}
 				>
 					{enabled && (
 						<Frame data={websiteData}>
@@ -80,7 +85,9 @@ const App = props => {
 								className="bg-white relative" 
 								canvas
 							>
+								<Element is={Header} />
 								<Element is={Biography} />
+								<Element is={Footer} />
 							</Element>
 						</Frame>
 					)}

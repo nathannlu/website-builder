@@ -14,6 +14,12 @@ export const Header = () => {
 				<div className="absolute top-0 left-0" style={{top: '50%', left: '50%', transform: 'translate(-50%,-50%)'}}>
 					<Text fontSize={40} fontWeight="bold" fontFamily="Times" color='white' text="Adrienne Kenny" />
 					<Text fontSize={16} color="white" text="Let's find your dream home." />
+					
+					<input
+						className="shadow"
+						style={{padding: '20px', margin: 0, marginTop: '10px', width: '100%', borderRadius: '3px', overflow: 'hidden'}} 
+						placeholder="Enter an address"
+					/>
 				</div>	
 			</header>
 		</Fade>

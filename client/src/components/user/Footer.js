@@ -1,5 +1,5 @@
 import React from "react";
-import {Paper, FormControl, FormLabel, Slider} from "@material-ui/core";
+import {Paper, Fade, FormControl, FormLabel, Slider} from "@material-ui/core";
 import ColorPicker from 'material-ui-color-picker';
 import { Container } from './Container';
 import { Text } from "./Text";
@@ -12,12 +12,14 @@ export const Footer = () => {
 	const { connectors: {connect, drag} } = useNode();
 
 	return (
-		<footer ref={ref =>connect(drag(ref)) } class="mx-auto relative container text-center">
-			<hr />
-			<small>© 2019 Adrienne Kenny | Vancouver Real Estate. All rights reserved.</small>
-			<hr />
-			<Image src="https://nathannlu.github.io/adrienne-kenny.github.io/img/footer.png" style="transform: translateY(5%)" alt="" />
-		</footer>		
+		<Fade in={true}>
+			<footer ref={ref =>connect(drag(ref)) } class="mx-auto relative container text-center">
+				<hr />
+				<small>© 2019 Adrienne Kenny | Vancouver Real Estate. All rights reserved.</small>
+				<hr />
+				<Image src="https://nathannlu.github.io/adrienne-kenny.github.io/img/footer.png" style="transform: translateY(5%)" alt="" />
+			</footer>		
+		</Fade>
 	)
 };
 

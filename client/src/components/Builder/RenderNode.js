@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useCallback } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { useNode, useEditor } from '@craftjs/core';
 import styled from 'styled-components';
 import { default as Move } from '@material-ui/icons/OpenWith';
@@ -10,8 +10,8 @@ import ReactDOM from 'react-dom';
 import { ROOT_NODE } from '@craftjs/utils';
 import { Container } from '../user/Container';
 
-export const RenderNode = ({ render }, openComponentSelection) => {
-	const { actions: {add, move}, query: {createNode, node} } = useEditor();
+export const RenderNode = ({ render }, openComponentSelection, openComponentEditor) => {
+	const { actions: {add, move}, query: {createNode, node}, connectors: {select} } = useEditor();
   const { actions, query, connectors } = useEditor();
   const {
     id,
@@ -30,7 +30,7 @@ export const RenderNode = ({ render }, openComponentSelection) => {
     name: node.data.custom.displayName || node.data.displayName,
     props: node.data.props,
   }));
-
+	
   const currentRef = useRef();
 	const currentNodeIndex = node('ROOT').get().data.nodes.findIndex(arrItem => arrItem == id)
 
@@ -120,6 +120,12 @@ export const RenderNode = ({ render }, openComponentSelection) => {
 								</div>	
 
 								<div className="absolute top-0 right-0 p-6" style={{zIndex: 5}}>
+									<Button ref={ref=>select(ref, id)} variant="contained" color="primary" onClick={() => {
+										openComponentEditor(id)
+									}}>
+										Edit component
+									</Button>
+
 									{currentNodeIndex > 0 && ( 
 										<Button
 											variant="outlined"
@@ -127,6 +133,7 @@ export const RenderNode = ({ render }, openComponentSelection) => {
 											size="small"
 											onClick={() => {
 												moveUp();	
+												actions.selectNode(null);
 											}}
 										>
 											<ArrowUp />
@@ -140,6 +147,7 @@ export const RenderNode = ({ render }, openComponentSelection) => {
 											size="small"
 											onClick={() => {
 												moveDown();	
+												actions.selectNode(null);
 											}}
 										>
 											<ArrowDown />	
