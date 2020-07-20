@@ -8,7 +8,7 @@ import { Button } from "./Button";
 import { WidthHalf } from './Layout';
 import {useNode, Element} from '@craftjs/core';
 
-export const Biography = () => {
+export const Biography = props => {
 	const { connectors: {connect,drag} } = useNode();
 
 	return (
@@ -28,6 +28,37 @@ export const Biography = () => {
 	)
 };
 
+export const BiographySettings = () => {
+  const { background, padding, actions: {setProp} } = useNode(node => ({
+    background: node.data.props.background,
+    padding: node.data.props.padding
+  }));
+  return (
+    <div>
+      <FormControl fullWidth={true} margin="normal" component="fieldset">
+        <FormLabel component="legend">Background</FormLabel>
+        <ColorPicker defaultValue={background || '#000'} onChange={color => {
+          setProp(props => props.background = color)
+        }} />
+      </FormControl>
+      <FormControl fullWidth={true} margin="normal" component="fieldset">
+        <FormLabel component="legend">Padding</FormLabel>
+        <Slider defaultValue={padding} onChange={(_, value) => setProp(props => props.padding = value)} />
+      </FormControl>
+    </div>
+  )
+}
+
+export const BiographyDefaultProps = {
+	background: '#fff',
+};
+
+Biography.craft = {
+	props: BiographyDefaultProps,
+	related: {
+		settings: BiographySettings 
+	}
+};
 
 {/*
 export const ContainerDefaultProps = {
