@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Drawer, Box, Chip, Grid, Typography, Button, FormControl, FormLabel, Slider } from "@material-ui/core";
+import {Drawer, Box, Chip, Grid, Typography, Button, FormControl, FormLabel, Slider } from "@material-ui/core";
 import { useEditor } from '@craftjs/core';
 
 export const SettingsPanel = props => {
@@ -28,24 +28,37 @@ export const SettingsPanel = props => {
 
 	return selected ? (
 		<Drawer anchor="right" open={props.openDrawer} onClose={handleClose}>
-			<div className="p-4">
-				{ selected.name}
-				{
-					selected.settings && React.createElement(selected.settings) 
-				}
-				{
-					selected.isDeletable ? (
-						<Button
-							variant="contained"
-							color="default"
-							onClick={() => {
-								actions.delete(selected.id);
-							}}
-						>
-							Delete
-						</Button>
-					) : null 
-				}
+			<div style={{width: '480px'}}> 
+				<div className="px-8 py-6">
+					<Typography variant="body1">
+						<b>
+							Edit the
+						</b>
+						<span className="bg-gray-200 rounded-full py-1 px-3 mx-1">{ selected.name}</span>
+						<b>
+							component
+						</b>
+					</Typography>
+				</div>
+				<hr />
+				<div className="px-8 py-6">
+					{
+						selected.settings && React.createElement(selected.settings) 
+					}
+					{/*
+						selected.isDeletable ? (
+							<Button
+								variant="contained"
+								color="default"
+								onClick={() => {
+									actions.delete(selected.id);
+								}}
+							>
+								Delete
+							</Button>
+						) : null 
+					*/}
+				</div>
 			</div>
 		</Drawer>
 	) : null
