@@ -13,7 +13,7 @@ export const Footer = () => {
 
 	return (
 		<Fade in={true}>
-			<footer ref={ref =>connect(drag(ref)) } class="mx-auto relative container text-center">
+			<footer ref={ref =>connect(drag(ref)) } class="mx-auto bg-white relative container text-center">
 				<hr />
 				<small>© 2019 Adrienne Kenny | Vancouver Real Estate. All rights reserved.</small>
 				<hr />
