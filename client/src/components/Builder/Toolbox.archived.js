@@ -7,7 +7,7 @@ import { Image } from '../user/Image';
 import { Button } from '../user/Button';
 import { Text } from '../user/Text';
 import { Layout } from '../user/Layout';
-import { WidthFull } from '../user/Layout';
+import { MLS } from '../user/MLS';
 import { Biography } from '../user/Biography';
 import { Footer } from '../user/Footer';
 import { Features } from '../user/Features';

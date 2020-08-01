@@ -5,6 +5,7 @@ import { Biography } from '../user/Biography';
 import { Features } from '../user/Features';
 import { Header } from '../user/Header';
 import { Footer } from '../user/Footer';
+import { MLS } from '../user/MLS';
 
 const ComponentSelection = props => {
 	const { actions: {add, move}, query: {createNode, node} } = useEditor();
@@ -38,6 +39,12 @@ const ComponentSelection = props => {
 					<Grid>
 						<Button variant="contained" onClick={() => addComponent(Features)}>
 							Features
+						</Button>
+					</Grid>
+
+					<Grid>
+						<Button variant="contained" onClick={() => addComponent(MLS)}>
+							MLS	
 						</Button>
 					</Grid>
 

@@ -95,6 +95,27 @@ export const RenderNode = ({ render }, openComponentSelection, openComponentEdit
     };
   }, [scroll]);
 
+
+	/*
+	return (
+		<div className="relative">
+			{isHover || isActive ? (
+				<Fade in={true}>
+					<div className="absolute z-10 bg-green-500 w-full">
+						<div className="text-right">
+							<Button variant="contained" color="primary">
+								Add a component
+							</Button>
+						</div>
+
+					</div>
+				</Fade>
+			) : null}
+			{render}	
+		</div>
+	)
+	*/
+
   return (
     <>
       {isHover || isActive

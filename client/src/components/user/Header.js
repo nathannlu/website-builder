@@ -12,7 +12,7 @@ export const Header = props => {
 
 	return (
 		<Fade in={true}>
-			<header style={{height: '400px'}} className="bg-black top-0 left-0 w-full relative overflow-hidden" ref={ref => connect(drag(ref)) }>
+			<header style={{height: '750px'}} className="bg-black top-0 left-0 w-full relative overflow-hidden" ref={ref => connect(drag(ref)) }>
 				<Image opacity={.5} src={props.background} />
 				<div className="absolute top-0 left-0" style={{top: '50%', left: '50%', transform: 'translate(-50%,-50%)'}}>
 					<Text fontSize={40} fontWeight="bold" fontFamily="Times" color='white' text={props.title} />

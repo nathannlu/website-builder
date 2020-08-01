@@ -22,7 +22,7 @@ import { Biography } from '../user/Biography';
 import { Header } from '../user/Header';
 import { Footer } from '../user/Footer';
 import { Features } from '../user/Features';
-
+import { MLS } from '../user/MLS';
 
 const App = props => {
 	const [websiteData, setWebsiteData] = useState('');			// Website data to load
@@ -68,7 +68,7 @@ const App = props => {
 		<div>
 			<Editor 
 				onRender={render => RenderNode(render, openComponentSelection, openComponentEditor)} 
-				resolver={{Image, Biography, Header, Footer, Features, Button, Text, Container}}
+				resolver={{Image, Biography, Header, Footer, Features, Button, Text, Container, MLS}}
 			>
 				<Viewport 
 					open={open}
@@ -82,7 +82,7 @@ const App = props => {
 						<Frame data={websiteData}>
 							<Element 
 								is={Container} 
-								className="bg-white relative" 
+								className="bg-white relative website" 
 								canvas
 							>
 								<Element is={Header} />

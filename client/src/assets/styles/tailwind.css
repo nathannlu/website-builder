@@ -4,23 +4,21 @@
 
 @tailwind utilities;
 
-/*
-html .dashboard {
+.website {
   font-size: 50%;
 }
 
 @media only screen and (min-width: 576px) {
-  html .dashboard {
+  .website {
     font-size: 56.25%;
   }
 }
 
 @media only screen and (min-width: 768px) {
-  html .dashboard {
+  .website {
     font-size: 62.5%;
   }
 }
-*/
 
 *:focus {
 	outline: none;
@@ -224,3 +222,27 @@ body {
 	pointer-events: none;
 	display: block;
 }
+
+.card {
+	color: #777;
+	font-size: 1.3rem;
+	position: relative;
+	-webkit-transition: all .7s cubic-bezier(.19, 1, .22, 1);
+	transition: all .7s cubic-bezier(.19, 1, .22, 1);
+	height: auto;
+	overflow: hidden;
+	box-shadow: rgb(209, 209, 213) 0px 0px 4px;
+	margin-bottom: 24px;
+	max-width: 100%;
+	border-radius: 5px;
+	border: 0;
+}
+
+.card-image {
+	height: 23rem;
+	-o-object-fit: cover;
+	object-fit: cover;
+	width: 100%;
+	cursor: pointer;
+}
+

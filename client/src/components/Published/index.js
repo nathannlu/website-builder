@@ -3,11 +3,13 @@ import axios from 'axios';
 import { Editor, Frame } from '@craftjs/core';
 import lz from 'lzutf8';
 
+// User component imports
 import { Container } from '../user/Container';
 import { Button } from '../user/Button';
 import { Image } from '../user/Image';
 import { Text } from '../user/Text';
 import { Biography } from '../user/Biography';
+import { Header } from '../user/Header';
 import { Footer } from '../user/Footer';
 import { Features } from '../user/Features';
 
@@ -29,7 +31,10 @@ const Published = props => {
 
 	return (
 		<div>
-			<Editor enabled={false} resolver={{Image, Biography, Footer, Features, Button, Text, Container}}>
+			<Editor 
+				enabled={false}
+				resolver={{Image, Biography, Header, Footer, Features, Button, Text, Container}}
+			>
 				{enabled && ( 
 					<Frame data={json}>
 
