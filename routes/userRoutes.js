@@ -11,6 +11,21 @@ const validateLoginInput = require('../validation/login');
 // Load User model
 const User = require('../models/userModel');
 
+const checkToken = (req, res, next) => {
+	const header = req.headers['authorization'];
+
+	if (typeof header !== 'undefined') {
+		const bearer = header.split(' ');
+		const token = bearer[1];
+
+		req.token = token;
+		next();
+	} else {
+		// If header is undefined return Forbidden(403)
+		res.sendStatus(403);	
+	}
+};
+
 // @route POST api/users/register
 // @desc Register user
 // @access Public
@@ -75,7 +90,9 @@ router.post('/login', (req, res) => {
 				// Create JWT Payload
 				const payload = {
 					id: user.id,
-					name: user.name
+					name: user.name,
+					email: email,
+					stripeCustomerId: user.stripeCustomerId
 				};
 
 				// Sign token
@@ -100,5 +117,41 @@ router.post('/login', (req, res) => {
 		});
 	});
 });
+
+// @route GET api/user
+// @desc Fetches user data 
+// @access Private 
+router.get('/', checkToken, (req, res) => {
+	jwt.verify(req.token, keys.secretOrKey, async (err, authorizedData) => {
+		if (err) {
+			res.sendStatus(403);
+		} else {
+			console.log('authorized data:', authorizedData)
+			User.findById(authorizedData.id, (err, foundUser) =>{
+				err && console.log(err);
+
+				res.status(200).json(foundUser);
+			})
+		}
+	})
+});
+
+// @route PUT api/user
+// @desc Saves website to user
+// @access Private 
+router.put('/', checkToken, (req, res) => {
+	jwt.verify(req.token, keys.secretOrKey, async (err, authorizedData) => {
+		if (err) {
+			res.sendStatus(403);
+		} else {
+			User.findByIdAndUpdate(authorizedData.id, {websiteData: req.body.websiteData}, (err) => {
+				if (err) console.log(err);
+
+				res.status(200).json('success');
+			})
+		}
+	})
+});
+
 
 module.exports = router;

@@ -1,20 +1,21 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
-import jwt_decode from 'jwt-decode';
+import React from 'react'; import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'; import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
 import { setCurrentUser, logoutUser } from './actions/authActions';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 import { Provider } from 'react-redux';
 import store from './store';
 
-import Navbar from './components/dashboard/Navbar';
+import Navbar from './components/Navbar';
+import DashNavbar from './components/Dashboard/Navbar';
 
-import Onboard from './layout/auth/Onboard';
-import Login from './layout/auth/Login';
-import Dashboard from './layout/dashboard/Dashboard';
-import CreateRequest from './layout/dashboard/CreateRequest';
-import Account from './layout/dashboard/Account';
+import Onboard from './components/Onboarding';
+import Login from './components/Login';
+import Dashboard from './components/Dashboard';
+import Pages from './components/Pages';
+import Builder from './components/Builder';
 import PrivateRoute from './components/routes/PrivateRoute';
+import Published from './components/Published';
 
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
@@ -42,22 +43,34 @@ if (localStorage.jwtToken) {
   }
 }
 
+const theme = createMuiTheme({
+	palette: {
+		primary: {
+			main: '#585BF2'
+		}
+	}
+});
+
 const App = () => {
 	return (
 		<Provider store={store}>
+			<ThemeProvider theme={theme}>
 			<Router>
 				<div className="App">
 					<Switch>	
 						<Route path="/dashboard">	
-							<Navbar />	
+							<div className="dashboard">
+							<DashNavbar />	
 							<Switch>
 								<PrivateRoute exact path="/dashboard" component={Dashboard} />
-								<PrivateRoute exact path="/dashboard/create-request" component={CreateRequest} />
-								<PrivateRoute exact path="/dashboard/account" component={Account} />
+								<PrivateRoute exact path="/dashboard/:title" component={Pages} />
+								<PrivateRoute exact path="/dashboard/:title/:pageName" component={Builder} />
 							</Switch>
+							</div>
 						</Route>
 		
 						<Route path="/">
+							<Navbar />
 							<Route exact path="/">
 								<Redirect to="/login" />
 							</Route>
@@ -65,10 +78,12 @@ const App = () => {
 								<Route exact path="/onboard" component={Onboard} />
 							</Elements>	
 							<Route exact path="/login" component={Login} />
+							<Route exact path="/published/:title/:pageName" component={Published} />
 						</Route>	
 					</Switch>
 				</div>
 			</Router>
+			</ThemeProvider>
 		</Provider>
   );
 }

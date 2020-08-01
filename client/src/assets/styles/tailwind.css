@@ -4,132 +4,132 @@
 
 @tailwind utilities;
 
-@font-face {
-	font-family: 'Futura BT';
-	src: url('../fonts/futura-book-bt-22240.ttf') format('truetype');
-}
-
-html {
-  /* 1 rem = 16 px  */
+.website {
   font-size: 50%;
 }
 
 @media only screen and (min-width: 576px) {
-  html {
+  .website {
     font-size: 56.25%;
   }
 }
 
 @media only screen and (min-width: 768px) {
-  html {
+  .website {
     font-size: 62.5%;
   }
 }
 
-body {
-  box-sizing: border-box;
-	font-family: 'Futura BT', sans-serif;
-  font-size: 1.6rem;
-	color: #333;
+*:focus {
+	outline: none;
 }
 
-h1 {
-  font-size: 4.883rem;
-  line-height: 5.86rem;
+body {
+  box-sizing: border-box;
+	font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+	color: #333;
+	background: #eee;
+	margin: 0;
+}
+
+/*
+.dashboard h1 {
+  font-size: 48px;
+  line-height: 58px;
 	font-family: 'Poppins', sans-serif;
 	font-weight: bold;
 }
 
-h2 {
-  font-size: 3.906rem;
-  line-height: 4.69rem;
+.dashboard h2 {
+  font-size: 38px;
+  line-height: 46px;
 	font-family: 'Poppins', sans-serif;
 	font-weight: 600;
 }
 
-h3 {
+.dashboard h3 {
 	font-family: 'Poppins', sans-serif;
-  font-size: 3.125rem;
-  line-height: 3.75rem;
+  font-size: 31px;
+  line-height: 37px;
 }
 
-h4 {
-  font-size: 2.5rem;
-  line-height: 3.0rem;
+.dashboard h4 {
+  font-size: 25px;
+  line-height: 30px;
 }
 
-h5 {
-  font-size: 2.0rem;
-  line-height: 2.4rem;
+.dashboard h5 {
+  font-size: 20px;
+  line-height: 24px;
 	font-weight: bold;
 }
 
-.btn {
+.dashboard .btn {
   display: inline-block;
   padding: 1.5rem 2.5rem;
-	font-size: 1.2rem;
+	font-size: 1.4rem;
 	font-weight: bold;
 	transition: all .2s ease;
-	text-transform: uppercase;
 	border-radius: 3px;
 }
 
-.btn:focus {
+.dashboard .btn:focus {
 	outline: none;
 }
 
-.btn-primary {
-	background-color: #00465a;
+.dashboard .btn-primary {
+	background-color: #089aae;
 	color: white;
 }
 
-.btn-primary:hover {
+.dashboard .btn-primary:hover {
 	background-color: #141414;
 }
 
-.btn-outline {
+.dashboard .btn-outline {
 	background-color: transparent;
 	border-color: rgba(20,20,20,.5);
 	color: rgba(20,20,20,.5);
 	border: 1px solid rgba(20,20,20,.5) 
 }
 
-.btn-outline:hover {
+.dashboard .btn-outline:hover {
 	border-style: solid;
 	border-color: #141414;
 	color: #141414;
 }
 
-.btn-black {
+.dashboard .btn-black {
   background-color: black;
   color: white;
 }
 
-.link {
+.dashboard .link {
 	color: #00465a;
 	text-decoration: underline;
 	transition: all .2 ease;
 }
 
-.link:hover {
+.dashboard .link:hover {
 	color: #141414;
 }
 
-.nav-link {
+.dashboard .nav-link {
 	color: rgba(20,20,20,.5);
 	transition: all .2s ease;
 }
 
-.nav-link:hover {
+.dashboard .nav-link:hover {
 	color: #141414;
 }
 
-li {
+.dashboard li {
 	list-style-image: url(https://uploads-ssl.webflow.com/5ce70410a40e7fbd23c39c8e/5d0150fa01d01e8019ec4429_checkmark.svg);
 	padding-left: 1rem;
 }
 
-input {
+.dashboard input {
 	border: 1px solid rgba(36,28,21,0.3);
 	background-color: white;
 	transition: all .2s ease;
@@ -139,13 +139,31 @@ input {
 	min-height: 4.6rem;
 }
 
-input:focus {
+.dashboard input:focus {
 	outline: none;
-	border: 1px solid #00465a;
-	box-shadow: inset 0 0 0 1px #00465a;
+	border: 1px solid #087887;
+	box-shadow: inset 0 0 0 1px #087887;
 }
 
-textarea {
+.dashboard .input-underlined {
+	border: 0;
+	border-bottom: 1px solid rgba(36,28,21,0.3);
+	background-color: white;
+	transition: all .2s ease;
+	border-radius: 2px;
+	width: 100%;
+	padding: 0 1.5rem;
+	min-height: 4.6rem;
+}
+
+.dashboard .input-underlined:focus {
+	outline: none;
+	border: 0;
+	border-bottom: 1px solid #087887;
+	box-shadow: inset 0 -10px 0 -9px #087887;
+}
+
+.dashboard textarea {
 	border: 1px solid rgba(36,28,21,0.3);
 	background-color: white;
 	transition: all .2s ease;
@@ -155,32 +173,76 @@ textarea {
 	min-height: 12rem;
 }
 
-textarea:focus {
+.dashboard textarea:focus {
 	outline: none;
 	border: 1px solid #00465a;
 	box-shadow: inset 0 0 0 1px #00465a;
 }
-
-.StripeElement {
-	min-height: 4.6rem;
- 	padding: 1.3rem 1.5rem; 
-	width: 100%;
-	border: 1px solid rgba(36,28,21,0.3);
-	background-color: white;
-	transition: all .2s ease;
-	border-radius: 2px;
-}
-
-.StripeElement--focus {
-	outline: none;
-	border: 1px solid #00465a;
-	box-shadow: inset 0 0 0 1px #00465a;
-}
-
-.StripeElement--invalid {
-  border-color: #fa755a;
-}
+*/
 
 .StripeElement--webkit-autofill {
   background-color: #fefde5 !important;
 }
+
+.StripeElement {
+	font: inherit;
+	color: currentColor;
+	width: 100%;
+	height: 1.1876em;
+	display: block;
+	padding: 18.5px 14px;
+	min-width: 0;
+	background: none;
+	box-sizing: content-box;
+	animation-name: mui-auto-fill-cancel;
+	letter-spacing: inherit;
+	animation-duration: 10ms;
+	-webkit-tap-highlight-color: transparent;
+	margin-top: 16px;
+	margin-bottom: 8px;
+	border: 1px solid rgba(0,0,0,.2);
+	border-radius: 3px;
+	width: auto; 
+}
+
+.StripeElement:hover {
+	border-color: rgba(0,0,0,1);	
+}
+.component-selected {
+	display: relative;
+}
+.component-selected::after {
+  content: ' ';
+	border-bottom: 1px dashed #2680eb;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	pointer-events: none;
+	display: block;
+}
+
+.card {
+	color: #777;
+	font-size: 1.3rem;
+	position: relative;
+	-webkit-transition: all .7s cubic-bezier(.19, 1, .22, 1);
+	transition: all .7s cubic-bezier(.19, 1, .22, 1);
+	height: auto;
+	overflow: hidden;
+	box-shadow: rgb(209, 209, 213) 0px 0px 4px;
+	margin-bottom: 24px;
+	max-width: 100%;
+	border-radius: 5px;
+	border: 0;
+}
+
+.card-image {
+	height: 23rem;
+	-o-object-fit: cover;
+	object-fit: cover;
+	width: 100%;
+	cursor: pointer;
+}
+
