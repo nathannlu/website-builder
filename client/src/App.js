@@ -51,6 +51,8 @@ const theme = createMuiTheme({
 	}
 });
 
+console.log(window.location.host.split('.');
+
 const App = () => {
 	return (
 		<Provider store={store}>
