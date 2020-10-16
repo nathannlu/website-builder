@@ -51,7 +51,7 @@ const theme = createMuiTheme({
 	}
 });
 
-console.log(window.location.host.split('.');
+console.log(window.location.host.split('.'));
 
 const App = () => {
 	return (
