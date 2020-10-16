@@ -16,7 +16,11 @@ import { Features } from '../user/Features';
 const Published = props => {
 	const [json, setJson] = useState('');
 	const [enabled, setEnabled] = useState(false);
-	const { title, pageName } = props.match.params;
+	//const { title, pageName } = props.match.params;
+
+	const pageName = 'home'
+	const parsedDomain = window.location.host.split('.');
+	const title = parsedDomain[0]
 
 	useEffect(() => {
 		axios.get(`/api/websites/${title}/${pageName}`).then(res => {
@@ -37,7 +41,6 @@ const Published = props => {
 			>
 				{enabled && ( 
 					<Frame data={json}>
-
 					</Frame>
 				)}
 			</Editor>

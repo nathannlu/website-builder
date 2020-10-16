@@ -51,7 +51,19 @@ const theme = createMuiTheme({
 	}
 });
 
-console.log(window.location.host.split('.'));
+const parsedDomain = window.location.host.split('.');
+
+if (parsedDomain.length > 3) {
+	if(parsedDomain[0] !== 'app' && parsedDomain[0] !== 'www') {
+		// Render published component	
+		ReactDOM.render(
+			<React.StrictMode>
+				<Published>
+			</React.StrictMode>,
+			document.getElementById('root')
+		);
+	}
+}
 
 const App = () => {
 	return (
