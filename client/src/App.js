@@ -1,4 +1,5 @@
 import React from 'react'; import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'; import jwt_decode from 'jwt-decode';
+import ReactDOM from 'react-dom';
 import setAuthToken from './utils/setAuthToken';
 import { setCurrentUser, logoutUser } from './actions/authActions';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -58,7 +59,7 @@ if (parsedDomain.length > 3) {
 		// Render published component	
 		ReactDOM.render(
 			<React.StrictMode>
-				<Published>
+				<Published />
 			</React.StrictMode>,
 			document.getElementById('root')
 		);
