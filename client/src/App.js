@@ -57,6 +57,7 @@ const parsedDomain = window.location.host.split('.');
 if (parsedDomain.length > 3) {
 	if(parsedDomain[0] !== 'app' && parsedDomain[0] !== 'www') {
 		// Render published component	
+		console.log('Loading published site...');
 		ReactDOM.render(
 			<React.StrictMode>
 				<Published />
