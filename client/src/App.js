@@ -2,13 +2,9 @@ import React from 'react'; import { BrowserRouter as Router, Route, Redirect, Sw
 import ReactDOM from 'react-dom';
 import setAuthToken from './utils/setAuthToken';
 import { setCurrentUser, logoutUser } from './actions/authActions';
-import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 import { Provider } from 'react-redux';
 import store from './store';
-
-import Navbar from './components/Navbar';
-import DashNavbar from './components/Dashboard/Navbar';
 
 import Onboard from './components/Onboarding';
 import Login from './components/Login';
@@ -17,6 +13,7 @@ import Pages from './components/Pages';
 import Builder from './components/Builder';
 import PrivateRoute from './components/routes/PrivateRoute';
 import Published from './components/Published';
+import FirstProject from './components/FirstProject';
 
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
@@ -44,39 +41,15 @@ if (localStorage.jwtToken) {
   }
 }
 
-const theme = createMuiTheme({
-	palette: {
-		primary: {
-			main: '#585BF2'
-		}
-	}
-});
-
-const parsedDomain = window.location.host.split('.');
-
-if (parsedDomain.length > 3) {
-	if(parsedDomain[0] !== 'app' && parsedDomain[0] !== 'www') {
-		// Render published component	
-		console.log('Loading published site...');
-		ReactDOM.render(
-			<React.StrictMode>
-				<Published />
-			</React.StrictMode>,
-			document.getElementById('root')
-		);
-	}
-}
-
 const App = () => {
 	return (
 		<Provider store={store}>
-			<ThemeProvider theme={theme}>
 			<Router>
-				<div className="App">
 					<Switch>	
+
+				{/*
 						<Route path="/dashboard">	
 							<div className="dashboard">
-							<DashNavbar />	
 							<Switch>
 								<PrivateRoute exact path="/dashboard" component={Dashboard} />
 								<PrivateRoute exact path="/dashboard/:title" component={Pages} />
@@ -84,22 +57,20 @@ const App = () => {
 							</Switch>
 							</div>
 						</Route>
+						*/}
 		
-						<Route path="/">
-							<Navbar />
-							<Route exact path="/">
-								<Redirect to="/login" />
-							</Route>
-							<Elements stripe={stripePromise}>
-								<Route exact path="/onboard" component={Onboard} />
-							</Elements>	
-							<Route exact path="/login" component={Login} />
-							<Route exact path="/published/:title/:pageName" component={Published} />
-						</Route>	
+						<Route exact path="/">
+							<Redirect to="/login" />
+						</Route>
+
+						<Route exact path="/onboard" component={Onboard} />
+						<Route exact path="/login" component={Login} />
+
+						{/*
+						<Route exact path="/published/:title/:pageName" component={Published} />
+						*/}
 					</Switch>
-				</div>
 			</Router>
-			</ThemeProvider>
 		</Provider>
   );
 }
