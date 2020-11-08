@@ -1,12 +1,18 @@
-import React from 'react'; import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'; import jwt_decode from 'jwt-decode';
+import React from 'react'; 
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'; 
 import ReactDOM from 'react-dom';
-import setAuthToken from './utils/setAuthToken';
-import { setCurrentUser, logoutUser } from './actions/authActions';
 
+// Global Redux state management
 import { Provider } from 'react-redux';
 import store from './store';
 
-import Onboard from './components/Onboarding';
+// FontAwesome icons
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faCheckSquare, faCoffee, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
+
+// Routes
+import Signup from './components/Signup';
+import SignupSuccess from './components/Signup/Success';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import Pages from './components/Pages';
@@ -15,11 +21,14 @@ import PrivateRoute from './components/routes/PrivateRoute';
 import Published from './components/Published';
 import FirstProject from './components/FirstProject';
 
+// JWT handler
+import jwt_decode from 'jwt-decode';
+import setAuthToken from './utils/setAuthToken';
+import { setCurrentUser, logoutUser } from './actions/authActions';
+
+// Stripe initialization
 import {Elements} from '@stripe/react-stripe-js';
 import {loadStripe} from '@stripe/stripe-js';
-
-// Make sure to call `loadStripe` outside of a component’s render to avoid
-// recreating the `Stripe` object on every render.
 const stripePromise = loadStripe("pk_test_51GtOMjKmTCfCxz2BBWOhjP3REOf3Gx5TUDzYkZ9x6qfURvmWKA0nXt6bnBIFeu9t462hJ9HjcevUkGsGKfP4GNnl00fz8xbmGM");
 
 // Check for token to keep user logged in
@@ -41,12 +50,13 @@ if (localStorage.jwtToken) {
   }
 }
 
+library.add(faEye, faEyeSlash)
+
 const App = () => {
 	return (
 		<Provider store={store}>
 			<Router>
 					<Switch>	
-
 				{/*
 						<Route path="/dashboard">	
 							<div className="dashboard">
@@ -63,7 +73,8 @@ const App = () => {
 							<Redirect to="/login" />
 						</Route>
 
-						<Route exact path="/onboard" component={Onboard} />
+						<Route exact path="/signup" component={Signup} />
+						<Route path="/signup/success/" component={SignupSuccess} />
 						<Route exact path="/login" component={Login} />
 
 						{/*

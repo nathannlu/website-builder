@@ -1,108 +1,105 @@
-import React, {useState, useEffect} from 'react';
-import {Snackbar, Container, Link, Fade, CssBaseline, Grid, Box, TextField, Typography, Button} from '@material-ui/core';
-import {LockOpen} from '@material-ui/icons';
-
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions/authActions';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-const Login = (props) => {
-	const [user, setUser] = useState({name: '', email: '', password: '', password2: ''});
-	const [errors, setErrors] = useState({});
+const Login = props => {
+	// User form handler
+	const initialFormState = {
+		email: '',	
+		password: ''
+	}
+	const [user, setUser] = useState(initialFormState);
 
+	// Handle show password
+	const [isRevealPassword, setIsRevealPassword] = useState(false);
+
+	// Handle form input 
 	const onChange = e => {
 		const { name, value } = e.target;
 
 		setUser({...user, [name]: value});
 	}
 
+	// Login form submission handler
 	const onSubmit = e => {
 		e.preventDefault();
+
 		props.loginUser(user);
 	}
 
+	// Handle existing JWT token
 	useEffect(() => {
 		if(props.auth.isAuthenticated) {
-			props.history.push('/dashboard');	
-		}
-	}, [])
-
-	useEffect(() => {
-		if(props.auth.isAuthenticated) {
-			props.history.push('/dashboard');	
+			props.history.push('/dashboard');
 		}
 	}, [props])
 
-	useEffect(() => {
-		if (props.errors) {
-			setErrors(props.errors);
-		}
-	}, [props.errors])
-
 	return (
-		<Fade in={true} direction="left" mountOnEnter unmountOnExit>
-			<Container maxWidth="xs" component="main">
-				<div style={{marginTop: '150px', textAlign: 'center'}}>
-					<Box my={3}>
-						<LockOpen color="primary" style={{fontSize:"3rem"}} />
-					</Box>
-					<form noValidate onSubmit={onSubmit}>
-						<Box mb={3}>
-							<Typography style={{fontWeight: 'bold'}} gutterBottom component="h1" variant="h5">
-								Sign In
-							</Typography>
-							<TextField
-								variant="outlined"
-								margin="normal"
-								required
-								fullWidth
+		<div className="bg-black min-h-screen">
+			<div className="bg-white min-h-screen w-2/5 py-48">
+				<div className="w-2/3 mx-auto">
+					<h1>
+						Log In
+					</h1>
+					<p className="mb-3">
+						Need a Mailchimp account? <Link className="link" to="/signup">Create an account</Link>
+					</p>
+
+					<form onSubmit={onSubmit} className="mt-16">
+						<div className="mb-8">
+							<label for="email">
+								Email
+							</label>
+							<input
+								className="mt-3"
+								type="email"
 								id="email"
-								label="Email Address"
 								name="email"
-								autoComplete="email"
-								autoFocus
-								value={user.email}
 								onChange={onChange}
 							/>
-							<TextField
-								variant="outlined"
-								margin="normal"
-								required
-								fullWidth
+						</div>
+
+						<div className="mb-12">
+							<label for="password">
+								Password
+							</label>
+							<label
+								onClick={() => setIsRevealPassword(!isRevealPassword)}
+								className="link float-right cursor-pointer"
+							>
+								{isRevealPassword ? (
+									<>
+										<FontAwesomeIcon icon="eye-slash" />
+										<span className="ml-6">Hide</span>
+									</>
+								) : (
+									<>
+										<FontAwesomeIcon icon="eye" />
+										<span className="ml-6">Show</span>
+									</>
+								)}
+							</label>
+							<input
+								className="mt-3"
+								type={isRevealPassword ? 'text' : 'password'}
 								id="password"
-								label="Password"
 								name="password"
-								autoComplete="password"
-								type="password"
-								value={user.password}
 								onChange={onChange}
 							/>
-							
-						</Box>
-						<Button type="submit" fullWidth variant="contained" color="primary">Sign in</Button>
-						<Snackbar
-							autoHideDuration={1000}
-							anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-							open={!!errors.email || !!errors.emailnotfound}
-							onClose={() => setErrors({})}
-							message={<span>{errors.email || errors.emailnotfound}</span>}
-						/>
-						<Snackbar
-							autoHideDuration={1000}
-							anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-							open={!!errors.password || !!errors.passwordincorrect}
-							onClose={() => setErrors({})}
-							message={<span>{errors.password || errors.passwordincorrect}</span>}
-						/>
+						</div>
+
+						<button className="btn btn-primary w-full" type="submit">
+							Log In
+						</button>
 					</form>
-					<Box mt={3}>
-						<Link color="black" href="/onboard">Don't have an account? Sign up</Link>
-					</Box>
 				</div>
-			</Container>	
-		</Fade>
+			</div>
+		</div>
 	)
-}
+};
 
 Login.propTypes ={
 	loginUser: PropTypes.func.isRequired,
