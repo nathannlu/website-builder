@@ -14409,7 +14409,6 @@ h5 {
 }
 
 .btn {
-  display: inline-block;
   padding: 1.5rem 2.5rem;
   font-size: 1.4rem;
   font-weight: bold;
@@ -14600,6 +14599,41 @@ textarea:focus {
   object-fit: cover;
   width: 100%;
   cursor: pointer;
+}
+
+.spinner {
+  animation: rotate 2s linear infinite;
+  z-index: 2;
+  height: 15px;
+}
+
+.spinner .path {
+  stroke: #fff;
+  stroke-linecap: round;
+  animation: dash 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
 }
 
 @media (min-width: 640px) {

@@ -21,14 +21,17 @@ const Signup = props => {
 	}
 	const [newUser, setNewUser] = useState(initialFormState)
 	const [isPasswordSecure, setIsPasswordSecure] = useState(false);
-	const [errors, setErrors] = useState({})
+	const [errors, setErrors] = useState({});
+	const [pendingFormSubmission, setPendingFormSubmission] = useState(false);
 
 	// Sign up form submission handler
 	const onSubmit = async e => {
 		e.preventDefault();
 
-		props.registerUser(newUser, props.history)
-		// @TODO Set button to loading 
+		setPendingFormSubmission(true);
+		props.registerUser(newUser, props.history, function() {
+			setPendingFormSubmission(false);
+		})
 	}
 
 	// Password validation for form button
@@ -65,6 +68,7 @@ const Signup = props => {
 						setNewUser={setNewUser} 
 						isPasswordSecure={isPasswordSecure}
 						errors={errors}
+						pendingFormSubmission={pendingFormSubmission}
 					/>
 				</div>
 			</div>
@@ -187,7 +191,20 @@ const Form = props => {
 					</div>
 				)}
 				</div>
-				<button type="submit" disabled={!props.isPasswordSecure} className="btn btn-primary">Sign Up</button>
+				<button type="submit" style={props.pendingFormSubmission ? {pointerEvents: 'none'} : {}} disabled={!props.isPasswordSecure} className="btn btn-primary flex items-center">
+					{!props.pendingFormSubmission ? (
+						<>Sign Up</>
+					) : (
+						<>
+							<svg class="spinner" viewBox="0 0 50 50">
+								<circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+							</svg>
+							<span className="ml-3 mr-8">
+								Please Wait...
+							</span>
+						</>
+					)}
+				</button>
 			</form>
 		</>
 	)

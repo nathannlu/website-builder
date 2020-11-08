@@ -7,22 +7,27 @@ import {
   USER_LOADING
 } from "./types";
 // Register User
-export const registerUser = (userData, history) => dispatch => {
+export const registerUser = (userData, history, callback) => dispatch => {
   axios
     .post("/api/users/register", userData)
     .then(res => {
 			const {email} = res.data;
 			history.push(`/signup/success/?email=${email}`);
 		}) // re-direct to login on successful register
-    .catch(err =>
+    .catch(err =>{
       dispatch({
         type: GET_ERRORS,
         payload: err.response.data
       })
-    );
+		})
+		.then(() => {
+			if (typeof callback == 'function') {
+				callback();	
+			}
+		})
 };
 // Login - get user token
-export const loginUser = userData => dispatch => {
+export const loginUser = (userData, callback) => dispatch => {
   axios
     .post("/api/users/login", userData)
     .then(res => {
@@ -42,7 +47,12 @@ export const loginUser = userData => dispatch => {
         type: GET_ERRORS,
         payload: err.response.data
       })
-    );
+    )
+		.then(() => {
+			if (typeof callback == 'function') {
+				callback();	
+			}
+		})
 };
 
 // Set logged in user

@@ -15,6 +15,7 @@ const Login = props => {
 
 	// Handle show password
 	const [isRevealPassword, setIsRevealPassword] = useState(false);
+	const [pendingFormSubmission, setPendingFormSubmission] = useState(false);
 
 	// Handle form input 
 	const onChange = e => {
@@ -26,8 +27,11 @@ const Login = props => {
 	// Login form submission handler
 	const onSubmit = e => {
 		e.preventDefault();
-
-		props.loginUser(user);
+	
+		setPendingFormSubmission(true);
+		props.loginUser(user, function() {
+			setPendingFormSubmission(false);
+		});
 	}
 
 	// Handle existing JWT token
@@ -91,8 +95,19 @@ const Login = props => {
 							/>
 						</div>
 
-						<button className="btn btn-primary w-full" type="submit">
-							Log In
+						<button type="submit" style={pendingFormSubmission ? {pointerEvents: 'none'} : {}} className="btn btn-primary flex items-center">
+							{!pendingFormSubmission ? (
+								<>Log In</>
+							) : (
+								<>
+									<svg class="spinner" viewBox="0 0 50 50">
+										<circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+									</svg>
+									<span className="ml-3 mr-8">
+										Please Wait...
+									</span>
+								</>
+							)}
 						</button>
 					</form>
 				</div>
