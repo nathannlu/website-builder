@@ -11,11 +11,13 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCheckSquare, faCoffee, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
 // Routes
-import Signup from './components/Signup';
-import SignupSuccess from './components/Signup/Success';
+import Signup from './components/pages/Signup';
+import SignupSuccess from './components/pages/Signup/Success';
 import Login from './components/Login';
+import ForgotPassword from './components/Login/ForgotPassword';
+
 import Dashboard from './components/Dashboard';
-import Pages from './components/Pages';
+// import Pages from './components/Pages';
 import Builder from './components/Builder';
 import PrivateRoute from './components/routes/PrivateRoute';
 import Published from './components/Published';
@@ -24,7 +26,7 @@ import FirstProject from './components/FirstProject';
 // JWT handler
 import jwt_decode from 'jwt-decode';
 import setAuthToken from './utils/setAuthToken';
-import { setCurrentUser, logoutUser } from './actions/authActions';
+import { setCurrentUser, logoutUser, authenticate } from './actions/authActions';
 
 // Stripe initialization
 import {Elements} from '@stripe/react-stripe-js';
@@ -35,19 +37,34 @@ const stripePromise = loadStripe("pk_test_51GtOMjKmTCfCxz2BBWOhjP3REOf3Gx5TUDzYk
 if (localStorage.jwtToken) {
   // Set auth token header auth
   const token = localStorage.jwtToken;
-  setAuthToken(token);
-  // Decode token and get user info and exp
-  const decoded = jwt_decode(token);
-  // Set user and isAuthenticated
-  store.dispatch(setCurrentUser(decoded));
-// Check for expired token
-  const currentTime = Date.now() / 1000; // to get in milliseconds
-  if (decoded.exp < currentTime) {
-    // Logout user
-    store.dispatch(logoutUser());
-    // Redirect to login
-    window.location.href = "./login";
-  }
+
+	store.dispatch(authenticate(token, isVerified => {
+		if(isVerified) {
+			console.log('User verified');
+
+			setAuthToken(token);
+
+			// Decode token and get user info and exp
+			const decoded = jwt_decode(token);
+
+			// Set user and isAuthenticated
+			store.dispatch(setCurrentUser(decoded));
+
+			// Check for expired token
+			const currentTime = Date.now() / 1000; // to get in milliseconds
+			if (decoded.exp < currentTime) {
+				// Logout user
+				store.dispatch(logoutUser());
+				// Redirect to login
+				window.location.href = "./login";
+			}
+		} else {
+			// If user does not exist
+			// remove JWT token
+			console.log('User does not exist. Removing token.');
+			store.dispatch(logoutUser());	
+		}
+	}));
 }
 
 library.add(faEye, faEyeSlash)
@@ -76,6 +93,7 @@ const App = () => {
 						<Route exact path="/signup" component={Signup} />
 						<Route path="/signup/success/" component={SignupSuccess} />
 						<Route exact path="/login" component={Login} />
+						<Route exact path="/login/forgot" component={ForgotPassword} />
 
 						{/*
 						<Route exact path="/published/:title/:pageName" component={Published} />

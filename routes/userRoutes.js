@@ -26,6 +26,7 @@ const checkToken = (req, res, next) => {
 	}
 };
 
+
 // @route POST api/users/register
 // @desc Register user
 // @access Public
@@ -58,6 +59,23 @@ router.post('/register', (req, res) => {
 			});
 		}
 	});
+});
+
+
+// @route POST api/users/verify-token
+// @desc Takes in token and checks if it is valid 
+// @access Public
+router.post('/verify-token', (req, res) => {
+	const { token } = req.body;
+	const decoded = jwt.verify(token.split(' ')[1], keys.secretOrKey)
+
+	User.findById(decoded.id).then(user => {
+		if(user) {
+			res.json(token);	
+		} else {
+			res.json(null);
+		}
+	})
 });
 
 

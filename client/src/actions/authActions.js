@@ -55,6 +55,36 @@ export const loginUser = (userData, callback) => dispatch => {
 		})
 };
 
+export const authenticate = (token, callback) => dispatch => {
+	if(!!token) {
+		const requestBody = {
+			token
+		};
+		axios
+			.post('/api/users/verify-token', requestBody)	
+			.then(res => {
+				const user = res.data;
+
+				if(typeof callback == 'function') {
+					if(user) {
+						callback(true);
+					} else {
+						callback(false);
+					}				
+				}
+			})
+			.catch(() => {
+				if(typeof callback == 'function') {
+					callback(false);
+				}
+			})
+	} else {
+		if(typeof callback == 'function') {
+			callback(false);
+		}
+	}
+};
+
 // Set logged in user
 export const setCurrentUser = decoded => {
   return {

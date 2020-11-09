@@ -16,6 +16,7 @@ const Login = props => {
 	// Handle show password
 	const [isRevealPassword, setIsRevealPassword] = useState(false);
 	const [pendingFormSubmission, setPendingFormSubmission] = useState(false);
+	const [errors, setErrors] = useState({email: '', emailnotfound: '', password: '', passwordincorrect: ''});
 
 	// Handle form input 
 	const onChange = e => {
@@ -34,12 +35,25 @@ const Login = props => {
 		});
 	}
 
+	// Handle incoming errors from failed login attempts
+	useEffect(() => {
+		if(props.errors) {
+			setErrors(props.errors);
+		}
+	}, [props.errors])
+
+
 	// Handle existing JWT token
 	useEffect(() => {
 		if(props.auth.isAuthenticated) {
 			props.history.push('/dashboard');
 		}
 	}, [props])
+
+	// Reset errors when component mounts
+	useEffect(() => {
+		setErrors({});	
+	}, [])
 
 	return (
 		<div className="bg-black min-h-screen">
@@ -49,7 +63,7 @@ const Login = props => {
 						Log In
 					</h1>
 					<p className="mb-3">
-						Need a Mailchimp account? <Link className="link" to="/signup">Create an account</Link>
+						Need a Agentsquare account? <Link className="link" to="/signup">Create an account</Link>
 					</p>
 
 					<form onSubmit={onSubmit} className="mt-16">
@@ -95,21 +109,25 @@ const Login = props => {
 							/>
 						</div>
 
-						<button type="submit" style={pendingFormSubmission ? {pointerEvents: 'none'} : {}} className="btn btn-primary flex items-center">
+						<button type="submit" style={pendingFormSubmission ? {pointerEvents: 'none'} : {}} className="btn btn-primary w-full flex items-center">
 							{!pendingFormSubmission ? (
-								<>Log In</>
+								<span className="mx-auto">Log In</span>
 							) : (
 								<>
 									<svg class="spinner" viewBox="0 0 50 50">
 										<circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
 									</svg>
-									<span className="ml-3 mr-8">
+									<span className="mx-auto">
 										Please Wait...
 									</span>
 								</>
 							)}
 						</button>
 					</form>
+
+					<div className="text-center mt-16">
+						<Link to="/login/forgot" className="link">Forgot password?</Link>
+					</div>
 				</div>
 			</div>
 		</div>
