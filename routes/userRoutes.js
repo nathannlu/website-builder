@@ -8,6 +8,7 @@ const nodemailer = require('nodemailer');
 // Load input validation
 const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
+const validateForgotPasswordInput = require('../validation/forgotpassword');
 
 // Load User model
 const User = require('../models/userModel');
@@ -176,6 +177,14 @@ router.put('/', checkToken, (req, res) => {
 // @desc Sends email with JWT link to change password
 // @access Public 
 router.post('/forgot', (req, res) => {
+	// Form validation
+	const { errors, isValid } = validateForgotPasswordInput(req.body);
+
+	// Check validation 
+	if(!isValid) {
+		return res.status(400).json(errors);
+	}
+
 	if (req.body.email) {
 		User.findOne({email: req.body.email}, (err, foundUser) => {
 			if (foundUser) {
@@ -227,7 +236,8 @@ router.post('/forgot', (req, res) => {
 					}
 				});
 			} else {
-				res.sendStatus(404);
+				// Check if user exidts
+				return res.status(404).json({ emailnotfound: "Email not found" });
 			}
 		})
 	} else {

@@ -52,6 +52,7 @@ const LoginForm = props => {
 				type="email"
 				label="Email"
 				onChange={onChange}
+				errors={errors.email || errors.emailnotfound}
 			/>
 			<TextField
 				name="password"
@@ -59,6 +60,7 @@ const LoginForm = props => {
 				label="Password"
 				onChange={onChange}
 				toggleVisibility
+				errors={errors.password || errors.passwordincorrect}
 			/>
 			<Button
 				type="submit"

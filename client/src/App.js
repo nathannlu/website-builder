@@ -1,7 +1,8 @@
 import React from 'react'; 
-import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'; 
-import PrivateRoute from './components/atoms/PrivateRoute';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'; 
+
+import PrivateRoute from './components/atoms/PrivateRoute';
 
 // Authenticate Routes
 import Signup from './components/pages/Signup';
@@ -25,7 +26,8 @@ import store from './store';
 
 // FontAwesome icons
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCheckSquare, faCoffee, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
+import { faCheckCircle } from '@fortawesome/free-regular-svg-icons'
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
 // JWT handler
 import jwt_decode from 'jwt-decode';
@@ -71,6 +73,7 @@ if (localStorage.jwtToken) {
 	}));
 }
 
+library.add(faCheckCircle)
 library.add(faEye, faEyeSlash)
 
 const App = () => {
@@ -78,7 +81,7 @@ const App = () => {
 		<Provider store={store}>
 			<Router>
 					<Switch>	
-				{/*
+						{/*
 						<Route path="/dashboard">	
 							<div className="dashboard">
 							<Switch>
