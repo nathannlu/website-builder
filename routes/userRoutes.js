@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const keys = require('../config/keys');
+const nodemailer = require('nodemailer');
 
 // Load input validation
 const validateRegisterInput = require('../validation/register');
@@ -136,7 +137,7 @@ router.post('/login', (req, res) => {
 	});
 });
 
-// @route GET api/user
+// @route GET api/users
 // @desc Fetches user data 
 // @access Private 
 router.get('/', checkToken, (req, res) => {
@@ -154,7 +155,7 @@ router.get('/', checkToken, (req, res) => {
 	})
 });
 
-// @route PUT api/user
+// @route PUT api/users
 // @desc Saves website to user
 // @access Private 
 router.put('/', checkToken, (req, res) => {
@@ -171,5 +172,132 @@ router.put('/', checkToken, (req, res) => {
 	})
 });
 
+// @route POST api/users/forgot
+// @desc Sends email with JWT link to change password
+// @access Public 
+router.post('/forgot', (req, res) => {
+	if (req.body.email) {
+		User.findOne({email: req.body.email}, (err, foundUser) => {
+			if (foundUser) {
+				console.log(foundUser);
+
+				const payload = {
+					id: foundUser.id,
+					email: foundUser.email
+				}
+
+				// Make this a one-time-use token by using the user's
+				// current password hash from the database, and combine it
+				// with the user's created date to make a very unique secret key!
+				// For example:
+				// const secret = foundUser.password + '-' + foundUser.date.getTime();
+				const secret = foundUser.password
+
+				const token = jwt.sign(
+					payload, 
+					secret,
+					{
+						expiresIn: 31556926
+					}
+				);
+
+				// Send email containing link to reset password
+				const transporter = nodemailer.createTransport({
+					host: 'smtp.gmail.com',
+					port: 465,
+					secure: true,
+					auth: {
+						user: 'support@agentsquare.ca',
+						pass: 'CanFISHfly?'
+					}
+				});
+
+				const mailOptions = {
+					from: 'support@agentsquare.ca',
+					to: foundUser.email,
+					subject: 'Reset your Agentsquare password',
+					html: `<a href="http://localhost:3000/login/reset?token=${token}&id=${foundUser.id}">Reset your password</a>`
+				}
+				transporter.sendMail(mailOptions, (err, response) => {
+					if(err) {
+						console.log('Error sending mail:', err);
+						res.sendStatus(403)
+					} else {
+						res.sendStatus(200)
+					}
+				});
+			} else {
+				res.sendStatus(404);
+			}
+		})
+	} else {
+		res.sendStatus(400);
+	}
+});
+
+// @route POST api/users/reset/validate
+// @desc Validates token from hashed password signed JWT token from front end
+// @access Public 
+router.post('/reset/validate', (req, res) => {
+	const { id, token } = req.body;
+
+	// Find JWT secret with ID
+	User.findById(id, (err, foundUser) => {
+		if (err) res.sendStatus(404);
+
+		jwt.verify(
+			token,
+			foundUser.password,
+			(err, decoded) => {
+				if (err) {
+					res.sendStatus(404)
+				} else {
+					res.sendStatus(200)
+				}
+			}
+		)
+	})
+});
+
+// @route POST api/users/reset/
+// @desc Validates token from hashed password signed JWT token from front end
+router.post('/reset', (req, res) => {	
+	const { id, token, newPassword } = req.body;
+
+	// Find JWT secret with ID
+	User.findById(id, (err, foundUser) => {
+		if (err) res.sendStatus(404);
+
+		// Verify token of incoming request
+		jwt.verify(
+			token,
+			foundUser.password,
+			(err, decoded) => {
+				if (err) {
+					res.sendStatus(404)
+				} else {
+
+					// Hash password before saving in database
+					bcrypt.genSalt(10, (err, salt) => {
+						bcrypt.hash(newPassword, salt, (err, hash) => {
+							User.findByIdAndUpdate(id, {
+								password: hash	
+							}, (err, updatedUser) => {
+								if (err) {
+									res.sendStatus(400)
+								}	else {
+									res.sendStatus(200)
+								}
+							})
+						});
+					});
+					
+					// Holy shit look at this callback hell bruh
+
+				}
+			}
+		)
+	})
+});
 
 module.exports = router;

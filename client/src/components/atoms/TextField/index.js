@@ -6,10 +6,10 @@ const InputField = props => {
 
 	return (
 		<div className="mb-8">
-			<label for={props.name}>
+			<label htmlFor={props.name}>
 				{props.label} 
 			</label>
-			{props.type === 'password' && (
+			{props.toggleVisibility && (
 				<label 
 					onClick={() => setIsRevealPassword(!isRevealPassword)} 
 					className="link float-right cursor-pointer"
@@ -29,7 +29,7 @@ const InputField = props => {
 			)}
 			<input 
 				className="mt-3" 
-				type={props.type === 'password' ? isRevealPassword ? 'text' : 'password' : props.type}
+				type={props.toggleVisibility ? isRevealPassword ? 'text' : 'password' : props.type}
 				id={props.name}
 				name={props.name}
 				onChange={props.onChange}

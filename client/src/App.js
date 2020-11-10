@@ -1,6 +1,23 @@
 import React from 'react'; 
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'; 
+import PrivateRoute from './components/atoms/PrivateRoute';
 import ReactDOM from 'react-dom';
+
+// Authenticate Routes
+import Signup from './components/pages/Signup';
+import SignupSuccess from './components/pages/Signup/Success';
+import Login from './components/pages/Login';
+import ForgotPassword from './components/pages/Login/ForgotPassword';
+import Reset from './components/pages/Login/Reset.js';
+
+/*
+import Dashboard from './components/Dashboard';
+// import Pages from './components/Pages';
+import Builder from './components/Builder';
+import Published from './components/Published';
+import FirstProject from './components/FirstProject';
+*/
+
 
 // Global Redux state management
 import { Provider } from 'react-redux';
@@ -9,19 +26,6 @@ import store from './store';
 // FontAwesome icons
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCheckSquare, faCoffee, faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
-
-// Routes
-import Signup from './components/pages/Signup';
-import SignupSuccess from './components/pages/Signup/Success';
-import Login from './components/Login';
-import ForgotPassword from './components/Login/ForgotPassword';
-
-import Dashboard from './components/Dashboard';
-// import Pages from './components/Pages';
-import Builder from './components/Builder';
-import PrivateRoute from './components/routes/PrivateRoute';
-import Published from './components/Published';
-import FirstProject from './components/FirstProject';
 
 // JWT handler
 import jwt_decode from 'jwt-decode';
@@ -94,6 +98,7 @@ const App = () => {
 						<Route path="/signup/success/" component={SignupSuccess} />
 						<Route exact path="/login" component={Login} />
 						<Route exact path="/login/forgot" component={ForgotPassword} />
+						<Route  path="/login/reset" component={Reset} />
 
 						{/*
 						<Route exact path="/published/:title/:pageName" component={Published} />

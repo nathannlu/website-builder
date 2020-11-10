@@ -9,14 +9,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { registerUser } from '../../../actions/authActions.js';
 
-
-// Regular Expression formats for validating password
-const lowercaseCheck = /(?=.*[a-z])/
-const uppercaseCheck = /(?=.*[A-Z])/
-const numberCheck = /(?=.*\d)/
-const specialCharacterCheck = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/
-const validatePassword = password => lowercaseCheck.test(password) && uppercaseCheck.test(password) && numberCheck.test(password) && specialCharacterCheck.test(password) && password.length >= 8 ? true : false
-
 const SignupForm = props => {
 	// Sign up form state management
 	const initialFormState = {
@@ -74,7 +66,9 @@ const SignupForm = props => {
 				errors={errors.name}
 			/>
 			<PasswordField
-				newUser={newUser}
+				label="Password"
+				name="password"
+				password={newUser.password}
 				onChange={onChange}
 				isPasswordSecure={isPasswordSecure}
 				setIsPasswordSecure={setIsPasswordSecure}
