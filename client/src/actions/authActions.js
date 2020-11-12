@@ -11,8 +11,8 @@ export const registerUser = (userData, history, callback) => dispatch => {
   axios
     .post("/api/users/register", userData)
     .then(res => {
-			const {email} = res.data;
-			history.push(`/signup/success/?email=${email}`);
+			dispatch(loginUser(userData))
+			// history.push(`/signup/success/?email=${email}`);
 		}) // re-direct to login on successful register
     .catch(err =>{
       dispatch({
@@ -39,6 +39,9 @@ export const loginUser = (userData, callback) => dispatch => {
       setAuthToken(token);
       // Decode token to get user data
       const decoded = jwt_decode(token);
+
+			console.log(decoded);
+
       // Set current user
       dispatch(setCurrentUser(decoded));
     })

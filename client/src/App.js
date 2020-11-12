@@ -6,18 +6,23 @@ import PrivateRoute from './components/atoms/PrivateRoute';
 
 // Authenticate Routes
 import Signup from './components/pages/Signup';
-import SignupSuccess from './components/pages/Signup/Success';
 import Login from './components/pages/Login';
 import ForgotPassword from './components/pages/Login/ForgotPassword';
-import Reset from './components/pages/Login/Reset.js';
+import Reset from './components/pages/Login/Reset';
 
 /*
-import Dashboard from './components/Dashboard';
-// import Pages from './components/Pages';
-import Builder from './components/Builder';
-import Published from './components/Published';
+import Pages from './components/Pages'; 
+import Published from './components/Published'; 
 import FirstProject from './components/FirstProject';
 */
+
+// Dashboard Routes
+import Dashboard from './components/pages/Dashboard';
+import NewSite from './components/pages/Dashboard/New';
+import Welcome from './components/pages/Dashboard/Welcome';
+
+// Website Builder Routes
+import Builder from './components/pages/Builder'; 
 
 
 // Global Redux state management
@@ -43,34 +48,32 @@ const stripePromise = loadStripe("pk_test_51GtOMjKmTCfCxz2BBWOhjP3REOf3Gx5TUDzYk
 if (localStorage.jwtToken) {
   // Set auth token header auth
   const token = localStorage.jwtToken;
+	setAuthToken(token);
 
+	// Decode token and get user info and exp
+	const decoded = jwt_decode(token);
+
+	// Set user and isAuthenticated
+	store.dispatch(setCurrentUser(decoded));
+
+	// Confirm token exist in database
 	store.dispatch(authenticate(token, isVerified => {
-		if(isVerified) {
-			console.log('User verified');
-
-			setAuthToken(token);
-
-			// Decode token and get user info and exp
-			const decoded = jwt_decode(token);
-
-			// Set user and isAuthenticated
-			store.dispatch(setCurrentUser(decoded));
-
-			// Check for expired token
-			const currentTime = Date.now() / 1000; // to get in milliseconds
-			if (decoded.exp < currentTime) {
-				// Logout user
-				store.dispatch(logoutUser());
-				// Redirect to login
-				window.location.href = "./login";
-			}
-		} else {
+		if(!isVerified) {
 			// If user does not exist
 			// remove JWT token
 			console.log('User does not exist. Removing token.');
 			store.dispatch(logoutUser());	
 		}
 	}));
+
+	// Check for expired token
+	const currentTime = Date.now() / 1000; // to get in milliseconds
+	if (decoded.exp < currentTime) {
+		// Logout user
+		store.dispatch(logoutUser());
+		// Redirect to login
+		window.location.href = "./login";
+	}
 }
 
 library.add(faCheckCircle)
@@ -80,33 +83,38 @@ const App = () => {
 	return (
 		<Provider store={store}>
 			<Router>
-					<Switch>	
-						{/*
-						<Route path="/dashboard">	
-							<div className="dashboard">
-							<Switch>
-								<PrivateRoute exact path="/dashboard" component={Dashboard} />
-								<PrivateRoute exact path="/dashboard/:title" component={Pages} />
-								<PrivateRoute exact path="/dashboard/:title/:pageName" component={Builder} />
-							</Switch>
-							</div>
-						</Route>
-						*/}
-		
-						<Route exact path="/">
-							<Redirect to="/login" />
-						</Route>
+				<Switch>	
+					{/*
+					<Route path="/dashboard">	
+						<div className="dashboard">
+						<Switch>
+							<PrivateRoute exact path="/dashboard/:title" component={Pages} />
+							<PrivateRoute exact path="/dashboard/:title/:pageName" component={Builder} />
+						</Switch>
+						</div>
+					</Route>
+					*/}
+	
+					<Route exact path="/">
+						<Redirect to="/login" />
+					</Route>
 
-						<Route exact path="/signup" component={Signup} />
-						<Route path="/signup/success/" component={SignupSuccess} />
-						<Route exact path="/login" component={Login} />
-						<Route exact path="/login/forgot" component={ForgotPassword} />
-						<Route  path="/login/reset" component={Reset} />
+					<Route exact path="/signup" component={Signup} />
+					<Route exact path="/login" component={Login} />
+					<Route exact path="/login/forgot" component={ForgotPassword} />
+					<Route  path="/login/reset" component={Reset} />
 
-						{/*
-						<Route exact path="/published/:title/:pageName" component={Published} />
-						*/}
-					</Switch>
+					<PrivateRoute exact path="/dashboard" component={Dashboard} />
+					<PrivateRoute exact path="/dashboard/welcome" component={Welcome} />
+					<PrivateRoute exact path="/dashboard/sites/new" component={NewSite} />
+
+
+					<PrivateRoute exact path="/builder" component={Builder} />
+
+					{/*
+					<Route exact path="/published/:title/:pageName" component={Published} />
+					*/}
+				</Switch>
 			</Router>
 		</Provider>
   );
