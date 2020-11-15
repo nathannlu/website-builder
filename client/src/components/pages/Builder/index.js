@@ -84,7 +84,6 @@ const App = props => {
 				>
 					{enabled && (
 						<Frame data={websiteData}>
-							{/*
 							<Element 
 								is={Container} 
 								className="bg-white relative website" 
@@ -94,7 +93,6 @@ const App = props => {
 								<Element is={Biography} />
 								<Element is={Footer} />
 							</Element>
-							*/}
 						</Frame>
 					)}
 				</Viewport>

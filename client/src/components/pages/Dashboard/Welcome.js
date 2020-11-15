@@ -8,9 +8,13 @@ const Welcome = props => {
 
 	const createWebsite = () => {
 		console.log(newWebsite);
-		axios.post('/api/websites', newWebsite).then(res => console.log(res));
+		axios.post('/api/websites', newWebsite).then(res => {
+			if(res.status === 200) {
+				props.history.push(`/builder/${newWebsite.title}/home`);
+			}
+			// @TODO Errror handling
+		});
 
-		props.history.push(`/builder/${newWebsite.title}/home`);
 	}
 
 
