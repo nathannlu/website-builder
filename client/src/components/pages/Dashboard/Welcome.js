@@ -1,11 +1,30 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import TemplateShowcase from '../../molecules/TemplateShowcase';
+import ProgressStep from '../../atoms/ProgressStep';
 
 const Welcome = props => {
+	const [newWebsite, setNewWebsite] = useState({title: 'test'});
+
+	const createWebsite = () => {
+		console.log(newWebsite);
+		axios.post('/api/websites', newWebsite).then(res => console.log(res));
+
+		props.history.push(`/builder/${newWebsite.title}/home`);
+	}
+
+
+
 	return (
 		<div>
-			<div className="py-24 w-full" style={{backgroundColor: '#eee'}}>
-				<div className="w-1/3 mx-auto">
+			<div className="w-full" style={{backgroundColor: '#eee'}}>
+				<div className="w-2/5 mx-auto flex flex-wrap space-x-2">
+					<ProgressStep active>Sign up</ProgressStep>
+					<ProgressStep active>Set up </ProgressStep>
+					<ProgressStep>Build</ProgressStep>
+				</div>
+
+				<div className="w-1/3 py-24 mx-auto">
 					<h1>
 						Create your new website	
 					</h1>
@@ -18,7 +37,7 @@ const Welcome = props => {
 			<div className="w-2/3 mx-auto flex flex-wrap space-x-8 py-32">
 				<TemplateShowcase
 					src="https://d3e54v103j8qbb.cloudfront.net/template-assets/5c75aacdf20430c74e511659/thumbnails/1558042197606_undefined"
-					onClick={() => props.history.push('/builder')}
+					onClick={() => createWebsite() }
 				>
 					<h3 className="mb-3">
 						Real Estate Starter

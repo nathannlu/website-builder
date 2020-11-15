@@ -2,20 +2,21 @@ import React, {useEffect} from 'react';
 import { useEditor } from '@craftjs/core';
 import { SettingsPanel } from '../SettingsPanel';
 import Navbar from '../Navbar';
-import ComponentSelection from '../ComponentSelection';
+import ComponentSelection from '../../../molecules/ComponentSelection';
 
 const Viewport = props => {
 	const { connectors } = useEditor();
 
-	useEffect(() => {
-		console.log(props.selectedNode)
-	}, [props.selectedNode])
-
 	return (
 		<div>
-			<ComponentSelection open={props.open} setOpen={props.setOpen} selectedNode={props.selectedNode} />
-
 			<Navbar saveToDatabase={props.saveToDatabase} />	
+			<ComponentSelection 
+				open={props.open} 
+				setOpen={props.setOpen} 
+				selectedNode={props.selectedNode}
+				setSelectedNode={props.setSelectedNode}
+			/>
+
 
 			<div className="flex h-full overflow-hidden flex-row w-full">
 				<SettingsPanel openDrawer={props.openDrawer} setOpenDrawer={props.setOpenDrawer} selectedNode={props.selectedNode} />

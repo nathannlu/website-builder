@@ -1,17 +1,23 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { useNode, useEditor } from '@craftjs/core';
+import ReactDOM from 'react-dom';
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import { useNode, useEditor } from '@craftjs/core';
+import { ROOT_NODE } from '@craftjs/utils';
+import { Container } from '../../user/Container';
+
+
 import { default as Move } from '@material-ui/icons/OpenWith';
 import { default as ArrowUp } from '@material-ui/icons/ArrowUpward';
 import { default as ArrowDown } from '@material-ui/icons/ArrowDownward';
 import { default as Delete } from '@material-ui/icons/Delete';
 import { Fade, Button } from '@material-ui/core';
-import ReactDOM from 'react-dom';
-import { ROOT_NODE } from '@craftjs/utils';
-import { Container } from '../user/Container';
+
 
 export const RenderNode = ({ render }, openComponentSelection, openComponentEditor) => {
 	const { actions: {add, move}, query: {createNode, node}, connectors: {select} } = useEditor();
+
   const { actions, query, connectors } = useEditor();
   const {
     id,
@@ -38,7 +44,6 @@ export const RenderNode = ({ render }, openComponentSelection, openComponentEdit
 		const newIndex = currentNodeIndex - 1
 
 		if(currentNodeIndex > 0) {
-			console.log(currentNodeIndex);
 			move(id, 'ROOT', newIndex);
 		}
 	};
@@ -95,27 +100,6 @@ export const RenderNode = ({ render }, openComponentSelection, openComponentEdit
     };
   }, [scroll]);
 
-
-	/*
-	return (
-		<div className="relative">
-			{isHover || isActive ? (
-				<Fade in={true}>
-					<div className="absolute z-10 bg-green-500 w-full">
-						<div className="text-right">
-							<Button variant="contained" color="primary">
-								Add a component
-							</Button>
-						</div>
-
-					</div>
-				</Fade>
-			) : null}
-			{render}	
-		</div>
-	)
-	*/
-
   return (
     <>
       {isHover || isActive
@@ -133,61 +117,68 @@ export const RenderNode = ({ render }, openComponentSelection, openComponentEdit
 								}}
 							>
 								<div className="absolute bottom-0" style={{zIndex: 5, left: '50%', transform: 'translate(-50%, 50%)'}}>
-									<Button variant="contained" color="primary" onClick={() => {
-										openComponentSelection(id)
-									}}>
+									<button 
+										className="btn-sm btn-primary"
+										onClick={() => {
+											openComponentSelection(id);
+										}}
+									>
+										<FontAwesomeIcon className="mr-2" icon={['fas','plus']} />
 										Add a component
-									</Button>
+									</button>
 								</div>	
 
 								<div className="absolute top-0 right-0 p-6" style={{zIndex: 5}}>
-									<Button ref={ref=>select(ref, id)} variant="contained" color="primary" onClick={() => {
-										openComponentEditor(id)
-									}}>
-										Edit component
-									</Button>
-
-									{currentNodeIndex > 0 && ( 
-										<Button
-											variant="outlined"
-											style={{backgroundColor: 'white'}}
-											size="small"
-											onClick={() => {
-												moveUp();	
-												actions.selectNode(null);
-											}}
-										>
-											<ArrowUp />
-										</Button>
-									)}
-
-									{currentNodeIndex < node('ROOT').get().data.nodes.length - 1 && ( 
-										<Button
-											variant="outlined"
-											style={{backgroundColor: 'white'}}
-											size="small"
-											onClick={() => {
-												moveDown();	
-												actions.selectNode(null);
-											}}
-										>
-											<ArrowDown />	
-										</Button>
-									)}
-
 									{deletable ? (
-										<Button
-											variant="outlined"
-											style={{backgroundColor: 'white'}}
-											size="small"
+										<button
+											className="btn-sm border bg-white text-black mr-4"
 											onMouseDown={(e: React.MouseEvent) => {
 												e.stopPropagation();
 												actions.delete(id);
 											}}
 										>
-											<Delete />
-										</Button>
+
+											<FontAwesomeIcon icon={['far','trash-alt']} />
+										</button>
 									) : null}
+
+
+									{currentNodeIndex > 0 && ( 
+										<button
+											className="btn-sm border bg-white text-black"
+											onClick={() => {
+												moveUp();
+												actions.selectNode(null);
+											}}
+										>
+											<FontAwesomeIcon icon={['fas','arrow-up']} />
+										</button>
+									)}
+
+									{currentNodeIndex < node('ROOT').get().data.nodes.length - 1 && ( 
+										<button
+											className="btn-sm border bg-white text-black"
+											onClick={() => {
+												moveDown();
+												actions.selectNode(null);
+											}}
+										>
+											<FontAwesomeIcon icon={['fas','arrow-down']} />
+										</button>
+									)}
+
+
+									<button
+										ref={ref=>select(ref, id)}
+										className="btn-sm btn-primary ml-4"
+										onClick={() => {
+											openComponentEditor(id)
+										}}
+									>
+										<FontAwesomeIcon className="mr-2" icon={['far','edit']} />
+										Edit component
+									</button>
+
 								</div>
 							</div>
 						</Fade>,

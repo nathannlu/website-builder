@@ -12,16 +12,12 @@ const Navbar = props => {
     enabled: state.options.enabled
   }));
 
-	useEffect(() => {
-		console.log(query);
-	}, [])
-
   const [dialogOpen, setDialogOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState();
   const [stateToLoad, setStateToLoad] = useState(null);
 
 	return (
-		<div className="fixed" style={{zIndex: 99, bottom: '28px', left: '50%', transform: 'translateX(-50%)'}}>
+		<div className="w-full bg-white">
 			<MaterialButton
 				className="copy-state-btn"
 				variant="contained"

@@ -25,7 +25,6 @@ export const SettingsPanel = props => {
 		actions.selectNode(null);
 	}
 
-
 	return selected ? (
 		<Drawer anchor="right" open={props.openDrawer} onClose={handleClose}>
 			<div style={{width: '480px'}}> 
@@ -45,19 +44,6 @@ export const SettingsPanel = props => {
 					{
 						selected.settings && React.createElement(selected.settings) 
 					}
-					{/*
-						selected.isDeletable ? (
-							<Button
-								variant="contained"
-								color="default"
-								onClick={() => {
-									actions.delete(selected.id);
-								}}
-							>
-								Delete
-							</Button>
-						) : null 
-					*/}
 				</div>
 			</div>
 		</Drawer>

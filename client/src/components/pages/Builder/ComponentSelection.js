@@ -1,11 +1,11 @@
 import React from 'react';
 import { Fade, Modal, Grid, Button, Container } from '@material-ui/core';
 import { useEditor, useNode } from '@craftjs/core';
-import { Biography } from '../user/Biography';
-import { Features } from '../user/Features';
-import { Header } from '../user/Header';
-import { Footer } from '../user/Footer';
-import { MLS } from '../user/MLS';
+import { Biography } from '../../user/Biography';
+import { Features } from '../../user/Features';
+import { Header } from '../../user/Header';
+import { Footer } from '../../user/Footer';
+import { MLS } from '../../user/MLS';
 
 const ComponentSelection = props => {
 	const { actions: {add, move}, query: {createNode, node} } = useEditor();

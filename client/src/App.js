@@ -31,8 +31,8 @@ import store from './store';
 
 // FontAwesome icons
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCheckCircle } from '@fortawesome/free-regular-svg-icons'
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
+import { faCheckCircle, faEdit, faTrashAlt } from '@fortawesome/free-regular-svg-icons'
+import { faCheck, faEye, faEyeSlash, faTimes, faPlus, faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons'
 
 // JWT handler
 import jwt_decode from 'jwt-decode';
@@ -76,8 +76,11 @@ if (localStorage.jwtToken) {
 	}
 }
 
-library.add(faCheckCircle)
-library.add(faEye, faEyeSlash)
+// Fontawesome regular icons
+library.add(faCheckCircle, faEdit, faTrashAlt)
+
+// Fontawesome solid icons
+library.add(faCheck, faEye, faEyeSlash, faTimes, faPlus, faArrowDown, faArrowUp)
 
 const App = () => {
 	return (
@@ -109,7 +112,7 @@ const App = () => {
 					<PrivateRoute exact path="/dashboard/sites/new" component={NewSite} />
 
 
-					<PrivateRoute exact path="/builder" component={Builder} />
+					<PrivateRoute exact path="/builder/:title/:pageName" component={Builder} />
 
 					{/*
 					<Route exact path="/published/:title/:pageName" component={Published} />
