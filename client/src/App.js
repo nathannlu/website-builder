@@ -32,7 +32,16 @@ import store from './store';
 // FontAwesome icons
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCheckCircle, faEdit, faTrashAlt } from '@fortawesome/free-regular-svg-icons'
-import { faCheck, faEye, faEyeSlash, faTimes, faPlus, faArrowDown, faArrowUp } from '@fortawesome/free-solid-svg-icons'
+import { 
+	faCheck, 
+	faEye, 
+	faEyeSlash, 
+	faTimes, 
+	faPlus, 
+	faArrowDown, 
+	faArrowUp,
+	faInfoCircle
+} from '@fortawesome/free-solid-svg-icons'
 
 // JWT handler
 import jwt_decode from 'jwt-decode';
@@ -80,7 +89,16 @@ if (localStorage.jwtToken) {
 library.add(faCheckCircle, faEdit, faTrashAlt)
 
 // Fontawesome solid icons
-library.add(faCheck, faEye, faEyeSlash, faTimes, faPlus, faArrowDown, faArrowUp)
+library.add(
+	faCheck, 
+	faEye, 
+	faEyeSlash, 
+	faTimes, 
+	faPlus, 
+	faArrowDown, 
+	faArrowUp,
+	faInfoCircle
+)
 
 const App = () => {
 	return (

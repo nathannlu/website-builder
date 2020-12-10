@@ -32,6 +32,7 @@ const InputField = props => {
 				type={props.toggleVisibility ? isRevealPassword ? 'text' : 'password' : props.type}
 				id={props.name}
 				name={props.name}
+				value={props.defaultValue}
 				onChange={props.onChange}
 			/>
 			{

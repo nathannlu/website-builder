@@ -14344,7 +14344,7 @@ video {
 }
 
 :root {
-  --color-primary-main: #006AFF;
+  --color-primary-main: #006aff;
 }
 
 html {
@@ -14371,7 +14371,7 @@ body {
   box-sizing: border-box;
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
-  color: #333;
+  color: #051c2c;
   margin: 0;
 }
 

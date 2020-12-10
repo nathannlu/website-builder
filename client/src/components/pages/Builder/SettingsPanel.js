@@ -29,7 +29,7 @@ export const SettingsPanel = props => {
 		<Drawer anchor="right" open={props.openDrawer} onClose={handleClose}>
 			<div style={{width: '480px'}}> 
 				<div className="px-8 py-6">
-					<Typography variant="body1">
+					<h6>
 						<b>
 							Edit the
 						</b>
@@ -37,7 +37,7 @@ export const SettingsPanel = props => {
 						<b>
 							component
 						</b>
-					</Typography>
+					</h6>
 				</div>
 				<hr />
 				<div className="px-8 py-6">

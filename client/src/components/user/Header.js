@@ -2,9 +2,12 @@ import React from 'react';
 import {Image} from './Image';
 import {Text} from './Text';
 import {useNode } from '@craftjs/core';
-import {Fade, Typography, Box, TextField, Paper, FormControl, FormLabel, Slider} from "@material-ui/core";
+import {Fade, Typography, TextField, Box, Paper, FormControl, FormLabel, Slider} from "@material-ui/core";
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import ColorPicker from 'material-ui-color-picker';
+
+import EditComponentField from '../molecules/EditComponentField';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
 export const Header = props => {
@@ -44,25 +47,14 @@ export const HeaderSettings = () => {
 	}
 
   return (
-    <div>
-			<Box pb={3}>
-				<FormControl fullWidth margin="normal" component="fieldset">
-					<Typography style={{fontWeight: 'bold'}} gutterBottom variant="h5">
-						Title
-					</Typography>
-					<Typography variant="body2" className="items-center">
-						<InfoOutlinedIcon className="mr-1" />
-						Enter the title:
-					</Typography>
-					<TextField
-						variant="outlined"
-						margin="normal"
-						name="title"
-						defaultValue={title}
-						onChange={onChange}
-					/>
-				</FormControl>
-			</Box>
+    <>
+			<EditComponentField
+				title="Title"
+				subtitle="Enter the title:"
+				name="title"
+				defaultValue={title}
+				onChange={onChange}
+			/>
 
 			<Box pb={3}>
 				<FormControl fullWidth margin="normal" component="fieldset">
@@ -101,7 +93,7 @@ export const HeaderSettings = () => {
 					/>
 				</FormControl>
 			</Box>
-    </div>
+    </>
   )
 }
 
