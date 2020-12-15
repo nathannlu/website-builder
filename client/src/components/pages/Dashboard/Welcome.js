@@ -6,6 +6,22 @@ import ProgressStep from '../../atoms/ProgressStep';
 const Welcome = props => {
 	const [newWebsite, setNewWebsite] = useState({title: 'test'});
 
+	// initialize name
+	const mount = () => {
+		console.log('mount');
+		axios.get('/api/users', {
+			token: props.token
+		}).then((res) => {
+			if (res.status === 200) {
+				console.log(res);
+				setNewWebsite({title: String(res.data.name)});
+			} else {
+				// TODO: error handling
+			}
+		});
+	};
+	useEffect(mount, []);
+
 	const createWebsite = () => {
 		console.log(newWebsite);
 		axios.post('/api/websites', newWebsite).then(res => {
@@ -14,7 +30,6 @@ const Welcome = props => {
 			}
 			// @TODO Errror handling
 		});
-
 	}
 
 
