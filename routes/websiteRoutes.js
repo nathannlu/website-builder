@@ -44,13 +44,13 @@ router.get('/', checkToken, (req, res) => {
 // @desc Fetches specific website page 
 // @access Private 
 router.get('/:title/:pageName', checkToken, (req, res) => {
-	//jwt.verify(req.token, keys.secretOrKey, async (err, authorizedData) => {
-	//	if (err) {
-	//		res.sendStatus(403);
-	//	} else {
+	jwt.verify(req.token, keys.secretOrKey, async (err, authorizedData) => {
+		if (err) {
+			res.sendStatus(403);
+		} else {
 			Website.findOne(
 			{
-	//			'author': authorizedData.id, 
+				'author': authorizedData.id, 
 				'title': req.params.title,
 				'pages': {$elemMatch: {'pageName': req.params.pageName}}
 			}, (err, websiteData) => {
@@ -58,8 +58,8 @@ router.get('/:title/:pageName', checkToken, (req, res) => {
 				
 				res.status(200).json(websiteData);
 			})
-	//	}
-	//})
+		}
+	})
 });
 
 // @route POST api/websites/
