@@ -117,6 +117,7 @@ export const RenderNode = ({ render }, openComponentSelection, openComponentEdit
 								}}
 							>
 								<div className="absolute bottom-0" style={{zIndex: 5, left: '50%', transform: 'translate(-50%, 50%)'}}>
+									{/*
 									<button 
 										className="btn-sm btn-primary"
 										onClick={() => {
@@ -126,9 +127,12 @@ export const RenderNode = ({ render }, openComponentSelection, openComponentEdit
 										<FontAwesomeIcon className="mr-2" icon={['fas','plus']} />
 										Add a component
 									</button>
+									*/}
 								</div>	
 
 								<div className="absolute top-0 right-0 p-6" style={{zIndex: 5}}>
+
+									{/*
 									{deletable ? (
 										<button
 											className="btn-sm border bg-white text-black mr-4"
@@ -166,7 +170,7 @@ export const RenderNode = ({ render }, openComponentSelection, openComponentEdit
 											<FontAwesomeIcon icon={['fas','arrow-down']} />
 										</button>
 									)}
-
+									*/}
 
 									<button
 										ref={ref=>select(ref, id)}

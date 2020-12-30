@@ -20,7 +20,8 @@ const Published = props => {
 
 	const pageName = 'home'
 	const parsedDomain = window.location.host.split('.');
-	const title = parsedDomain[0]
+//	const title = parsedDomain[0]
+	const title = 'test'
 
 	useEffect(() => {
 		axios.get(`/api/websites/${title}/${pageName}`).then(res => {
@@ -31,20 +32,15 @@ const Published = props => {
 			setJson(json);
 			setEnabled(true);
 		});
-	},[])
+	}, [])
 
 	return (
-		<div>
-			<Editor 
-				enabled={false}
-				resolver={{Image, Biography, Header, Footer, Features, Button, Text, Container}}
-			>
-				{enabled && ( 
-					<Frame data={json}>
-					</Frame>
-				)}
-			</Editor>
-		</div>
+		<Editor 
+			enabled={false}
+			resolver={{Image, Biography, Header, Footer, Features, Button, Text, Container}}
+		>
+			{ enabled && <Frame data={json} /> }
+		</Editor>
 	);
 };
 

@@ -12,7 +12,6 @@ import Reset from './components/pages/Login/Reset';
 
 /*
 import Pages from './components/Pages'; 
-import Published from './components/Published'; 
 import FirstProject from './components/FirstProject';
 */
 
@@ -24,6 +23,8 @@ import Welcome from './components/pages/Dashboard/Welcome';
 // Website Builder Routes
 import Builder from './components/pages/Builder'; 
 
+// Published Website Route
+import Published from './components/Published'; 
 
 // Global Redux state management
 import { Provider } from 'react-redux';
@@ -131,10 +132,8 @@ const App = () => {
 
 
 					<PrivateRoute exact path="/builder/:title/:pageName" component={Builder} />
-
-					{/*
 					<Route exact path="/published/:title/:pageName" component={Published} />
-					*/}
+
 				</Switch>
 			</Router>
 		</Provider>
